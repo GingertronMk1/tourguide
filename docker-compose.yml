@@ -4,6 +4,14 @@ services:
   db:
     platform: linux/x86_64
     image: mysql:8.0
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: qwerty
+
 
   app:
     platform: linux/x86_64
@@ -11,15 +19,23 @@ services:
       context: .
       dockerfile: ./docker/app.dockerfile
     volumes:
-      - ".:/app:delegated"
+      - ./:/var/www
+    networks:
+      - app-network
 
   nginx:
     image: nginx:1.23.4-alpine
     volumes:
-      - ".:/var/www:delegated"
+      - "./:/var/www:delegated"
+      - "./nginx/conf.d/:/etc/nginx/conf.d/:delegated"
     depends_on:
       - "app"
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - app-network
 
 networks:
-  default:
-    name: 'tourguide'
+  app-network:
+    driver: bridge

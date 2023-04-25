@@ -4,7 +4,7 @@ RUN docker-php-ext-install pdo pdo_mysql sockets
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-WORKDIR /app
+WORKDIR /var/www
 
 COPY . .
 

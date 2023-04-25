@@ -1,42 +1,49 @@
 version: '3.8'
 
 services:
-  db:
-    platform: linux/x86_64
-    image: mysql:8.0
-    ports:
-      - "3306:3306"
-    networks:
-      - app-network
-    environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: qwerty
+    db:
+        platform: linux/x86_64
+        image: mysql:8.0
+        ports:
+            - "3306:3306"
+        networks:
+            - app-network
+        environment:
+            MYSQL_DATABASE: laravel
+            MYSQL_ROOT_PASSWORD: qwerty
 
+    app:
+        platform: linux/x86_64
+        build:
+            context: .
+            dockerfile: ./docker/app.dockerfile
+        volumes:
+            - "./:/var/www"
+            - "./php/local.ini:/usr/local/etc/php/conf.d/local.ini"
+        networks:
+            - app-network
 
-  app:
-    platform: linux/x86_64
-    build:
-      context: .
-      dockerfile: ./docker/app.dockerfile
-    volumes:
-      - "./:/var/www"
-      - "./php/local.ini:/usr/local/etc/php/conf.d/local.ini"
-    networks:
-      - app-network
+    node:
+        platform: linux/x86_64
+        image: node:20-alpine3.16
+        volumes:
+            - "./:/app"
+        command: tail -F /dev/null
+        working_dir: /app
 
-  nginx:
-    image: nginx:1.23.4-alpine
-    volumes:
-      - "./:/var/www:delegated"
-      - "./nginx/conf.d/:/etc/nginx/conf.d/:delegated"
-    depends_on:
-      - "app"
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - app-network
+    nginx:
+        image: nginx:1.23.4-alpine
+        volumes:
+            - "./:/var/www:delegated"
+            - "./nginx/conf.d/:/etc/nginx/conf.d/:delegated"
+        depends_on:
+            - "app"
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - app-network
 
 networks:
-  app-network:
-    driver: bridge
+    app-network:
+        driver: bridge

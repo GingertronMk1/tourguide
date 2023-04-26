@@ -26,3 +26,8 @@ This information must include, but is not limited to:
 ### My Requirements
 
 - [x] Audit logging
+
+
+## Rough DB Diagram
+
+![Untitled](https://user-images.githubusercontent.com/6438175/234537777-9c4efe03-3d4d-4f12-a944-19423fde9e7d.png)

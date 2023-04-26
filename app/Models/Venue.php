@@ -6,6 +6,7 @@ use App\Traits\LoggableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Venue extends Model
@@ -46,5 +47,15 @@ class Venue extends Model
     public function getVenueType(): BelongsTo
     {
         return $this->belongsTo(VenueType::class);
+    }
+
+    public function getAccessEquipment(): BelongsToMany
+    {
+        return $this->belongsToMany(AccessEquipment::class);
+    }
+
+    public function getDealTypes(): BelongsToMany
+    {
+        return $this->belongsToMany(DealType::class);
     }
 }

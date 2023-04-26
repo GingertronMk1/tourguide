@@ -51,11 +51,11 @@ class Venue extends Model
 
     public function accessEquipment(): BelongsToMany
     {
-        return $this->belongsToMany(AccessEquipment::class);
+        return $this->belongsToMany(AccessEquipment::class)->withTimestamps();
     }
 
     public function dealTypes(): BelongsToMany
     {
-        return $this->belongsToMany(DealType::class);
+        return $this->belongsToMany(DealType::class)->withTimestamps();
     }
 }

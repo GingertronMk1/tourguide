@@ -1,13 +1,20 @@
 <script setup>
-import BaseLayout from '@/Layouts/BaseLayout.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import BaseLayout from "@/Layouts/BaseLayout.vue";
+import { Head, Link } from "@inertiajs/vue3";
 
-  defineProps({ venues: Array })
+defineProps({
+    venues: {
+        type: Array,
+        default: () => [],
+    },
+});
 </script>
 <template>
     <BaseLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Venues</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Venues
+            </h2>
         </template>
 
         <Head title="Venues" />
@@ -21,8 +28,10 @@ import { Head, Link } from '@inertiajs/vue3';
                 <Link
                     :href="route('venue.show', venue.id)"
                     class="text-2xl font-bold"
-                    v-text="`${venue.name} | ${venue.region?.name ?? 'Unknown Region'}`"
-                />
+                >
+                    {{ venue.name }} |
+                    {{ venue.region?.name ?? "Unknown Region" }}
+                </Link>
                 <hr />
                 <h6 class="text-l font-bold">Description</h6>
                 <p class="font-normal" v-text="venue.description" />
@@ -31,10 +40,30 @@ import { Head, Link } from '@inertiajs/vue3';
                 <p class="font-normal" v-text="venue.notes" />
                 <hr />
                 <span class="grid grid-cols-4 divide-x-2">
-                    <p class="text-center" v-text="`Max seats: ${venue.maximum_seats}`" />
-                    <p class="text-center" v-text="`Max wheelchair seats: ${venue.maximum_wheelchair_seats}`" />
-                    <p class="text-center" v-text="`Dressing rooms: ${venue.number_of_dressing_rooms}`" />
-                    <p class="text-center" v-text="`Wheelchairs backstage? ${venue.backstage_wheelchair_access ? 'Yes' : 'No'}`" />
+                    <p
+                        class="text-center"
+                        v-text="`Max seats: ${venue.maximum_seats}`"
+                    />
+                    <p
+                        class="text-center"
+                        v-text="
+                            `Max wheelchair seats: ${venue.maximum_wheelchair_seats}`
+                        "
+                    />
+                    <p
+                        class="text-center"
+                        v-text="
+                            `Dressing rooms: ${venue.number_of_dressing_rooms}`
+                        "
+                    />
+                    <p
+                        class="text-center"
+                        v-text="
+                            `Wheelchairs backstage? ${
+                                venue.backstage_wheelchair_access ? 'Yes' : 'No'
+                            }`
+                        "
+                    />
                 </span>
                 <hr />
                 <span class="flex flex-row items-start space-x-3">

@@ -5,10 +5,10 @@ namespace App\Models;
 use App\Traits\LoggableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Area extends Model
+class Region extends Model
 {
     use HasFactory, LoggableTrait, SoftDeletes;
 
@@ -22,8 +22,8 @@ class Area extends Model
 
     ];
 
-    public function regions(): HasMany
+    public function getArea(): BelongsTo
     {
-        return $this->hasMany(Region::class);
+        return $this->belongsTo(Area::class);
     }
 }

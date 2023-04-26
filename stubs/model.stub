@@ -10,4 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 class {{ class }} extends Model
 {
     use HasFactory, LoggableTrait, SoftDeletes;
+
+    protected $fillable = [
+
+    ];
+
+    protected $casts = [
+
+    ];
 }

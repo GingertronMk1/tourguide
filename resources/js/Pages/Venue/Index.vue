@@ -26,11 +26,11 @@ import BaseLayout from '@/Layouts/BaseLayout.vue';
                 <h6 class="text-l font-bold">Notes</h6>
                 <p class="font-normal" v-text="venue.notes" />
                 <hr />
-                <span class="flex flex-row space-x-3">
-                    <p v-text="`Max seats: ${venue.maximum_seats}`" />
-                    <p v-text="`Max wheelchair seats: ${venue.maximum_wheelchair_seats}`" />
-                    <p v-text="`Dressing rooms: ${venue.number_of_dressing_rooms}`" />
-                    <p v-text="`Wheelchairs backstage? ${venue.backstage_wheelchair_access ? 'Yes' : 'No'}`" />
+                <span class="grid grid-cols-4 divide-x-2">
+                    <p class="text-center" v-text="`Max seats: ${venue.maximum_seats}`" />
+                    <p class="text-center" v-text="`Max wheelchair seats: ${venue.maximum_wheelchair_seats}`" />
+                    <p class="text-center" v-text="`Dressing rooms: ${venue.number_of_dressing_rooms}`" />
+                    <p class="text-center" v-text="`Wheelchairs backstage? ${venue.backstage_wheelchair_access ? 'Yes' : 'No'}`" />
                 </span>
                 <hr />
                 <span class="flex flex-row items-start space-x-3">

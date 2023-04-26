@@ -43,9 +43,9 @@ const submit = () => {
 
                 <TextInput
                     id="email"
+                    v-model="form.email"
                     type="email"
                     class="mt-1 block w-full"
-                    v-model="form.email"
                     required
                     autofocus
                     autocomplete="username"
@@ -59,9 +59,9 @@ const submit = () => {
 
                 <TextInput
                     id="password"
+                    v-model="form.password"
                     type="password"
                     class="mt-1 block w-full"
-                    v-model="form.password"
                     required
                     autocomplete="current-password"
                 />
@@ -71,7 +71,7 @@ const submit = () => {
 
             <div class="block mt-4">
                 <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
+                    <Checkbox v-model:checked="form.remember" name="remember" />
                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
             </div>

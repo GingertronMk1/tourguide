@@ -20,8 +20,8 @@ import { Head, Link } from '@inertiajs/vue3';
             >
                 <Link
                     :href="route('venue.show', venue.id)"
-                    v-text="`${venue.name} | ${venue.region?.name ?? 'Unknown Region'}`"
                     class="text-2xl font-bold"
+                    v-text="`${venue.name} | ${venue.region?.name ?? 'Unknown Region'}`"
                 />
                 <hr />
                 <h6 class="text-l font-bold">Description</h6>

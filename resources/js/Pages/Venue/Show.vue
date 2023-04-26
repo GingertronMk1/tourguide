@@ -3,6 +3,10 @@ import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
 
 defineProps({
+    region: {
+        type: [Object, null],
+        default: null
+    },
     venue: {
         type: Object,
         required: true,
@@ -12,13 +16,23 @@ defineProps({
 <template>
     <BaseLayout>
         <template #header>
-            <Link
-                :href="route('venue.index')"
-                class="font-semibold text-xl text-gray-800 leading-tight"
-            >
-                <i class="fa-solid fa-chevron-left" />
-                Back to Venue Index
-            </Link>
+            <span class="font-semibold text-xl text-gray-800 leading-tight">
+                <Link
+                    :href="
+                        region?.id
+                        ? route('region.venue.index', {region: region.id})
+                        : route('venue.index')
+                    "
+                >
+                    <i class="fa-solid fa-chevron-left" />
+                    <template v-if="region">
+                        Back to {{ region.name }} Venues
+                    </template>
+                    <template v-else>
+                        Back to Venue Index
+                    </template>
+                </Link>
+            </span>
         </template>
 
         <Head :title="venue.name" />

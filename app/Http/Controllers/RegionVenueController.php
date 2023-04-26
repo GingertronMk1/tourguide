@@ -21,8 +21,8 @@ class RegionVenueController extends Controller
         return inertia(
             'Venue/Index',
             [
-                'header' => "Venues in {$region->name}",
-                'venues' => $venues
+                'venues' => $venues,
+                'region' => $region
             ]
         );
     }
@@ -48,7 +48,15 @@ class RegionVenueController extends Controller
      */
     public function show(Region $region, Venue $venue)
     {
-        //
+        return inertia('Venue/Show', [
+            'venue'=> $venue->load([
+                'region',
+                'venueType',
+                'accessEquipment',
+                'dealTypes'
+            ]),
+            'region' => $region
+        ]);
     }
 
     /**

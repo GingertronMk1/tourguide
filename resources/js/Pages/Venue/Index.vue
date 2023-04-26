@@ -3,23 +3,23 @@ import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
 
 defineProps({
-    header: {
-        type: String,
-        default: "Venues"
-    },
     venues: {
         type: Array,
         default: () => [],
     },
+    region: {
+        type: [Object, null],
+        default: null
+    }
 });
 </script>
 <template>
     <BaseLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight" v-text="header" />
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight" v-text="region ? `Venues in ${region.name}` : 'Venues'" />
         </template>
 
-        <Head title="Venues" />
+        <Head :title="region ? `Venues in ${region.name}` : 'Venues'" />
 
         <div class="flex-1 flex flex-col space-y-4">
             <div
@@ -28,7 +28,14 @@ defineProps({
                 class="shadow border border-gray-100 rounded-lg p-3 space-y-3"
             >
                 <Link
-                    :href="route('venue.show', venue.id)"
+                    :href="
+                        region
+                        ? route('region.venue.show', {
+                            region: region.id,
+                            venue: venue.id
+                        })
+                        : route('venue.show', venue.id)
+                    "
                     class="text-2xl font-bold"
                 >
                     {{ venue.name }} |

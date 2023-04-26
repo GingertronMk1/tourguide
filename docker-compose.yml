@@ -30,6 +30,8 @@ services:
             - "./:/app"
         command: tail -F /dev/null
         working_dir: /app
+        ports:
+          - "5173:5173"
 
     nginx:
         image: nginx:1.23.4-alpine

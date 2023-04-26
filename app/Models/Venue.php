@@ -39,11 +39,6 @@ class Venue extends Model
         return $this->belongsTo(Region::class);
     }
 
-    public function area(): BelongsTo
-    {
-        return $this->region->area();
-    }
-
     public function venueType(): BelongsTo
     {
         return $this->belongsTo(VenueType::class);

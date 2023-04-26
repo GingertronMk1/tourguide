@@ -13,7 +13,15 @@ class VenueController extends Controller
      */
     public function index()
     {
-        //
+        $venues = Venue::with([
+            'region',
+            'venueType',
+            'accessEquipment',
+            'dealTypes'
+        ])->get();
+        return inertia('Venue/Index', [
+            'venues' => $venues
+        ]);
     }
 
     /**

@@ -9,7 +9,7 @@ import { Head, Link } from '@inertiajs/vue3';
         <template #header>
             <Link :href="route('venue.index')" class="font-semibold text-xl text-gray-800 leading-tight">
                 <i class="fa-solid fa-chevron-left" />
-                Back to venue index
+                Back to Venue Index
             </Link>
         </template>
 
@@ -49,30 +49,22 @@ import { Head, Link } from '@inertiajs/vue3';
 
             <div class="border border-gray-100 rounded-lg p-3 space-y-3">
                 <p class="text-2xl font-bold">Access Equipment</p>
-                <template v-if="venue.access_equipment.length">
-                    <ul>
-                        <li v-for="(equpiment, index) in venue.access_equipment" :key="index">
-                            {{  equpiment.name }}
+                    <ul v-if="venue.access_equipment.length">
+                        <li v-for="equipment in venue.access_equipment" :key="equipment.id">
+                            {{ equipment.name }}
+                            <template v-if="equipment?.pivot?.notes"> | {{ equipment.pivot.notes }}</template>
                         </li>
                     </ul>
-                </template>
-                <template v-else>
-                    <p>This venue does not have any access equipment</p>
-                </template>
             </div>
 
             <div class="border border-gray-100 rounded-lg p-3 space-y-3">
                 <p class="text-2xl font-bold">Deal Types</p>
-                <template v-if="venue.deal_types.length">
                     <ul>
                         <li v-for="(type, index) in venue.deal_types" :key="index">
-                            {{  type.name }}
+                            {{ type.name }}
+                            <template v-if="type?.pivot?.notes"> | {{ type.pivot.notes }}</template>
                         </li>
                     </ul>
-                </template>
-                <template v-else>
-                    <p>This venue does not have any deal types</p>
-                </template>
             </div>
         </div>
     </BaseLayout>

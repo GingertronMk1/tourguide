@@ -22,8 +22,25 @@ class VenueFactory extends Factory
             $numberOfDealTypes = random_int(1, 5);
             $accessEquipments = AccessEquipment::inRandomOrder()->limit($numberOfAccessEquipments)->pluck('id')->toArray();
             $dealTypes = DealType::inRandomOrder()->limit($numberOfDealTypes)->pluck('id')->toArray();
-            $venue->dealTypes()->attach($dealTypes);
-            $venue->accessEquipment()->attach($accessEquipments);
+
+            $processedAccessEquipments = [];
+            $processedDealTypes = [];
+
+            foreach($accessEquipments as $accessEquipment) {
+                $processedAccessEquipments[$accessEquipment] = [
+                    'notes' => $this->faker->text,
+                ];
+            }
+
+
+            foreach($dealTypes as $dealType) {
+                $processedDealTypes[$dealType] = [
+                    'notes' => $this->faker->text,
+                ];
+            }
+
+            $venue->dealTypes()->attach($processedDealTypes);
+            $venue->accessEquipment()->attach($processedAccessEquipments);
         });
     }
     /**

@@ -46,11 +46,11 @@ class Venue extends Model
 
     public function accessEquipment(): BelongsToMany
     {
-        return $this->belongsToMany(AccessEquipment::class)->withTimestamps();
+        return $this->belongsToMany(AccessEquipment::class)->withPivot(['notes'])->withTimestamps();
     }
 
     public function dealTypes(): BelongsToMany
     {
-        return $this->belongsToMany(DealType::class)->withTimestamps();
+        return $this->belongsToMany(DealType::class)->withPivot(['notes'])->withTimestamps();
     }
 }

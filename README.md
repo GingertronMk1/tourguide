@@ -25,4 +25,4 @@ This information must include, but is not limited to:
 
 ### My Requirements
 
-- [ ] Audit logging
+- [x] Audit logging

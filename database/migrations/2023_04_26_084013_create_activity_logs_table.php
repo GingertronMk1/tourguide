@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('event_type');
             $table->foreignIdFor(User::class)->nullable()->constrained();
             $table->morphs('loggable');
-            $table->json('changed_data');
+            $table->json('old_data');
+            $table->json('new_data');
             $table->timestamps();
         });
     }

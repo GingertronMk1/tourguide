@@ -3,6 +3,10 @@ import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
 
 defineProps({
+    header: {
+        type: String,
+        default: "Venues"
+    },
     venues: {
         type: Array,
         default: () => [],
@@ -12,9 +16,7 @@ defineProps({
 <template>
     <BaseLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Venues
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight" v-text="header" />
         </template>
 
         <Head title="Venues" />

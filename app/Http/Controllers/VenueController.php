@@ -15,9 +15,7 @@ class VenueController extends Controller
     {
         $venues = Venue::with([
             'region',
-            'venueType',
-            'accessEquipment',
-            'dealTypes'
+            'venueType'
         ])->get();
         return inertia('Venue/Index', [
             'venues' => $venues

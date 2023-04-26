@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegionVenueController;
 use App\Http\Controllers\VenueController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::resource('venue', VenueController::class)->only($readOnlyMethods);
+Route::resource('region.venue', RegionVenueController::class)->only($readOnlyMethods);
 Route::middleware('auth')->group(function() use ($readOnlyMethods) {
     Route::resource('venue', VenueController::class)->except($readOnlyMethods);
 });

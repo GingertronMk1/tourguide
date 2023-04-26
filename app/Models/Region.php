@@ -22,7 +22,7 @@ class Region extends Model
 
     ];
 
-    public function getArea(): BelongsTo
+    public function area(): BelongsTo
     {
         return $this->belongsTo(Area::class);
     }

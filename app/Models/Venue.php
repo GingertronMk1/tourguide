@@ -34,27 +34,27 @@ class Venue extends Model
         'backstage_wheelchair_access' => 'boolean'
     ];
 
-    public function getRegion(): BelongsTo
+    public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);
     }
 
-    public function getArea(): BelongsTo
+    public function area(): BelongsTo
     {
-        return $this->region->getArea();
+        return $this->region->area();
     }
 
-    public function getVenueType(): BelongsTo
+    public function venueType(): BelongsTo
     {
         return $this->belongsTo(VenueType::class);
     }
 
-    public function getAccessEquipment(): BelongsToMany
+    public function accessEquipment(): BelongsToMany
     {
         return $this->belongsToMany(AccessEquipment::class);
     }
 
-    public function getDealTypes(): BelongsToMany
+    public function dealTypes(): BelongsToMany
     {
         return $this->belongsToMany(DealType::class);
     }

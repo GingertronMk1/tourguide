@@ -22,12 +22,12 @@ class ActivityLog extends Model
         'new_data' => 'json',
     ];
 
-    public function getUser(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function getLoggable(): BelongsTo
+    public function loggable(): BelongsTo
     {
         return $this->belongsTo($this->loggable_type);
     }

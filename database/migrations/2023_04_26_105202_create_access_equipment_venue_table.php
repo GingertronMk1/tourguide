@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('access_equipment_venue', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(AccessEquipment::class)->constrained();
+            $table->foreignIdFor(AccessEquipment::class)->constrained('access_equipment');
             $table->foreignIdFor(Venue::class)->constrained();
             $table->text('notes')->nullable();
             $table->timestamps();

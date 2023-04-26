@@ -9,7 +9,9 @@ import { Link } from "@inertiajs/vue3";
             <div class="flex-1">
                 <slot name="header" />
             </div>
-            <div v-if="$page?.props?.auth?.user"></div>
+            <div v-if="$page?.props?.auth?.user">
+                <span v-text="$page?.props?.auth?.user.name" />
+            </div>
             <div v-else>
                 <Link :href="route('login')">Log In</Link>
             </div>

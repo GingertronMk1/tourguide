@@ -23,7 +23,7 @@ defineProps({
             <div
                 v-for="venue in venues"
                 :key="venue.id"
-                class="border border-gray-100 rounded-lg p-3 space-y-3"
+                class="shadow border border-gray-100 rounded-lg p-3 space-y-3"
             >
                 <Link
                     :href="route('venue.show', venue.id)"

@@ -24,7 +24,7 @@ defineProps({
         <Head :title="venue.name" />
 
         <div class="flex-1 flex flex-col space-y-4">
-            <div class="border border-gray-100 rounded-lg p-3 space-y-3">
+            <div class="shadow border border-gray-100 rounded-lg p-3 space-y-3">
                 <Link
                     :href="route('venue.show', venue.id)"
                     class="text-2xl font-bold"
@@ -76,7 +76,7 @@ defineProps({
                 </span>
             </div>
 
-            <div class="border border-gray-100 rounded-lg p-3 space-y-3">
+            <div class="shadow border border-gray-100 rounded-lg p-3 space-y-3">
                 <p class="text-2xl font-bold">Access Equipment</p>
                 <ul v-if="venue.access_equipment.length">
                     <li
@@ -91,7 +91,7 @@ defineProps({
                 </ul>
             </div>
 
-            <div class="border border-gray-100 rounded-lg p-3 space-y-3">
+            <div class="shadow border border-gray-100 rounded-lg p-3 space-y-3">
                 <p class="text-2xl font-bold">Deal Types</p>
                 <ul>
                     <li v-for="(type, index) in venue.deal_types" :key="index">

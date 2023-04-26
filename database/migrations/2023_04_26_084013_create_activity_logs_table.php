@@ -14,7 +14,8 @@ return new class extends Migration
     {
         Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
+            $table->string('event_type');
+            $table->foreignIdFor(User::class)->nullable()->constrained();
             $table->morphs('loggable');
             $table->json('changed_data');
             $table->timestamps();

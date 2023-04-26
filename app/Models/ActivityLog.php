@@ -10,6 +10,10 @@ class ActivityLog extends Model
 {
     use HasFactory;
 
+    public const TYPE_CREATED = 'created';
+    public const TYPE_UPDATED = 'updated';
+    public const TYPE_DELETED = 'deleted';
+
     protected $fillable = [
     ];
 

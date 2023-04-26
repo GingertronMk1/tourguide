@@ -2,22 +2,18 @@
 import BaseLayout from '@/Layouts/BaseLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
 
-  defineProps({ venues: Array })
+  defineProps({ venue: Object })
 </script>
 <template>
     <BaseLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Venues</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight" v-text="venue.name" />
         </template>
 
-        <Head title="Venues" />
+        <Head :title="venue.name" />
 
         <div class="flex-1 flex flex-col space-y-4">
-            <div
-                v-for="venue in venues"
-                :key="venue.id"
-                class="border border-gray-100 rounded-lg p-3 space-y-3"
-            >
+            <div class="border border-gray-100 rounded-lg p-3 space-y-3">
                 <Link
                     :href="route('venue.show', venue.id)"
                     v-text="`${venue.name} | ${venue.region?.name ?? 'Unknown Region'}`"
@@ -45,6 +41,35 @@ import { Head, Link } from '@inertiajs/vue3';
                         <li v-text="`D: ${venue.maximum_stage_depth}mm`" />
                     </ul>
                 </span>
+            </div>
+
+
+            <div class="border border-gray-100 rounded-lg p-3 space-y-3">
+                <p class="text-2xl font-bold">Access Equipment</p>
+                <template v-if="venue.access_equipment.length">
+                    <ul>
+                        <li v-for="(equpiment, index) in venue.access_equipment" :key="index">
+                            {{  equpiment.name }}
+                        </li>
+                    </ul>
+                </template>
+                <template v-else>
+                    <p>This venue does not have any access equipment</p>
+                </template>
+            </div>
+
+            <div class="border border-gray-100 rounded-lg p-3 space-y-3">
+                <p class="text-2xl font-bold">Deal Types</p>
+                <template v-if="venue.deal_types.length">
+                    <ul>
+                        <li v-for="(type, index) in venue.deal_types" :key="index">
+                            {{  type.name }}
+                        </li>
+                    </ul>
+                </template>
+                <template v-else>
+                    <p>This venue does not have any deal types</p>
+                </template>
             </div>
         </div>
     </BaseLayout>

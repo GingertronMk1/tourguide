@@ -17,6 +17,8 @@ use Inertia\Inertia;
 |
 */
 
+$readOnlyMethods = ['index', 'show'];
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -36,10 +38,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/venue', [VenueController::class, 'index'])->name('venue.show');
 
-Route::middleware('auth')->group(function() {
-    Route::resource('venue', VenueController::class)->except('index');
+
+Route::resource('venue', VenueController::class)->only($readOnlyMethods);
+Route::middleware('auth')->group(function() use ($readOnlyMethods) {
+    Route::resource('venue', VenueController::class)->except($readOnlyMethods);
 });
 
 require __DIR__.'/auth.php';

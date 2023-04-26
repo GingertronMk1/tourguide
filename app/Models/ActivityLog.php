@@ -18,7 +18,8 @@ class ActivityLog extends Model
     ];
 
     protected $casts = [
-        'changed_data' => 'json'
+        'old_data' => 'json',
+        'new_data' => 'json',
     ];
 
     public function getUser(): BelongsTo

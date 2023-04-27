@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+docker-compose up -d
+
+echo "NPM installing..."
+./bin/node npm install
+
+echo "Composer installing"
+./bin/composer install
+
+echo "Running migrations and seeding database"
+./bin/artisan migrate:fresh --seed
+
+echo "Done!"

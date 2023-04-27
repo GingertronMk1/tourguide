@@ -3,17 +3,13 @@ import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
 
 const props = defineProps({
-    regions: {
+    areas: {
         type: Array,
         default: () => [],
-    },
-    area: {
-        type: [Object, null],
-        default: null,
-    },
+    }
 });
 
-const headerText = props?.area ? `Regions in ${props.area.name}` : `Regions`;
+const headerText = "Areas"
 </script>
 <template>
     <BaseLayout>
@@ -28,38 +24,32 @@ const headerText = props?.area ? `Regions in ${props.area.name}` : `Regions`;
 
         <div class="flex-1 flex flex-col space-y-4">
             <div
-                v-for="region in regions"
-                :key="region.id"
+                v-for="area in areas"
+                :key="area.id"
                 class="shadow border border-gray-100 rounded-lg p-3 space-y-3 bg-white"
             >
                 <Link
-                    :href="
-                        area
-                            ? route('area.region.show', {
-                                  region: region.id,
-                                  area: area.id,
-                              })
-                            : route('region.show', region.id)
-                    "
+                    :href="route('area.show', area.id)"
                     class="text-2xl font-bold"
                 >
-                    {{ region.name }}
+                    {{ area.name }}
                 </Link>
                 <hr />
                 <h6 class="text-l font-bold">Description</h6>
-                <p class="font-normal" v-text="region.description" />
+                <p class="font-normal" v-text="area.description" />
                 <hr />
                 <h6 class="text-l font-bold">Notes</h6>
-                <p class="font-normal" v-text="region.notes" />
+                <p class="font-normal" v-text="area.notes" />
                 <hr />
                 <p
                     class="font-normal"
                     v-text="
-                        region?.venues?.length === 1
-                            ? `1 theatre`
-                            : `${region.venues.length} theatres`
+                        area?.regions?.length === 1
+                            ? `1 region`
+                            : `${area.regions.length} regions`
                     "
                 />
+
             </div>
         </div>
     </BaseLayout>

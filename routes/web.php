@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\AreaRegionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
@@ -41,9 +42,10 @@ $readOnlyMethods = ['index', 'show'];
 
 $resourceControllers = [
     'venue' => VenueController::class,
-    'region.venue' => RegionVenueController::class,
     'region' => RegionController::class,
+    'region.venue' => RegionVenueController::class,
     'area' => AreaController::class,
+    'area.region' => AreaRegionController::class,
 ];
 
 foreach($resourceControllers as $resource => $controller) {

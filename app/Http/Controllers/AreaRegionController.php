@@ -2,25 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAreaRequest;
-use App\Http\Requests\UpdateAreaRequest;
 use App\Models\Area;
+use App\Models\Region;
+use Illuminate\Http\Request;
 
-class AreaController extends Controller
+class AreaRegionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Area $area)
     {
-        $areas = Area::with(['regions'])->get()->sortBy('name')->values()->all();
-        return inertia('Area/Index', ['areas' => $areas]);
+        //
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Area $area)
     {
         //
     }
@@ -28,7 +27,7 @@ class AreaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAreaRequest $request)
+    public function store(Request $request, Area $area)
     {
         //
     }
@@ -36,16 +35,15 @@ class AreaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Area $area)
+    public function show(Area $area, Region $region)
     {
-        $area->load(['regions']);
-        return inertia('Area/Show', ['area' => $area]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Area $area)
+    public function edit(Area $area, Region $region)
     {
         //
     }
@@ -53,7 +51,7 @@ class AreaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAreaRequest $request, Area $area)
+    public function update(Request $request, Area $area, Region $region)
     {
         //
     }
@@ -61,7 +59,7 @@ class AreaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Area $area)
+    public function destroy(Area $area, Region $region)
     {
         //
     }

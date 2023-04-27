@@ -6,10 +6,10 @@ const props = defineProps({
     areas: {
         type: Array,
         default: () => [],
-    }
+    },
 });
 
-const headerText = "Areas"
+const headerText = "Areas";
 </script>
 <template>
     <BaseLayout>
@@ -49,7 +49,6 @@ const headerText = "Areas"
                             : `${area.regions.length} regions`
                     "
                 />
-
             </div>
         </div>
     </BaseLayout>

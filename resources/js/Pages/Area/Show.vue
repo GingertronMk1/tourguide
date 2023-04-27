@@ -13,10 +13,7 @@ defineProps({
     <BaseLayout>
         <template #header>
             <span class="font-semibold text-xl text-gray-800 leading-tight">
-                <Link
-                    :href=" route('area.index')
-                    "
-                >
+                <Link :href="route('area.index')">
                     <i class="fa-solid fa-chevron-left" />
                     Back to Area Index
                 </Link>
@@ -26,7 +23,9 @@ defineProps({
         <Head :title="area.name" />
 
         <div class="flex-1 flex flex-col space-y-4">
-            <div class="bg-white shadow border border-gray-100 rounded-lg p-3 space-y-3">
+            <div
+                class="bg-white shadow border border-gray-100 rounded-lg p-3 space-y-3"
+            >
                 <Link
                     :href="route('area.show', area.id)"
                     class="text-2xl font-bold"

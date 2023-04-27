@@ -5,7 +5,10 @@ import { Link } from "@inertiajs/vue3";
 <template>
     <div class="h-full flex flex-col">
         <header class="p-4 bg-white border-b border-gray-100 flex flex-row">
-            <Link :href="route('home')" class="fa-solid fa-house mr-3 flex flex-col justify-center"></Link>
+            <Link
+                :href="route('home')"
+                class="fa-solid fa-house mr-3 flex flex-col justify-center"
+            ></Link>
             <div class="flex-1">
                 <slot name="header" />
             </div>

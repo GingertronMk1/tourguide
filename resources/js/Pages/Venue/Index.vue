@@ -1,6 +1,7 @@
 <script setup>
 import BaseLayout from "@/Layouts/BaseLayout.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
+import { ref, watch } from "vue";
 
 const props = defineProps({
     venues: {
@@ -11,9 +12,49 @@ const props = defineProps({
         type: [Object, null],
         default: null,
     },
+    accessEquipment: {
+        type: Array,
+        default: () => [],
+    },
+    dealTypes: {
+        type: Array,
+        default: () => [],
+    },
+    selectedAccessEquipmentProp: {
+        type: Array,
+        default: () => [],
+    },
+    selectedDealTypesProp: {
+        type: Array,
+        default: () => [],
+    },
 });
 
 const headerText = props?.region ? `Venues in ${props?.region.name}` : "Venues";
+const selectedAccessEquipment = ref(props.selectedAccessEquipmentProp);
+const selectedDealTypes = ref(props.selectedDealTypesProp);
+
+watch(selectedAccessEquipment, (newAccess) => {
+    router.get(
+        route("venue.index", {
+            _query: {
+                accessEquipment: newAccess,
+                dealTypes: selectedDealTypes.value,
+            },
+        })
+    );
+});
+
+watch(selectedDealTypes, (newDeals) => {
+    router.get(
+        route("venue.index", {
+            _query: {
+                accessEquipment: selectedAccessEquipment.value,
+                dealTypes: newDeals,
+            },
+        })
+    );
+});
 </script>
 <template>
     <BaseLayout>
@@ -26,6 +67,36 @@ const headerText = props?.region ? `Venues in ${props?.region.name}` : "Venues";
 
         <Head :title="headerText" />
 
+        <div
+            class="shadow border border-gray-100 rounded-lg p-3 space-y-3 bg-white"
+        >
+            <select
+                name="dealTypes"
+                id="dealTypes"
+                multiple
+                v-model="selectedDealTypes"
+            >
+                <option
+                    v-for="dealType in dealTypes"
+                    :key="dealType.id"
+                    :value="dealType.id"
+                    v-text="dealType.name"
+                />
+            </select>
+            <select
+                name="accessEquipment"
+                id="accessEquipment"
+                multiple
+                v-model="selectedAccessEquipment"
+            >
+                <option
+                    v-for="access in accessEquipment"
+                    :key="access.id"
+                    :value="access.id"
+                    v-text="access.name"
+                />
+            </select>
+        </div>
         <div class="flex-1 flex flex-col space-y-4">
             <div
                 v-for="venue in venues"

@@ -30,8 +30,8 @@ const cardClasses = [
     "justify-center",
     "align-center",
     "text-center",
-    "text-2xl"
-].join(" ")
+    "text-2xl",
+].join(" ");
 </script>
 <template>
     <BaseLayout>
@@ -42,22 +42,13 @@ const cardClasses = [
         </template>
 
         <div class="flex-1 grid grid-cols-2 gap-4">
-            <Link
-                :href="route('venue.index')"
-                :class="cardClasses"
-            >
+            <Link :href="route('venue.index')" :class="cardClasses">
                 {{ venueCount }} venues
             </Link>
-            <Link
-                :href="route('region.index')"
-                :class="cardClasses"
-            >
+            <Link :href="route('region.index')" :class="cardClasses">
                 {{ regionCount }} regions
             </Link>
-            <Link
-                :href="route('area.index')"
-                :class="cardClasses"
-            >
+            <Link :href="route('area.index')" :class="cardClasses">
                 {{ areaCount }} areas
             </Link>
         </div>

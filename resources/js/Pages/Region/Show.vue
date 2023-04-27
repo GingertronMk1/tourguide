@@ -36,7 +36,9 @@ defineProps({
         <Head :title="region.name" />
 
         <div class="flex-1 flex flex-col space-y-4">
-            <div class="bg-white shadow border border-gray-100 rounded-lg p-3 space-y-3">
+            <div
+                class="bg-white shadow border border-gray-100 rounded-lg p-3 space-y-3"
+            >
                 <Link
                     :href="route('region.show', region.id)"
                     class="text-2xl font-bold"

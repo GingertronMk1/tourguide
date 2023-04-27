@@ -13,7 +13,17 @@ class AreaRegionController extends Controller
      */
     public function index(Area $area)
     {
-        //
+        $regions = $area->regions;
+        $regions->load([
+            'venues'
+        ]);
+        return inertia(
+            'Region/Index',
+            [
+                'area' => $area,
+                'regions' => $regions
+            ]
+            );
     }
 
     /**

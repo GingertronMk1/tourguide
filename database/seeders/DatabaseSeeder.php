@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
         $user->password = bcrypt("12345");
         $user->email_verified_at = date('Y-m-d\TH:i:s');
         $user->save();
-        Venue::factory(10)->create();
+        Venue::factory(1000)->create();
     }
 }

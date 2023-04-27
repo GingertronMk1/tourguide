@@ -1,10 +1,9 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
-
 </script>
 
 <template>
-    <div class="flex flex-col">
+    <div class="h-full flex flex-col">
         <header class="p-4 bg-white border-b border-gray-100 flex flex-row">
             <div class="flex-1">
                 <slot name="header" />
@@ -16,7 +15,7 @@ import { Link } from "@inertiajs/vue3";
                 <Link :href="route('login')">Log In</Link>
             </div>
         </header>
-        <div class="p-4 flex-1 flex flex-col">
+        <div class="p-4 flex-1 flex flex-col bg-gray-200">
             <slot />
         </div>
     </div>

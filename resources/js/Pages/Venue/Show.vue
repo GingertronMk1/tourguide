@@ -5,7 +5,7 @@ import { Head, Link } from "@inertiajs/vue3";
 defineProps({
     region: {
         type: [Object, null],
-        default: null
+        default: null,
     },
     venue: {
         type: Object,
@@ -20,17 +20,15 @@ defineProps({
                 <Link
                     :href="
                         region?.id
-                        ? route('region.venue.index', {region: region.id})
-                        : route('venue.index')
+                            ? route('region.venue.index', { region: region.id })
+                            : route('venue.index')
                     "
                 >
                     <i class="fa-solid fa-chevron-left" />
                     <template v-if="region">
                         Back to {{ region.name }} Venues
                     </template>
-                    <template v-else>
-                        Back to Venue Index
-                    </template>
+                    <template v-else> Back to Venue Index </template>
                 </Link>
             </span>
         </template>

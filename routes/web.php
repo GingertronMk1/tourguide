@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegionController;
 use App\Http\Controllers\RegionVenueController;
 use App\Http\Controllers\VenueController;
 use Illuminate\Foundation\Application;
@@ -18,20 +21,11 @@ use Inertia\Inertia;
 |
 */
 
-$readOnlyMethods = ['index', 'show'];
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+/**
+ * Base Laravel routes
+ */
+Route::get('/', HomeController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,12 +33,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+/**
+ * My routes
+ */
 
+$readOnlyMethods = ['index', 'show'];
 
-Route::resource('venue', VenueController::class)->only($readOnlyMethods);
-Route::resource('region.venue', RegionVenueController::class)->only($readOnlyMethods);
-Route::middleware('auth')->group(function() use ($readOnlyMethods) {
-    Route::resource('venue', VenueController::class)->except($readOnlyMethods);
-});
+$resourceControllers = [
+    'venue' => VenueController::class,
+    'region.venue' => RegionVenueController::class,
+    'region' => RegionController::class,
+    'area' => AreaController::class,
+];
+
+foreach($resourceControllers as $resource => $controller) {
+    Route::resource($resource, $controller)->only($readOnlyMethods);
+    Route::middleware('auth')->resource($resource, $controller)->except($readOnlyMethods);
+}
 
 require __DIR__.'/auth.php';

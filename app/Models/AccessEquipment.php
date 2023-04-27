@@ -4,10 +4,10 @@ namespace App\Models;
 
 use App\Traits\LoggableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\TourGuideModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AccessEquipment extends Model
+class AccessEquipment extends TourGuideModel
 {
     use HasFactory, LoggableTrait, SoftDeletes;
 

@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\TourGuideModel;
 use Illuminate\Contracts\Database\Eloquent\CastsInboundAttributes;
 
 class {{ class }} implements CastsInboundAttributes

@@ -26,7 +26,7 @@ class VenueController extends Controller
             $venues = $venues->whereHas(
                 'accessEquipment',
                 function(Builder $query) use ($selectedAccessEquipmentProp) {
-                    $query->whereIn('access_equipment.id', $selectedAccessEquipmentProp);
+                    $query->whereIn(AccessEquipment::getTableName() . '.id', $selectedAccessEquipmentProp);
                 },
                 '=',
                 count($selectedAccessEquipmentProp)
@@ -36,7 +36,7 @@ class VenueController extends Controller
             $venues = $venues->whereHas(
                 'dealTypes',
                 function(Builder $query) use ($selectedDealTypesProp) {
-                    $query->whereIn('deal_types.id', $selectedDealTypesProp);
+                    $query->whereIn(DealType::getTableName() . '.id', $selectedDealTypesProp);
                 },
                 '=',
                 count($selectedDealTypesProp)

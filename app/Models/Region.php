@@ -4,12 +4,12 @@ namespace App\Models;
 
 use App\Traits\LoggableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\TourGuideModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Region extends Model
+class Region extends TourGuideModel
 {
     use HasFactory, LoggableTrait, SoftDeletes;
 

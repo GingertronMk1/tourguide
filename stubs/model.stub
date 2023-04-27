@@ -5,9 +5,9 @@ namespace {{ namespace }};
 use App\Traits\LoggableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\TourGuideModel;
 
-class {{ class }} extends Model
+class {{ class }} extends TourGuideModel
 {
     use HasFactory, LoggableTrait, SoftDeletes;
 

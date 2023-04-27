@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\TourGuideModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ActivityLog extends Model
+class ActivityLog extends TourGuideModel
 {
     use HasFactory;
 

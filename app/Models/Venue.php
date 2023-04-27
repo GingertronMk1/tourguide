@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\LoggableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\TourGuideModel;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -54,5 +55,35 @@ class Venue extends TourGuideModel
     public function dealTypes(): BelongsToMany
     {
         return $this->belongsToMany(DealType::class)->withPivot(['notes'])->withTimestamps();
+    }
+
+    public function scopeWithAccessEquipment(Builder $query, array $equipmentIds): void
+    {
+        $equipmentCount = count($equipmentIds);
+        if ($equipmentCount > 0) {
+            $query->whereHas(
+                'accessEquipment',
+                function(Builder $query) use ($equipmentIds) {
+                    $query->whereIn(AccessEquipment::getTableName() . '.id', $equipmentIds);
+                },
+                '=',
+                $equipmentCount
+            );
+        }
+    }
+
+    public function scopeWithDealTypes(Builder $query, array $dealTypeIds): void
+    {
+        $dealTypeCount = count($dealTypeIds);
+        if ($dealTypeCount > 0) {
+            $query->whereHas(
+                'dealTypes',
+                function(Builder $query) use ($dealTypeIds) {
+                    $query->whereIn(DealType::getTableName() . '.id', $dealTypeIds);
+                },
+                '=',
+                $dealTypeCount
+            );
+        }
     }
 }

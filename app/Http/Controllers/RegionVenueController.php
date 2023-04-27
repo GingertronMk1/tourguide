@@ -19,28 +19,10 @@ class RegionVenueController extends Controller
         $selectedAccessEquipmentProp = $request->get('accessEquipment', []);
         $selectedDealTypesProp = $request->get('dealTypes', []);
 
-        $venues = $region->venues();
-
-        if (is_array($selectedAccessEquipmentProp) && count($selectedAccessEquipmentProp) > 0) {
-            $venues = $venues->whereHas(
-                'accessEquipment',
-                function(Builder $query) use ($selectedAccessEquipmentProp) {
-                    $query->whereIn(AccessEquipment::getTableName() . '.id', $selectedAccessEquipmentProp);
-                },
-                '=',
-                count($selectedAccessEquipmentProp)
-            );
-        }
-        if (is_array($selectedDealTypesProp) && count($selectedDealTypesProp) > 0) {
-            $venues = $venues->whereHas(
-                'dealTypes',
-                function(Builder $query) use ($selectedDealTypesProp) {
-                    $query->whereIn(DealType::getTableName() . '.id', $selectedDealTypesProp);
-                },
-                '=',
-                count($selectedDealTypesProp)
-            );
-        }
+        $venues = $region
+            ->venues()
+            ->withAccessEquipment($selectedAccessEquipmentProp)
+            ->withDealTypes($selectedDealTypesProp);
 
         $venues = $venues->with([
             'region',

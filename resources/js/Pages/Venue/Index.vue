@@ -4,9 +4,9 @@ import { Head, Link, router } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
 
 const props = defineProps({
-    venues: {
-        type: Array,
-        default: () => [],
+    venuePaginator: {
+        type: Object,
+        default: () => {},
     },
     region: {
         type: [Object, null],
@@ -40,6 +40,7 @@ watch(selectedAccessEquipment, (newAccess) => {
             _query: {
                 accessEquipment: newAccess,
                 dealTypes: selectedDealTypes.value,
+                page: 1
             },
         })
     );
@@ -51,10 +52,34 @@ watch(selectedDealTypes, (newDeals) => {
             _query: {
                 accessEquipment: selectedAccessEquipment.value,
                 dealTypes: newDeals,
+                page: 1
             },
         })
     );
 });
+
+function advancePage() {
+    router.get(
+        route("venue.index", {
+            _query: {
+                accessEquipment: selectedAccessEquipment.value,
+                dealTypes: selectedDealTypes.value,
+                page: props.venuePaginator.current_page + 1
+            },
+        })
+    )
+}
+function returnPage() {
+    router.get(
+        route("venue.index", {
+            _query: {
+                accessEquipment: selectedAccessEquipment.value,
+                dealTypes: newDeals,
+                page: props.venuePaginator.current_page - 1
+            },
+        })
+    )
+}
 </script>
 <template>
     <BaseLayout>
@@ -101,7 +126,7 @@ watch(selectedDealTypes, (newDeals) => {
                 </select>
             </div>
             <div
-                v-for="venue in venues"
+                v-for="venue in venuePaginator.data"
                 :key="venue.id"
                 class="shadow border border-gray-100 rounded-lg p-3 space-y-3 bg-white"
             >
@@ -160,6 +185,21 @@ watch(selectedDealTypes, (newDeals) => {
                         <li v-text="`H: ${venue.maximum_stage_height}mm`" />
                         <li v-text="`D: ${venue.maximum_stage_depth}mm`" />
                     </ul>
+                </span>
+            </div>
+            <div class="shadow border border-gray-100 rounded-lg p-3 bg-white flex flex-row justify-between">
+                <span>
+                    <template v-if="venuePaginator.current_page > 1">
+                        <i class="fa-solid fa-chevron-left" />
+                        <button @click="returnPage">Previous</button>
+                    </template>
+                </span>
+                <span v-text="`You are on page ${ venuePaginator.current_page } of ${ venuePaginator.last_page }`" />
+                <span>
+                    <template v-if="venuePaginator.current_page < venuePaginator.last_page">
+                        <button @click="advancePage">Next</button>
+                        <i class="fa-solid fa-chevron-right" />
+                    </template>
                 </span>
             </div>
         </div>

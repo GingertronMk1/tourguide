@@ -49,11 +49,11 @@ class VenueController extends Controller
         ]);
 
         return inertia('Venue/Index', [
-            'venues' => $venues->get(),
+            'venuePaginator' => $venues->paginate(Venue::PER_PAGE),
             'accessEquipment' => AccessEquipment::all(),
             'dealTypes' => DealType::all(),
             'selectedAccessEquipmentProp' => $selectedAccessEquipmentProp,
-            'selectedDealTypesProp' => $selectedDealTypesProp
+            'selectedDealTypesProp' => $selectedDealTypesProp,
         ]);
     }
 

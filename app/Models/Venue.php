@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Venue extends TourGuideModel
 {
+    public const PER_PAGE = 25;
+
     use HasFactory, LoggableTrait, SoftDeletes;
 
     protected $fillable = [

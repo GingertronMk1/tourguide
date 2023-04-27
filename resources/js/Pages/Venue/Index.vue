@@ -40,7 +40,7 @@ watch(selectedAccessEquipment, (newAccess) => {
             _query: {
                 accessEquipment: newAccess,
                 dealTypes: selectedDealTypes.value,
-                page: 1
+                page: 1,
             },
         })
     );
@@ -52,7 +52,7 @@ watch(selectedDealTypes, (newDeals) => {
             _query: {
                 accessEquipment: selectedAccessEquipment.value,
                 dealTypes: newDeals,
-                page: 1
+                page: 1,
             },
         })
     );
@@ -64,21 +64,21 @@ function advancePage() {
             _query: {
                 accessEquipment: selectedAccessEquipment.value,
                 dealTypes: selectedDealTypes.value,
-                page: props.venuePaginator.current_page + 1
+                page: props.venuePaginator.current_page + 1,
             },
         })
-    )
+    );
 }
 function returnPage() {
     router.get(
         route("venue.index", {
             _query: {
                 accessEquipment: selectedAccessEquipment.value,
-                dealTypes: newDeals,
-                page: props.venuePaginator.current_page - 1
+                dealTypes: newDeals.value,
+                page: props.venuePaginator.current_page - 1,
             },
         })
-    )
+    );
 }
 </script>
 <template>
@@ -187,16 +187,27 @@ function returnPage() {
                     </ul>
                 </span>
             </div>
-            <div class="shadow border border-gray-100 rounded-lg p-3 bg-white flex flex-row justify-between">
+            <div
+                class="shadow border border-gray-100 rounded-lg p-3 bg-white flex flex-row justify-between"
+            >
                 <span>
                     <template v-if="venuePaginator.current_page > 1">
                         <i class="fa-solid fa-chevron-left" />
                         <button @click="returnPage">Previous</button>
                     </template>
                 </span>
-                <span v-text="`You are on page ${ venuePaginator.current_page } of ${ venuePaginator.last_page }`" />
+                <span
+                    v-text="
+                        `You are on page ${venuePaginator.current_page} of ${venuePaginator.last_page}`
+                    "
+                />
                 <span>
-                    <template v-if="venuePaginator.current_page < venuePaginator.last_page">
+                    <template
+                        v-if="
+                            venuePaginator.current_page <
+                            venuePaginator.last_page
+                        "
+                    >
                         <button @click="advancePage">Next</button>
                         <i class="fa-solid fa-chevron-right" />
                     </template>

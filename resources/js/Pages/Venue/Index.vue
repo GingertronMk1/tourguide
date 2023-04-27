@@ -67,37 +67,39 @@ watch(selectedDealTypes, (newDeals) => {
 
         <Head :title="headerText" />
 
-        <div
-            class="shadow border border-gray-100 rounded-lg p-3 space-y-3 bg-white"
-        >
-            <select
-                name="dealTypes"
-                id="dealTypes"
-                multiple
-                v-model="selectedDealTypes"
-            >
-                <option
-                    v-for="dealType in dealTypes"
-                    :key="dealType.id"
-                    :value="dealType.id"
-                    v-text="dealType.name"
-                />
-            </select>
-            <select
-                name="accessEquipment"
-                id="accessEquipment"
-                multiple
-                v-model="selectedAccessEquipment"
-            >
-                <option
-                    v-for="access in accessEquipment"
-                    :key="access.id"
-                    :value="access.id"
-                    v-text="access.name"
-                />
-            </select>
-        </div>
         <div class="flex-1 flex flex-col space-y-4">
+            <div
+                class="shadow border border-gray-100 rounded-lg p-3 bg-white grid grid-cols-2 gap-x-3"
+            >
+                <select
+                    id="dealTypes"
+                    v-model="selectedDealTypes"
+                    name="dealTypes"
+                    multiple
+                    class="rounded-md"
+                >
+                    <option
+                        v-for="dealType in dealTypes"
+                        :key="dealType.id"
+                        :value="dealType.id"
+                        v-text="dealType.name"
+                    />
+                </select>
+                <select
+                    id="accessEquipment"
+                    v-model="selectedAccessEquipment"
+                    name="accessEquipment"
+                    multiple
+                    class="rounded-md"
+                >
+                    <option
+                        v-for="access in accessEquipment"
+                        :key="access.id"
+                        :value="access.id"
+                        v-text="access.name"
+                    />
+                </select>
+            </div>
             <div
                 v-for="venue in venues"
                 :key="venue.id"

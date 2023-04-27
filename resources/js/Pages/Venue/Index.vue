@@ -31,55 +31,24 @@ const props = defineProps({
 });
 
 const headerText = props?.region ? `Venues in ${props?.region.name}` : "Venues";
-const selectedAccessEquipment = ref(props.selectedAccessEquipmentProp);
-const selectedDealTypes = ref(props.selectedDealTypesProp);
 
-watch(selectedAccessEquipment, (newAccess) => {
-    router.get(
-        route("venue.index", {
-            _query: {
-                accessEquipment: newAccess,
-                dealTypes: selectedDealTypes.value,
-                page: 1,
-            },
-        })
-    );
+const query = ref({
+    accessEquipment: props.selectedAccessEquipmentProp,
+    dealTypes: props.selectedDealTypesProp,
+    page: props?.venuePaginator?.current_page ?? 1,
 });
 
-watch(selectedDealTypes, (newDeals) => {
-    router.get(
-        route("venue.index", {
-            _query: {
-                accessEquipment: selectedAccessEquipment.value,
-                dealTypes: newDeals,
-                page: 1,
-            },
-        })
-    );
-});
-
-function advancePage() {
-    router.get(
-        route("venue.index", {
-            _query: {
-                accessEquipment: selectedAccessEquipment.value,
-                dealTypes: selectedDealTypes.value,
-                page: props.venuePaginator.current_page + 1,
-            },
-        })
-    );
-}
-function returnPage() {
-    router.get(
-        route("venue.index", {
-            _query: {
-                accessEquipment: selectedAccessEquipment.value,
-                dealTypes: newDeals.value,
-                page: props.venuePaginator.current_page - 1,
-            },
-        })
-    );
-}
+watch(
+    () => query.value,
+    (newQuery) => {
+        router.get(
+            route("venue.index", {
+                _query: newQuery,
+            })
+        );
+    },
+    { deep: true }
+);
 </script>
 <template>
     <BaseLayout>
@@ -98,7 +67,7 @@ function returnPage() {
             >
                 <select
                     id="dealTypes"
-                    v-model="selectedDealTypes"
+                    v-model="query.dealTypes"
                     name="dealTypes"
                     multiple
                     class="rounded-md"
@@ -112,7 +81,7 @@ function returnPage() {
                 </select>
                 <select
                     id="accessEquipment"
-                    v-model="selectedAccessEquipment"
+                    v-model="query.accessEquipment"
                     name="accessEquipment"
                     multiple
                     class="rounded-md"
@@ -193,7 +162,7 @@ function returnPage() {
                 <span>
                     <template v-if="venuePaginator.current_page > 1">
                         <i class="fa-solid fa-chevron-left" />
-                        <button @click="returnPage">Previous</button>
+                        <button @click="query.page--">Previous</button>
                     </template>
                 </span>
                 <span
@@ -208,7 +177,7 @@ function returnPage() {
                             venuePaginator.last_page
                         "
                     >
-                        <button @click="advancePage">Next</button>
+                        <button @click="query.page++">Next</button>
                         <i class="fa-solid fa-chevron-right" />
                     </template>
                 </span>

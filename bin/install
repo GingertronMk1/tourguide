@@ -11,4 +11,7 @@ echo "Composer installing"
 echo "Running migrations and seeding database"
 ./bin/artisan migrate:fresh --seed
 
+echo "Building assets"
+./bin/npm build
+
 echo "Done!"

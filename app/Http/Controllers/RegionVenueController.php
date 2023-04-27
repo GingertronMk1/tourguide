@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccessEquipment;
+use App\Models\DealType;
 use App\Models\Region;
 use App\Models\Venue;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class RegionVenueController extends Controller
@@ -11,20 +14,47 @@ class RegionVenueController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Region $region)
+    public function index(Region $region, Request $request)
     {
-        $venues = $region->venues;
-        $venues->load([
-                'region',
-                'venueType'
+        $selectedAccessEquipmentProp = $request->get('accessEquipment', []);
+        $selectedDealTypesProp = $request->get('dealTypes', []);
+
+        $venues = $region->venues();
+
+        if (is_array($selectedAccessEquipmentProp) && count($selectedAccessEquipmentProp) > 0) {
+            $venues = $venues->whereHas(
+                'accessEquipment',
+                function(Builder $query) use ($selectedAccessEquipmentProp) {
+                    $query->whereIn(AccessEquipment::getTableName() . '.id', $selectedAccessEquipmentProp);
+                },
+                '=',
+                count($selectedAccessEquipmentProp)
+            );
+        }
+        if (is_array($selectedDealTypesProp) && count($selectedDealTypesProp) > 0) {
+            $venues = $venues->whereHas(
+                'dealTypes',
+                function(Builder $query) use ($selectedDealTypesProp) {
+                    $query->whereIn(DealType::getTableName() . '.id', $selectedDealTypesProp);
+                },
+                '=',
+                count($selectedDealTypesProp)
+            );
+        }
+
+        $venues = $venues->with([
+            'region',
+            'venueType'
         ]);
-        return inertia(
-            'Venue/Index',
-            [
-                'venues' => $venues,
-                'region' => $region
-            ]
-        );
+
+        return inertia('Venue/Index', [
+            'venuePaginator' => $venues->paginate(Venue::PER_PAGE),
+            'accessEquipment' => AccessEquipment::all(),
+            'dealTypes' => DealType::all(),
+            'selectedAccessEquipmentProp' => $selectedAccessEquipmentProp,
+            'selectedDealTypesProp' => $selectedDealTypesProp,
+            'region' => $region
+        ]);
     }
 
     /**

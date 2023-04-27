@@ -17,8 +17,8 @@ class VenueController extends Controller
      */
     public function index(Request $request)
     {
-        $selectedAccessEquipmentProp = $request->get('accessEquipment');
-        $selectedDealTypesProp = $request->get('dealTypes');
+        $selectedAccessEquipmentProp = $request->get('accessEquipment', []);
+        $selectedDealTypesProp = $request->get('dealTypes', []);
 
         $venues = Venue::query();
 

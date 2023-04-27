@@ -26,7 +26,7 @@ use Inertia\Inertia;
 /**
  * Base Laravel routes
  */
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

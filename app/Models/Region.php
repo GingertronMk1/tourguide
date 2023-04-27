@@ -30,6 +30,6 @@ class Region extends Model
 
     public function venues(): HasMany
     {
-        return $this->hasMany(Venue::class);
+        return $this->hasMany(Venue::class)->orderBy('name');
     }
 }

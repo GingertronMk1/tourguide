@@ -25,11 +25,11 @@ class Area extends Model
 
     public function regions(): HasMany
     {
-        return $this->hasMany(Region::class);
+        return $this->hasMany(Region::class)->orderBy('name');
     }
 
     public function venues(): HasManyThrough
     {
-        return $this->hasManyThrough(Venue::class, Region::class);
+        return $this->hasManyThrough(Venue::class, Region::class)->orderBy('name');
     }
 }

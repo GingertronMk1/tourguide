@@ -16,6 +16,7 @@ jobs:
       - run: ./bin/app/artisan about
   deploy:
     name: Deploy app
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

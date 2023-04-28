@@ -3,21 +3,21 @@
 docker-compose up -d
 
 echo "NPM installing..."
-./bin/node npm install
+./bin/node/npm npm install
 
 echo "Composer installing"
-./bin/composer install
+./bin/app/composer install
 
 echo "Running migrations and seeding database"
-./bin/artisan migrate:fresh --seed
+./bin/app/artisan migrate:fresh --seed
 
 echo "Building assets"
-./bin/npm build
+./bin/node/npm build
 
 echo "Copying .env.local"
 cp .env.local .env
 
 echo "Generating app key"
-./bin/artisan key:generate
+./bin/app/artisan key:generate
 
 echo "Done!"

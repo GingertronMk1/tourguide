@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-docker-compose up -d
+docker-compose up -d --build
 
 echo "NPM installing..."
 ./bin/node/npm npm install
@@ -13,9 +13,6 @@ echo "Running migrations and seeding database"
 
 echo "Building assets"
 ./bin/node/npm build
-
-echo "Copying .env.local"
-cp .env.local .env
 
 echo "Generating app key"
 ./bin/app/artisan key:generate

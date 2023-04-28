@@ -7,8 +7,6 @@ jobs:
   lint:
     name: Lint code
     runs-on: ubuntu-latest
-    env:
-      APP_ENV: testing
     steps:
       - uses: actions/checkout@v3
       - run: touch database/database.sqlite

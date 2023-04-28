@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: touch database/database.sqlite
       - run: ./bin/install
-      - run: ./bin/artisan about
+      - run: ./bin/app/artisan about
   deploy:
     name: Deploy app
     runs-on: ubuntu-latest

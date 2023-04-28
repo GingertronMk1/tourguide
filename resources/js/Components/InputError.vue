@@ -2,6 +2,7 @@
 defineProps({
     message: {
         type: String,
+        default: "There has been an error",
     },
 });
 </script>

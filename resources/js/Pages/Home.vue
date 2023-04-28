@@ -1,6 +1,6 @@
 <script setup>
 import BaseLayout from "@/Layouts/BaseLayout.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 
 defineProps({
     venueCount: {

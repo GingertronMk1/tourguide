@@ -9,6 +9,7 @@ const props = defineProps({
         required: true,
     },
     value: {
+        type: () => true,
         default: null,
     },
 });

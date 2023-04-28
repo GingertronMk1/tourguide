@@ -3,7 +3,7 @@
 docker-compose up -d --build
 
 echo "NPM installing..."
-./bin/node/node npm install
+./bin/node/run npm install
 
 echo "Composer installing"
 ./bin/app/composer install

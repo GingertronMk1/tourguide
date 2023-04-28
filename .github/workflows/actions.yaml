@@ -1,9 +1,19 @@
-name: Fly Deploy
+name: Testing and Fly Deployment
 on:
   push:
     branches:
       - main
 jobs:
+  lint:
+    name: Lint code
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: testing
+    steps:
+      - uses: actions/checkout@v3
+      - run: touch database/database.sqlite
+      - run: ./bin/install
+      - run: ./bin/artisan about
   deploy:
     name: Deploy app
     runs-on: ubuntu-latest

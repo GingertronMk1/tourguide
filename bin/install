@@ -14,4 +14,10 @@ echo "Running migrations and seeding database"
 echo "Building assets"
 ./bin/npm build
 
+echo "Copying .env.local"
+cp .env.local .env
+
+echo "Generating app key"
+./bin/artisan key:generate
+
 echo "Done!"

@@ -145,16 +145,16 @@ return new class extends Migration
                 'Peterborough',
                 'Southend-on-Sea',
                 'Suffolk',
-                'Thurrock'
+                'Thurrock',
             ],
             'London' => [
-                'Greater London'
-            ]
+                'Greater London',
+            ],
         ];
 
-        foreach($initial_regions as $area => $regions) {
+        foreach ($initial_regions as $area => $regions) {
             $area_model = Area::firstWhere('name', $area);
-            foreach($regions as $region) {
+            foreach ($regions as $region) {
                 $area_model->regions()->create(['name' => $region]);
             }
         }

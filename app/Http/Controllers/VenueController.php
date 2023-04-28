@@ -7,7 +7,6 @@ use App\Http\Requests\UpdateVenueRequest;
 use App\Models\AccessEquipment;
 use App\Models\DealType;
 use App\Models\Venue;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class VenueController extends Controller
@@ -26,7 +25,7 @@ class VenueController extends Controller
 
         $venues = $venues->with([
             'region',
-            'venueType'
+            'venueType',
         ]);
 
         return inertia('Venue/Index', [
@@ -60,6 +59,7 @@ class VenueController extends Controller
     public function show(Venue $venue)
     {
         $venue->load(['region', 'venueType', 'accessEquipment', 'dealTypes']);
+
         return inertia('Venue/Show', ['venue' => $venue]);
     }
 

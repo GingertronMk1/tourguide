@@ -14,6 +14,7 @@ class AreaController extends Controller
     public function index()
     {
         $areas = Area::with(['regions'])->get()->sortBy('name')->values()->all();
+
         return inertia('Area/Index', ['areas' => $areas]);
     }
 
@@ -39,6 +40,7 @@ class AreaController extends Controller
     public function show(Area $area)
     {
         $area->load(['regions']);
+
         return inertia('Area/Show', ['area' => $area]);
     }
 

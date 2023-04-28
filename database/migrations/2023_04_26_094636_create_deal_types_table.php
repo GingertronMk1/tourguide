@@ -24,10 +24,10 @@ return new class extends Migration
         $initial_types = [
             'Hire',
             'Split',
-            'Guarantee'
+            'Guarantee',
         ];
 
-        foreach($initial_types as $type) {
+        foreach ($initial_types as $type) {
             DealType::create(['name' => $type]);
         }
 

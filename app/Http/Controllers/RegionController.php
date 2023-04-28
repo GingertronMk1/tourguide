@@ -15,14 +15,15 @@ class RegionController extends Controller
     {
         $regions = Region::with([
             'area',
-            'venues'
+            'venues',
         ])
             ->get()
             ->sortBy('name')
             ->values()
             ->all();
+
         return inertia('Region/Index', [
-            'regions' => $regions
+            'regions' => $regions,
         ]);
     }
 
@@ -48,6 +49,7 @@ class RegionController extends Controller
     public function show(Region $region)
     {
         $region->load(['venues', 'area']);
+
         return inertia('Region/Show', ['region' => $region]);
     }
 

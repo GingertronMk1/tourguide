@@ -6,7 +6,6 @@ use App\Models\AccessEquipment;
 use App\Models\DealType;
 use App\Models\Region;
 use App\Models\Venue;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class RegionVenueController extends Controller
@@ -26,7 +25,7 @@ class RegionVenueController extends Controller
 
         $venues = $venues->with([
             'region',
-            'venueType'
+            'venueType',
         ]);
 
         return inertia('Venue/Index', [
@@ -35,7 +34,7 @@ class RegionVenueController extends Controller
             'dealTypes' => DealType::all(),
             'selectedAccessEquipmentProp' => $selectedAccessEquipmentProp,
             'selectedDealTypesProp' => $selectedDealTypesProp,
-            'region' => $region
+            'region' => $region,
         ]);
     }
 
@@ -61,13 +60,13 @@ class RegionVenueController extends Controller
     public function show(Region $region, Venue $venue)
     {
         return inertia('Venue/Show', [
-            'venue'=> $venue->load([
+            'venue' => $venue->load([
                 'region',
                 'venueType',
                 'accessEquipment',
-                'dealTypes'
+                'dealTypes',
             ]),
-            'region' => $region
+            'region' => $region,
         ]);
     }
 

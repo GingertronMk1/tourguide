@@ -26,10 +26,10 @@ return new class extends Migration
             'Midlands',
             'South West',
             'South East',
-            'London'
+            'London',
         ];
 
-        foreach($initial_areas as $area) {
+        foreach ($initial_areas as $area) {
             Area::create(['name' => $area]);
         }
     }

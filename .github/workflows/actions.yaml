@@ -16,6 +16,7 @@ jobs:
   deploy:
     name: Deploy app
     needs: lint
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

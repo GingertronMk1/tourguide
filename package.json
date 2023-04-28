@@ -4,8 +4,8 @@
         "dev": "vite",
         "build": "vite build",
         "watch": "vite build --watch --mode dev",
-        "fix": "eslint --ext .js,.vue --ignore-path .gitignore --fix resources",
-        "lint": "eslint --ext .js,.vue --ignore-path .gitignore resources"
+        "lint": "eslint --ext .js,.vue --ignore-path .gitignore resources",
+        "lint:fix": "npm run lint -- --fix"
     },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",

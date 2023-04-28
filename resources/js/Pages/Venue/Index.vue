@@ -42,18 +42,18 @@ watch(
     () => query.value,
     (newQuery) => {
         if (props?.region?.id) {
-        router.get(
-            route("region.venue.index", {
-                region: props.region.id,
-                _query: newQuery,
-            })
-        );
+            router.get(
+                route("region.venue.index", {
+                    region: props.region.id,
+                    _query: newQuery,
+                })
+            );
         } else {
-        router.get(
-            route("venue.index", {
-                _query: newQuery,
-            })
-        );
+            router.get(
+                route("venue.index", {
+                    _query: newQuery,
+                })
+            );
         }
     },
     { deep: true }

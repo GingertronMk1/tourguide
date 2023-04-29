@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
   lint:
     name: Lint code
@@ -16,6 +20,7 @@ jobs:
   deploy:
     name: Deploy app
     needs: lint
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

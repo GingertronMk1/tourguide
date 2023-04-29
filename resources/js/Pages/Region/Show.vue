@@ -54,7 +54,7 @@ defineProps({
                 <div>
                     <Link
                         class="text-l font-bold"
-                        :href="route('region.venue.index', region.id)"
+                        :href="route('venue.index', {regions: [region.id]})"
                     >
                         See
                         {{

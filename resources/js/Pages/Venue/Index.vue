@@ -59,7 +59,7 @@ watch(
 
         <Head title="Venues" />
 
-        <div class="flex-1 flex flex-col space-y-4">
+        <div class="space-y-4 flex flex-col">
             <!--
                 Filtering by access and deal types
             -->
@@ -115,6 +115,8 @@ watch(
             <!--
                 Venues
             -->
+            <div class="overflow-y-scroll flex-1">
+
             <VenueCard
                 v-for="venue in venuePaginator.data"
                 :key="venue.id"
@@ -126,6 +128,7 @@ watch(
                     })
                 "
             />
+            </div>
 
             <div class="card flex flex-row justify-between">
                 <span>

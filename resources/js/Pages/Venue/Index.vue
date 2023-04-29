@@ -68,7 +68,7 @@ watch(
             <div class="card flex flex-row justify-between">
                 <span>
                     <template v-if="venuePaginator.current_page > 1">
-                        <i class="fa-solid fa-chevron-left" />
+                        <i class="fa-solid fa-chevron-left mr-2" />
                         <button @click="query.page--">Previous</button>
                     </template>
                 </span>
@@ -85,7 +85,7 @@ watch(
                         "
                     >
                         <button @click="query.page++">Next</button>
-                        <i class="fa-solid fa-chevron-right" />
+                        <i class="fa-solid fa-chevron-right ml-2" />
                     </template>
                 </span>
             </div>

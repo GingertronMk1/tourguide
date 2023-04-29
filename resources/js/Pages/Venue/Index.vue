@@ -172,7 +172,7 @@ function incrementPage() {
                     </select>
                 </div>
                 <div
-                    class="card bg-blue-700 text-white font-bold text-center cursor-pointer"
+                    class="card bg-blue-700 text-white font-bold text-center cursor-pointer border-blue-700"
                     @click="resetFilters"
                 >
                     Reset Filters

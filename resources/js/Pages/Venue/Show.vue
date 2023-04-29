@@ -12,6 +12,10 @@ defineProps({
         type: Object,
         required: true,
     },
+    query: {
+        type: Object,
+        default: () => {}
+    }
 });
 </script>
 <template>
@@ -19,11 +23,7 @@ defineProps({
         <template #header>
             <span class="font-semibold text-xl text-gray-800 leading-tight">
                 <Link
-                    :href="
-                        region?.id
-                            ? route('region.venue.index', { region: region.id })
-                            : route('venue.index')
-                    "
+                    :href="route('venue.index', query)"
                 >
                     <i class="fa-solid fa-chevron-left" />
                     <template v-if="region">

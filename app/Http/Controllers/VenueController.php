@@ -22,7 +22,7 @@ class VenueController extends Controller
                 'accessEquipment' => [],
                 'dealTypes' => [],
                 'page' => 1,
-                'regions' => []
+                'regions' => [],
             ],
             $request->input()
         );
@@ -71,11 +71,17 @@ class VenueController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Venue $venue)
+    public function show(Venue $venue, Request $request)
     {
         $venue->load(['accessEquipment', 'dealTypes']);
 
-        return inertia('Venue/Show', ['venue' => $venue]);
+        return inertia(
+            'Venue/Show',
+            [
+                'venue' => $venue,
+                'query' => $request->get('query'),
+            ]
+        );
     }
 
     /**

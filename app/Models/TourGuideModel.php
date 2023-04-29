@@ -13,7 +13,7 @@ class TourGuideModel extends Model
 
     public static function getTableColumn(string $column): string
     {
-        return static::getTableName() . '.' . $column;
+        return static::getTableName().'.'.$column;
     }
 
     protected $fillable = [

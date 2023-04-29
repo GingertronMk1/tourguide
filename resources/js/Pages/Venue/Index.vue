@@ -119,7 +119,10 @@ watch(
                 v-for="venue in venuePaginator.data"
                 :key="venue.id"
                 :venue="venue"
-                :href="route('venue.show', venue.id)"
+                :href="route('venue.show', {
+                    venue,
+                    query
+                })"
             />
 
             <div class="card flex flex-row justify-between">

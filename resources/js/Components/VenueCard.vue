@@ -34,7 +34,7 @@ const cardTitle = [
         <h6 class="text-l font-bold">Notes</h6>
         <p class="font-normal" v-text="venue.notes" />
         <hr />
-        <span class="grid grid-cols-4 divide-x-2">
+        <span class="grid grid-cols-4 divide-x-2 items-center">
             <p
                 class="text-center"
                 v-text="`Max seats: ${venue.maximum_seats}`"

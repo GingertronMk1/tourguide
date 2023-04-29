@@ -8,8 +8,10 @@ echo "NPM installing..."
 echo "Composer installing"
 ./bin/app/composer install
 
-echo "Copying .env.local"
-cp .env.local .env
+if [ -ne ".env" ]; then
+    echo "Copying .env.local"
+    cp .env.local .env
+fi
 
 echo "Generating app key"
 ./bin/app/artisan key:generate

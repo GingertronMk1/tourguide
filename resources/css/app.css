@@ -9,3 +9,7 @@ body,
 #app {
     height: 100%;
 }
+
+.card {
+    @apply shadow border border-gray-100 rounded-lg p-3 bg-white;
+}

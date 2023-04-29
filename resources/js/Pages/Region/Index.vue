@@ -30,7 +30,7 @@ const headerText = props?.area ? `Regions in ${props.area.name}` : `Regions`;
             <div
                 v-for="region in regions"
                 :key="region.id"
-                class="shadow border border-gray-100 rounded-lg p-3 space-y-3 bg-white"
+                class="card space-y-3"
             >
                 <Link
                     :href="

@@ -26,7 +26,7 @@ const headerText = "Areas";
             <div
                 v-for="area in areas"
                 :key="area.id"
-                class="shadow border border-gray-100 rounded-lg p-3 space-y-3 bg-white"
+                class="card space-y-3"
             >
                 <Link
                     :href="route('area.show', area.id)"

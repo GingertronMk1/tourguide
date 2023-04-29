@@ -72,7 +72,7 @@ watch(
 
         <div class="flex-1 flex flex-col space-y-4">
             <div
-                class="shadow border border-gray-100 rounded-lg p-3 bg-white grid grid-cols-2 gap-x-3"
+                class="card grid grid-cols-2 gap-x-3"
             >
                 <select
                     id="dealTypes"
@@ -106,7 +106,7 @@ watch(
             <div
                 v-for="venue in venuePaginator.data"
                 :key="venue.id"
-                class="shadow border border-gray-100 rounded-lg p-3 space-y-3 bg-white"
+                class="card space-y-3"
             >
                 <Link
                     :href="
@@ -166,7 +166,7 @@ watch(
                 </span>
             </div>
             <div
-                class="shadow border border-gray-100 rounded-lg p-3 bg-white flex flex-row justify-between"
+                class="card flex flex-row justify-between"
             >
                 <span>
                     <template v-if="venuePaginator.current_page > 1">

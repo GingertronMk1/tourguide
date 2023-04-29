@@ -24,7 +24,7 @@ defineProps({
 
         <div class="flex-1 flex flex-col space-y-4">
             <div
-                class="bg-white shadow border border-gray-100 rounded-lg p-3 space-y-3"
+                class="card space-y-3"
             >
                 <Link
                     :href="route('area.show', area.id)"

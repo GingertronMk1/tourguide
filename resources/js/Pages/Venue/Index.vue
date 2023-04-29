@@ -38,7 +38,10 @@ const query = ref(props.query);
 
 watch(
     () => query.value,
-    (newQuery) => {
+    (newQuery, oldQuery) => {
+        if (parseInt(oldQuery.page) === parseInt(newQuery.page)) {
+            newQuery.page = 1;
+        }
         router.get(
             route("venue.index", {
                 _query: newQuery,
@@ -47,6 +50,31 @@ watch(
     },
     { deep: true }
 );
+
+function resetFilters() {
+    query.value = {
+        ...query.value,
+        accessEquipment: [],
+        dealTypes: [],
+        regions: [],
+    };
+}
+
+function decrementPage() {
+    const { page } = query.value;
+    query.value = {
+        ...query.value,
+        page: parseInt(page) - 1,
+    };
+}
+
+function incrementPage() {
+    const { page } = query.value;
+    query.value = {
+        ...query.value,
+        page: parseInt(page) + 1,
+    };
+}
 </script>
 <template>
     <BaseLayout
@@ -69,7 +97,7 @@ watch(
                 <span>
                     <template v-if="venuePaginator.current_page > 1">
                         <i class="fa-solid fa-chevron-left mr-2" />
-                        <button @click="query.page--">Previous</button>
+                        <button @click="decrementPage">Previous</button>
                     </template>
                 </span>
                 <span
@@ -84,7 +112,7 @@ watch(
                             venuePaginator.last_page
                         "
                     >
-                        <button @click="query.page++">Next</button>
+                        <button @click="incrementPage">Next</button>
                         <i class="fa-solid fa-chevron-right ml-2" />
                     </template>
                 </span>
@@ -143,6 +171,12 @@ watch(
                         />
                     </template>
                 </select>
+            </div>
+            <div
+                class="card bg-blue-700 text-white font-bold text-center cursor-pointer"
+                @click="resetFilters"
+            >
+                Reset Filters
             </div>
         </div>
 

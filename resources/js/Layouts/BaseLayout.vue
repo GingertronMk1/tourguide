@@ -1,9 +1,18 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
+
+const props = defineProps({
+    bodyClasses: {
+        type: String,
+        default: "",
+    },
+});
+
+let bodyClasses = "p-4 bg-gray-200 ".concat(props.bodyClasses);
 </script>
 
 <template>
-    <div class="h-full">
+    <div class="h-full flex flex-col">
         <header class="p-4 bg-white border-b border-gray-100 flex flex-row">
             <Link
                 :href="route('home')"
@@ -19,7 +28,7 @@ import { Link } from "@inertiajs/vue3";
                 <Link :href="route('login')">Log In</Link>
             </div>
         </header>
-        <div class="p-4 bg-gray-200">
+        <div :class="bodyClasses">
             <slot />
         </div>
     </div>

@@ -58,7 +58,7 @@ defineProps({
                     >
                         See
                         {{
-                            region?.venues?.length === 1
+                            region.venues?.length === 1
                                 ? `1 theatre`
                                 : `${region.venues.length} theatres`
                         }}

@@ -78,7 +78,7 @@ function incrementPage() {
 </script>
 <template>
     <BaseLayout
-        body-classes="flex flex-row items-start flex-1 space-x-4 overflow-y-hidden"
+        body-classes="overflow-y-hidden"
     >
         <template #header>
             <h2
@@ -88,6 +88,8 @@ function incrementPage() {
         </template>
 
         <Head title="Venues" />
+
+        <div class="flex flex-row flex-1 overflow-y-hidden space-x-3">
 
         <!--
                 Filtering by access and deal types
@@ -197,6 +199,7 @@ function incrementPage() {
                     })
                 "
             />
+        </div>
         </div>
     </BaseLayout>
 </template>

@@ -1,9 +1,5 @@
 @import "@fortawesome/fontawesome-free/css/all.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 html,
 body,
 #app {
@@ -16,3 +12,7 @@ body,
 .card {
     @apply shadow border border-gray-100 rounded-lg p-3 bg-white;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

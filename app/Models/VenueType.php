@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Traits\LoggableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\TourGuideModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class VenueType extends TourGuideModel
@@ -14,7 +13,7 @@ class VenueType extends TourGuideModel
     protected $fillable = [
         'name',
         'description',
-        'notes'
+        'notes',
     ];
 
     protected $casts = [

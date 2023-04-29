@@ -9,7 +9,6 @@ use App\Http\Controllers\RegionVenueController;
 use App\Http\Controllers\VenueController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +20,6 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 /**
  * Base Laravel routes
@@ -37,7 +35,6 @@ Route::middleware('auth')->group(function () {
 /**
  * My routes
  */
-
 $readOnlyMethods = ['index', 'show'];
 
 $resourceControllers = [
@@ -48,7 +45,7 @@ $resourceControllers = [
     'area.region' => AreaRegionController::class,
 ];
 
-foreach($resourceControllers as $resource => $controller) {
+foreach ($resourceControllers as $resource => $controller) {
     Route::resource($resource, $controller)->only($readOnlyMethods);
     Route::middleware('auth')->resource($resource, $controller)->except($readOnlyMethods);
 }

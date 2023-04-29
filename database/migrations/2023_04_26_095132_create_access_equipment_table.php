@@ -25,10 +25,10 @@ return new class extends Migration
             'Caption Screen',
             'Audio Enhancement Equipment',
             'Quiet Space',
-            'BSL Position'
+            'BSL Position',
         ];
 
-        foreach($initial_equipments as $equipment) {
+        foreach ($initial_equipments as $equipment) {
             AccessEquipment::create(['name' => $equipment]);
         }
     }

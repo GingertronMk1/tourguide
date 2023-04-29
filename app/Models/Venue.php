@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use App\Traits\LoggableTrait;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\TourGuideModel;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,7 +33,7 @@ class Venue extends TourGuideModel
     ];
 
     protected $casts = [
-        'backstage_wheelchair_access' => 'boolean'
+        'backstage_wheelchair_access' => 'boolean',
     ];
 
     public function region(): BelongsTo
@@ -63,8 +62,8 @@ class Venue extends TourGuideModel
         if ($equipmentCount > 0) {
             $query->whereHas(
                 'accessEquipment',
-                function(Builder $query) use ($equipmentIds) {
-                    $query->whereIn(AccessEquipment::getTableName() . '.id', $equipmentIds);
+                function (Builder $query) use ($equipmentIds) {
+                    $query->whereIn(AccessEquipment::getTableName().'.id', $equipmentIds);
                 },
                 '=',
                 $equipmentCount
@@ -78,8 +77,8 @@ class Venue extends TourGuideModel
         if ($dealTypeCount > 0) {
             $query->whereHas(
                 'dealTypes',
-                function(Builder $query) use ($dealTypeIds) {
-                    $query->whereIn(DealType::getTableName() . '.id', $dealTypeIds);
+                function (Builder $query) use ($dealTypeIds) {
+                    $query->whereIn(DealType::getTableName().'.id', $dealTypeIds);
                 },
                 '=',
                 $dealTypeCount

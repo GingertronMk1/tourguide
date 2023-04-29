@@ -17,7 +17,7 @@ class HomeController extends Controller
         return inertia('Home', [
             'venueCount' => Venue::count(),
             'regionCount' => Region::count(),
-            'areaCount' => Area::count()
+            'areaCount' => Area::count(),
         ]);
     }
 }

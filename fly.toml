@@ -22,6 +22,9 @@ kill_timeout = "5s"
   PRIMARY_REGION = "lhr"
   DB_CONNECTION="pgsql"
 
+[build]
+  dockerfile = "./fly.io/Dockerfile"
+
 [[services]]
   protocol = "tcp"
   internal_port = 8080

@@ -1,11 +1,21 @@
-name: Fly Deploy
+name: Testing and Fly Deployment
 on:
   push:
     branches:
       - main
 jobs:
+  lint:
+    name: Lint code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: touch database/database.sqlite
+      - run: ./bin/install
+      - run: ./bin/app/phpvendor pint --test
+      - run: ./bin/node/npm lint
   deploy:
     name: Deploy app
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

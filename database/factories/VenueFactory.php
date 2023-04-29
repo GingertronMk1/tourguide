@@ -14,10 +14,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class VenueFactory extends Factory
 {
-
     public function configure(): static
     {
-        return $this->afterCreating(function(Venue $venue) {
+        return $this->afterCreating(function (Venue $venue) {
             $numberOfAccessEquipments = random_int(0, 5);
             $numberOfDealTypes = random_int(1, 5);
             $accessEquipments = AccessEquipment::inRandomOrder()->limit($numberOfAccessEquipments)->pluck('id')->toArray();
@@ -26,14 +25,13 @@ class VenueFactory extends Factory
             $processedAccessEquipments = [];
             $processedDealTypes = [];
 
-            foreach($accessEquipments as $accessEquipment) {
+            foreach ($accessEquipments as $accessEquipment) {
                 $processedAccessEquipments[$accessEquipment] = [
                     'notes' => $this->faker->text,
                 ];
             }
 
-
-            foreach($dealTypes as $dealType) {
+            foreach ($dealTypes as $dealType) {
                 $processedDealTypes[$dealType] = [
                     'notes' => $this->faker->text,
                 ];
@@ -43,6 +41,7 @@ class VenueFactory extends Factory
             $venue->accessEquipment()->attach($processedAccessEquipments);
         });
     }
+
     /**
      * Define the model's default state.
      *
@@ -51,7 +50,7 @@ class VenueFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name . ' Theatre',
+            'name' => $this->faker->name.' Theatre',
             'description' => $this->faker->text,
             'notes' => $this->faker->text,
             'street_address' => $this->faker->streetAddress,
@@ -64,7 +63,7 @@ class VenueFactory extends Factory
             'maximum_seats' => $this->faker->numberBetween(25, 500),
             'maximum_wheelchair_seats' => $this->faker->numberBetween(1, 25),
             'number_of_dressing_rooms' => $this->faker->numberBetween(0, 10),
-            'backstage_wheelchair_access' => $this->faker->boolean(66)
+            'backstage_wheelchair_access' => $this->faker->boolean(66),
         ];
     }
 }

@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class TourGuideModel extends Model
 {
-    public static function getTableName() {
+    public static function getTableName()
+    {
         return (new static)->getTable();
     }
 

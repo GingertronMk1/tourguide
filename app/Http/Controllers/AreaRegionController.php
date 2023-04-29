@@ -15,15 +15,16 @@ class AreaRegionController extends Controller
     {
         $regions = $area->regions;
         $regions->load([
-            'venues'
+            'venues',
         ]);
+
         return inertia(
             'Region/Index',
             [
                 'area' => $area,
-                'regions' => $regions
+                'regions' => $regions,
             ]
-            );
+        );
     }
 
     /**

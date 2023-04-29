@@ -26,10 +26,10 @@ return new class extends Migration
             'Arts Centre',
             'Outdoor theatre',
             'Community Venue',
-            'Library'
+            'Library',
         ];
 
-        foreach($initial_types as $type) {
+        foreach ($initial_types as $type) {
             VenueType::create(['name' => $type]);
         }
     }

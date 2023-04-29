@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 trait LoggableTrait
 {
-
     public static function bootLoggableTrait(): void
     {
         static::created(function (mixed $loggable) {

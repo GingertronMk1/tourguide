@@ -14,17 +14,15 @@ defineProps({
     },
     query: {
         type: Object,
-        default: () => {}
-    }
+        default: () => {},
+    },
 });
 </script>
 <template>
     <BaseLayout>
         <template #header>
             <span class="font-semibold text-xl text-gray-800 leading-tight">
-                <Link
-                    :href="route('venue.index', query)"
-                >
+                <Link :href="route('venue.index', query)">
                     <i class="fa-solid fa-chevron-left" />
                     <template v-if="region">
                         Back to {{ region.name }} Venues

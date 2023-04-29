@@ -23,11 +23,6 @@ class RegionVenueController extends Controller
             ->withAccessEquipment($selectedAccessEquipmentProp)
             ->withDealTypes($selectedDealTypesProp);
 
-        $venues = $venues->with([
-            'region',
-            'venueType',
-        ]);
-
         return inertia('Venue/Index', [
             'venuePaginator' => $venues->paginate(Venue::PER_PAGE),
             'accessEquipment' => AccessEquipment::all(),
@@ -61,8 +56,6 @@ class RegionVenueController extends Controller
     {
         return inertia('Venue/Show', [
             'venue' => $venue->load([
-                'region',
-                'venueType',
                 'accessEquipment',
                 'dealTypes',
             ]),

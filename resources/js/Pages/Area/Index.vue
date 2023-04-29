@@ -23,11 +23,7 @@ const headerText = "Areas";
         <Head :title="headerText" />
 
         <div class="flex-1 flex flex-col space-y-4">
-            <div
-                v-for="area in areas"
-                :key="area.id"
-                class="card space-y-3"
-            >
+            <div v-for="area in areas" :key="area.id" class="card space-y-3">
                 <Link
                     :href="route('area.show', area.id)"
                     class="text-2xl font-bold"

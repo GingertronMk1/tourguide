@@ -28,7 +28,7 @@ class VenuePolicy
      */
     public function create(User $user): bool
     {
-        return !is_null($user?->id);
+        return ! is_null($user?->id);
     }
 
     /**
@@ -36,7 +36,7 @@ class VenuePolicy
      */
     public function update(User $user, Venue $venue): bool
     {
-        return !is_null($user?->id);
+        return ! is_null($user?->id);
     }
 
     /**
@@ -44,7 +44,7 @@ class VenuePolicy
      */
     public function delete(User $user, Venue $venue): bool
     {
-        return !is_null($user?->id);
+        return ! is_null($user?->id);
     }
 
     /**
@@ -52,7 +52,7 @@ class VenuePolicy
      */
     public function restore(User $user, Venue $venue): bool
     {
-        return !is_null($user?->id);
+        return ! is_null($user?->id);
     }
 
     /**
@@ -60,6 +60,6 @@ class VenuePolicy
      */
     public function forceDelete(User $user, Venue $venue): bool
     {
-        return !is_null($user?->id);
+        return ! is_null($user?->id);
     }
 }

@@ -36,6 +36,11 @@ class Venue extends TourGuideModel
         'backstage_wheelchair_access' => 'boolean',
     ];
 
+    protected $with = [
+        'venueType',
+        'region',
+    ];
+
     public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);

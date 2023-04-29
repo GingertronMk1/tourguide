@@ -5,9 +5,7 @@ use App\Http\Controllers\AreaRegionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
-use App\Http\Controllers\RegionVenueController;
 use App\Http\Controllers\VenueController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,7 +38,6 @@ $readOnlyMethods = ['index', 'show'];
 $resourceControllers = [
     'venue' => VenueController::class,
     'region' => RegionController::class,
-    'region.venue' => RegionVenueController::class,
     'area' => AreaController::class,
     'area.region' => AreaRegionController::class,
 ];

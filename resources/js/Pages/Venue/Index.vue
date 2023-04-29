@@ -9,10 +9,6 @@ const props = defineProps({
         type: Object,
         default: () => {},
     },
-    region: {
-        type: [Object, null],
-        default: null,
-    },
     accessEquipment: {
         type: Array,
         default: () => [],
@@ -21,41 +17,33 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
-    selectedAccessEquipmentProp: {
+    areas: {
         type: Array,
         default: () => [],
     },
-    selectedDealTypesProp: {
-        type: Array,
-        default: () => [],
+    query: {
+        type: Object,
+        default: () => {
+            return {
+                accessEquipment: [],
+                dealTypes: [],
+                page: 1,
+                regions: [],
+            };
+        },
     },
 });
 
-const headerText = props?.region ? `Venues in ${props?.region.name}` : "Venues";
-
-const query = ref({
-    accessEquipment: props.selectedAccessEquipmentProp,
-    dealTypes: props.selectedDealTypesProp,
-    page: props?.venuePaginator?.current_page ?? 1,
-});
+const query = ref(props.query);
 
 watch(
     () => query.value,
     (newQuery) => {
-        if (props?.region?.id) {
-            router.get(
-                route("region.venue.index", {
-                    region: props.region.id,
-                    _query: newQuery,
-                })
-            );
-        } else {
-            router.get(
-                route("venue.index", {
-                    _query: newQuery,
-                })
-            );
-        }
+        router.get(
+            route("venue.index", {
+                _query: newQuery,
+            })
+        );
     },
     { deep: true }
 );
@@ -65,17 +53,17 @@ watch(
         <template #header>
             <h2
                 class="font-semibold text-xl text-gray-800 leading-tight"
-                v-text="headerText"
+                v-text="'Venues'"
             />
         </template>
 
-        <Head :title="headerText" />
+        <Head title="Venues" />
 
         <div class="flex-1 flex flex-col space-y-4">
             <!--
                 Filtering by access and deal types
             -->
-            <div class="card grid grid-cols-2 gap-x-3">
+            <div class="card grid grid-cols-3 gap-x-3">
                 <select
                     id="dealTypes"
                     v-model="query.dealTypes"
@@ -104,6 +92,24 @@ watch(
                         v-text="access.name"
                     />
                 </select>
+                <select
+                    id="regions"
+                    v-model="query.regions"
+                    name="regions"
+                    multiple
+                    class="rounded-md"
+                >
+                    <template v-for="area in areas" :key="area.id">
+                        <option disabled v-text="area.name" />
+                        <option
+                            v-for="region in area.regions"
+                            :key="region.id"
+                            :value="region.id"
+                            class="ps-2"
+                            v-text="`  ${region.name}`"
+                        />
+                    </template>
+                </select>
             </div>
 
             <!--
@@ -113,14 +119,7 @@ watch(
                 v-for="venue in venuePaginator.data"
                 :key="venue.id"
                 :venue="venue"
-                :href="
-                    region
-                        ? route('region.venue.show', {
-                              region: region.id,
-                              venue: venue.id,
-                          })
-                        : route('venue.show', venue.id)
-                "
+                :href="route('venue.show', venue.id)"
             />
 
             <div class="card flex flex-row justify-between">

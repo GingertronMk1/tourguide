@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreVenueRequest;
 use App\Http\Requests\UpdateVenueRequest;
 use App\Models\AccessEquipment;
+use App\Models\Area;
 use App\Models\DealType;
 use App\Models\Venue;
 use Illuminate\Http\Request;
@@ -16,20 +17,39 @@ class VenueController extends Controller
      */
     public function index(Request $request)
     {
-        $selectedAccessEquipmentProp = $request->get('accessEquipment', []);
-        $selectedDealTypesProp = $request->get('dealTypes', []);
+        $query = array_merge(
+            [
+                'accessEquipment' => [],
+                'dealTypes' => [],
+                'page' => 1,
+                'regions' => []
+            ],
+            $request->input()
+        );
 
         $venues = Venue::query()
-            ->withAccessEquipment($selectedAccessEquipmentProp)
-            ->withDealTypes($selectedDealTypesProp);
+            ->withAccessEquipment($query['accessEquipment'])
+            ->withDealTypes($query['dealTypes']);
 
-        return inertia('Venue/Index', [
-            'venuePaginator' => $venues->paginate(Venue::PER_PAGE),
-            'accessEquipment' => AccessEquipment::all(),
-            'dealTypes' => DealType::all(),
-            'selectedAccessEquipmentProp' => $selectedAccessEquipmentProp,
-            'selectedDealTypesProp' => $selectedDealTypesProp,
-        ]);
+        if (is_array($query['regions']) && count($query['regions'])) {
+            $venues = $venues->whereIn('region_id', $query['regions']);
+        }
+
+        $venuePaginator = $venues->paginate(Venue::PER_PAGE);
+        $accessEquipment = AccessEquipment::all();
+        $dealTypes = DealType::all();
+        $areas = Area::all()->load('regions');
+
+        return inertia(
+            'Venue/Index',
+            compact(
+                'venuePaginator',
+                'query',
+                'dealTypes',
+                'accessEquipment',
+                'areas'
+            )
+        );
     }
 
     /**

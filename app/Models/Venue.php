@@ -68,7 +68,7 @@ class Venue extends TourGuideModel
             $query->whereHas(
                 'accessEquipment',
                 function (Builder $query) use ($equipmentIds) {
-                    $query->whereIn(AccessEquipment::getTableName().'.id', $equipmentIds);
+                    $query->whereIn(AccessEquipment::getTableColumn('id'), $equipmentIds);
                 },
                 '=',
                 $equipmentCount
@@ -83,7 +83,7 @@ class Venue extends TourGuideModel
             $query->whereHas(
                 'dealTypes',
                 function (Builder $query) use ($dealTypeIds) {
-                    $query->whereIn(DealType::getTableName().'.id', $dealTypeIds);
+                    $query->whereIn(DealType::getTableColumn('id'), $dealTypeIds);
                 },
                 '=',
                 $dealTypeCount

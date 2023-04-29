@@ -6,9 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class TourGuideModel extends Model
 {
-    public static function getTableName()
+    public static function getTableName(): string
     {
         return (new static)->getTable();
+    }
+
+    public static function getTableColumn(string $column): string
+    {
+        return static::getTableName() . '.' . $column;
     }
 
     protected $fillable = [

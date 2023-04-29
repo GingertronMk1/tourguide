@@ -10,13 +10,15 @@ const props = defineProps({
 
 let bodyClasses = [
     "p-4 bg-gray-200 flex flex-col flex-1",
-    props.bodyClasses
-    ].join(" ");
+    props.bodyClasses,
+].join(" ");
 </script>
 
 <template>
     <div class="h-full flex flex-col">
-        <header class="p-4 bg-white border-b border-gray-100 flex flex-row items-center">
+        <header
+            class="p-4 bg-white border-b border-gray-100 flex flex-row items-center"
+        >
             <Link
                 :href="route('home')"
                 class="fa-solid fa-house mr-3 justify-center"

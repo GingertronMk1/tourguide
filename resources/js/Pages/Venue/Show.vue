@@ -30,7 +30,7 @@ const addressSearchURL = computed(() => {
             <span class="font-semibold text-xl text-gray-800 leading-tight">
                 <Link :href="route('venue.index', query)">
                     <i class="fa-solid fa-chevron-left" />
-                     Back to Venue Index
+                    Back to Venue Index
                 </Link>
             </span>
         </template>

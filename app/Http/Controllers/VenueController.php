@@ -34,7 +34,7 @@ class VenueController extends Controller
                 'dealTypes' => [],
                 'page' => 1,
                 'regions' => [],
-                'venueTypes' => []
+                'venueTypes' => [],
             ],
             $request->input()
         );

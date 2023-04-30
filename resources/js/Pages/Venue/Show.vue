@@ -2,8 +2,9 @@
 import VenueCard from "@/Components/Venue/VenueCard.vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
+import { computed } from "vue";
 
-defineProps({
+const props = defineProps({
     region: {
         type: [Object, null],
         default: null,
@@ -17,6 +18,15 @@ defineProps({
         default: () => {},
     },
 });
+
+const addressSearchURL = computed(() => {
+    const { street_address, city } = props?.venue ?? {};
+    const replacedStreetAddress = street_address.replace(/\n/g, " ");
+    const encodedAddress = encodeURIComponent(`${city} ${replacedStreetAddress}`);
+    return `https://www.google.com/maps/search/${encodedAddress}`;
+})
+
+
 </script>
 <template>
     <BaseLayout>
@@ -36,6 +46,24 @@ defineProps({
 
         <div class="flex-1 flex flex-col space-y-4">
             <VenueCard :venue="venue" />
+
+            <div class="card">
+                <div class="text-2xl font-bold">Address Details</div>
+                <div class="grid grid-cols-2 gap-x-4">
+                    <div class="flex flex-col space-y-3">
+                        <span class="font-semibold">City</span>
+                        <span v-text="venue.city" />
+                        <a :href="addressSearchURL" target="_blank">
+                            <i class="fa-solid fa-map-location-dot" />
+                            Find on Google
+                        </a>
+                    </div>
+                    <div class="flex flex-col space-y-3">
+                        <span class="font-semibold">Street Address</span>
+                        <span class="whitespace-pre-line" v-text="venue.street_address" />
+                    </div>
+                </div>
+            </div>
 
             <div class="card space-y-3">
                 <p class="text-2xl font-bold">Access Equipment</p>

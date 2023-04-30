@@ -23,20 +23,12 @@ const props = defineProps({
     },
     venueTypes: {
         type: Array,
-        default: () => []
-    }
+        default: () => [],
+    },
 });
 
 const newVenue = ref(props.venue);
 
-const venueSearchValue = computed(() => {
-    const { street_address, city } = newVenue.value;
-    const modifiedAddress = street_address?.replace(/\n/g, " ");
-    const searchString = `${city} ${modifiedAddress}`;
-    return `https://www.google.com/maps/search/${encodeURIComponent(
-        searchString
-    )}`;
-});
 </script>
 <template>
     <BaseLayout>
@@ -49,22 +41,32 @@ const venueSearchValue = computed(() => {
         <Head :title="`Edit ${venue.name}`" />
         <div class="card space-y-3">
             <div class="grid grid-cols-2">
-
-            <label for="name" class="flex flex-row items-center space-x-3">
-                <span>Name</span>
-                <input
-                    id="name"
-                    v-model="newVenue.name"
-                    type="text"
-                    name="name"
-                />
-            </label>
-            <label for="venue_type">
-                <span>Venue Type</span>
-                <select name="venue_type" id="venue_type" v-model="newVenue.venue_type_id">
-                    <option v-for="venue_type in venueTypes" :key="venue_type.id" :value="venue_type.id" v-text="venue_type.name" />
-                </select>
-            </label>
+                <label for="name" class="flex flex-row items-center space-x-3">
+                    <span>Name</span>
+                    <input
+                        id="name"
+                        v-model="newVenue.name"
+                        type="text"
+                        name="name"
+                        class="flex-1"
+                    />
+                </label>
+                <label for="venue_type">
+                    <span>Venue Type</span>
+                    <select
+                        id="venue_type"
+                        v-model="newVenue.venue_type_id"
+                        name="venue_type"
+                        class="flex-1"
+                    >
+                        <option
+                            v-for="venue_type in venueTypes"
+                            :key="venue_type.id"
+                            :value="venue_type.id"
+                            v-text="venue_type.name"
+                        />
+                    </select>
+                </label>
             </div>
             <label for="description" class="flex flex-col">
                 <span>Description</span>
@@ -108,7 +110,6 @@ const venueSearchValue = computed(() => {
                                 />
                             </template>
                         </select>
-
                     </label>
                     <label
                         for="city"
@@ -120,6 +121,7 @@ const venueSearchValue = computed(() => {
                             v-model="newVenue.city"
                             type="text"
                             name="city"
+                            class="flex-1"
                         />
                     </label>
                 </div>
@@ -223,6 +225,5 @@ const venueSearchValue = computed(() => {
                 </div>
             </div>
         </div>
-        <pre v-text="venue" />
     </BaseLayout>
 </template>

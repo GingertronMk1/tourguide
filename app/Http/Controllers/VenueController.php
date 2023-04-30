@@ -13,16 +13,16 @@ use Illuminate\Http\Request;
 
 class VenueController extends Controller
 {
-
     private function getVenueRelatedItems(?array $merge = []): array
     {
         return array_merge([
             'dealTypes' => DealType::all(),
             'accessEquipment' => AccessEquipment::all(),
             'areas' => Area::all()->load('regions'),
-            'venueTypes' => VenueType::all()
+            'venueTypes' => VenueType::all(),
         ], $merge);
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -52,7 +52,7 @@ class VenueController extends Controller
             'Venue/Index',
             $this->getVenueRelatedItems([
                 'venuePaginator' => $venuePaginator,
-                'query' => $query
+                'query' => $query,
             ])
         );
     }

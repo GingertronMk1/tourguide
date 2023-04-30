@@ -22,11 +22,11 @@ const props = defineProps({
 const addressSearchURL = computed(() => {
     const { street_address, city } = props?.venue ?? {};
     const replacedStreetAddress = street_address.replace(/\n/g, " ");
-    const encodedAddress = encodeURIComponent(`${city} ${replacedStreetAddress}`);
+    const encodedAddress = encodeURIComponent(
+        `${city} ${replacedStreetAddress}`
+    );
     return `https://www.google.com/maps/search/${encodedAddress}`;
-})
-
-
+});
 </script>
 <template>
     <BaseLayout>
@@ -60,7 +60,10 @@ const addressSearchURL = computed(() => {
                     </div>
                     <div class="flex flex-col space-y-3">
                         <span class="font-semibold">Street Address</span>
-                        <span class="whitespace-pre-line" v-text="venue.street_address" />
+                        <span
+                            class="whitespace-pre-line"
+                            v-text="venue.street_address"
+                        />
                     </div>
                 </div>
             </div>

@@ -2,7 +2,6 @@
 import { Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
-import { computed } from "vue";
 
 const props = defineProps({
     venue: {
@@ -28,7 +27,6 @@ const props = defineProps({
 });
 
 const newVenue = ref(props.venue);
-
 </script>
 <template>
     <BaseLayout>
@@ -40,7 +38,7 @@ const newVenue = ref(props.venue);
 
         <Head :title="`Edit ${venue.name}`" />
         <div class="card space-y-3">
-            <div class="grid grid-cols-2">
+            <div class="grid grid-cols-2 gap-x-4">
                 <label for="name" class="flex flex-row items-center space-x-3">
                     <span>Name</span>
                     <input
@@ -51,7 +49,10 @@ const newVenue = ref(props.venue);
                         class="flex-1"
                     />
                 </label>
-                <label for="venue_type">
+                <label
+                    for="venue_type"
+                    class="flex flex-row items-center space-x-3"
+                >
                     <span>Venue Type</span>
                     <select
                         id="venue_type"

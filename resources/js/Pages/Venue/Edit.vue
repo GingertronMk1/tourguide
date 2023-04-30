@@ -82,53 +82,93 @@ const newVenue = ref(props.venue);
                     rows="10"
                 />
             </label>
-            <div class="flex flex-col items-start">
-                <span>Stage Dimensions</span>
-                <label
-                    for="maximum_stage_width"
-                    class="flex flex-row items-center space-x-3"
-                >
-                    <span>Max Width</span>
-                    <span>
-                        <input
-                            id="maximum_stage_width"
-                            v-model="newVenue.maximum_stage_width"
-                            type="number"
-                            name="maximum_stage_width"
-                        />mm</span
+            <div class="grid grid-cols-2 gap-x-4 items-end">
+                <div class="flex flex-col items-stretch space-y-2">
+                    <span>Stage Dimensions</span>
+                    <label
+                        for="maximum_stage_width"
+                        class="flex flex-row items-center space-x-3 justify-between"
                     >
-                </label>
-                <label
-                    for="maximum_stage_depth"
-                    class="flex flex-row items-center space-x-3"
-                >
-                    <span>Max Height</span>
-                    <span>
-                        <input
-                            id="maximum_stage_depth"
-                            v-model="newVenue.maximum_stage_depth"
-                            type="number"
-                            name="maximum_stage_depth"
-                        />mm
-                    </span>
-                </label>
-                <label
-                    for="maximum_stage_height"
-                    class="flex flex-row items-center space-x-3"
-                >
-                    <span>Max Depth</span>
-                    <span>
-                        <input
-                            id="maximum_stage_height"
-                            v-model="newVenue.maximum_stage_height"
-                            type="number"
-                            name="maximum_stage_height"
-                        />mm</span
+                        <span>Max Width</span>
+                        <span>
+                            <input
+                                id="maximum_stage_width"
+                                v-model="newVenue.maximum_stage_width"
+                                type="number"
+                                name="maximum_stage_width"
+                            />mm</span
+                        >
+                    </label>
+                    <label
+                        for="maximum_stage_depth"
+                        class="flex flex-row items-center space-x-3 justify-between"
                     >
-                </label>
+                        <span>Max Height</span>
+                        <span>
+                            <input
+                                id="maximum_stage_depth"
+                                v-model="newVenue.maximum_stage_depth"
+                                type="number"
+                                name="maximum_stage_depth"
+                            />mm
+                        </span>
+                    </label>
+                    <label
+                        for="maximum_stage_height"
+                        class="flex flex-row items-center space-x-3 justify-between"
+                    >
+                        <span>Max Depth</span>
+                        <span>
+                            <input
+                                id="maximum_stage_height"
+                                v-model="newVenue.maximum_stage_height"
+                                type="number"
+                                name="maximum_stage_height"
+                            />mm</span
+                        >
+                    </label>
+                </div>
+                <div class="flex flex-col items-stretch space-y-3">
+                    <label
+                        for="maximum_seats"
+                        class="flex flex-row justify-between items-center space-x-3"
+                    >
+                        <span>Maximum Seats</span>
+                        <input
+                            id="maximum_seats"
+                            v-model="newVenue.maximum_seats"
+                            type="number"
+                            name="maximum_seats"
+                        />
+                    </label>
+                    <label
+                        for="maximum_wheelchair_seats"
+                        class="flex flex-row justify-between items-center space-x-3"
+                    >
+                        <span>Maximum Wheelchair Seats</span>
+                        <input
+                            id="maximum_wheelchair_seats"
+                            v-model="newVenue.maximum_wheelchair_seats"
+                            type="number"
+                            name="maximum_wheelchair_seats"
+                        />
+                    </label>
+                    <label
+                        for="backstage_wheelchair_access"
+                        class="flex flex-row justify-between items-center space-x-3"
+                    >
+                        <span>Backstage Wheelchair Access?</span>
+                        <input
+                            id="backstage_wheelchair_access"
+                            v-model="newVenue.backstage_wheelchair_access"
+                            :value="true"
+                            type="checkbox"
+                            name="backstage_wheelchair_access"
+                        />
+                    </label>
+                </div>
             </div>
         </div>
         <pre v-text="venue" />
-        <div class="card"></div>
     </BaseLayout>
 </template>

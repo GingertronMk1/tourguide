@@ -34,6 +34,7 @@ class VenueController extends Controller
                 'dealTypes' => [],
                 'page' => 1,
                 'regions' => [],
+                'venueTypes' => []
             ],
             $request->input()
         );
@@ -44,6 +45,9 @@ class VenueController extends Controller
 
         if (is_array($query['regions']) && count($query['regions'])) {
             $venues = $venues->whereIn('region_id', $query['regions']);
+        }
+        if (is_array($query['venueTypes']) && count($query['venueTypes'])) {
+            $venues = $venues->whereIn('venue_type_id', $query['venueTypes']);
         }
 
         $venuePaginator = $venues->paginate(Venue::PER_PAGE);

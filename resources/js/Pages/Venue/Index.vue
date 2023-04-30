@@ -17,6 +17,10 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    venueTypes: {
+        type: Array,
+        default: () => [],
+    },
     areas: {
         type: Array,
         default: () => [],
@@ -174,6 +178,24 @@ function incrementPage() {
                         </template>
                     </select>
                 </div>
+                <div class="card">
+                    <div class="font-bold">Venue Types</div>
+                    <select
+                        id="venueTypes"
+                        v-model="query.venueTypes"
+                        name="venueTypes"
+                        multiple
+                        class="rounded-md w-full"
+                    >
+                        <option
+                            v-for="venueType in venueTypes"
+                            :key="venueType.id"
+                            :value="venueType.id"
+                            v-text="venueType.name"
+                        />
+                    </select>
+                </div>
+
                 <div
                     class="card bg-blue-700 text-white font-bold text-center cursor-pointer border-blue-700"
                     @click="resetFilters"

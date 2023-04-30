@@ -105,7 +105,10 @@ class VenueController extends Controller
      */
     public function update(UpdateVenueRequest $request, Venue $venue)
     {
-        //
+        if($venue->update($request->post())) {
+            return redirect(route('venue.show', $venue));
+        }
+        return redirect(route('venue.edit', $venue));
     }
 
     /**

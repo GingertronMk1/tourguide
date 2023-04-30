@@ -1,6 +1,5 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { useForm, Head } from "@inertiajs/vue3";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
 
 const props = defineProps({
@@ -26,7 +25,7 @@ const props = defineProps({
     },
 });
 
-const newVenue = ref(props.venue);
+const form = useForm(props.venue);
 </script>
 <template>
     <BaseLayout>
@@ -37,13 +36,16 @@ const newVenue = ref(props.venue);
         </template>
 
         <Head :title="`Edit ${venue.name}`" />
-        <div class="card space-y-3">
+        <form
+            class="card space-y-3"
+            @submit.prevent="form.patch(route('venue.update', venue))"
+        >
             <div class="grid grid-cols-2 gap-x-4">
                 <label for="name" class="flex flex-row items-center space-x-3">
                     <span>Name</span>
                     <input
                         id="name"
-                        v-model="newVenue.name"
+                        v-model="form.name"
                         type="text"
                         name="name"
                         class="flex-1"
@@ -56,7 +58,7 @@ const newVenue = ref(props.venue);
                     <span>Venue Type</span>
                     <select
                         id="venue_type"
-                        v-model="newVenue.venue_type_id"
+                        v-model="form.venue_type_id"
                         name="venue_type"
                         class="flex-1"
                     >
@@ -73,7 +75,7 @@ const newVenue = ref(props.venue);
                 <span>Description</span>
                 <textarea
                     id="description"
-                    v-model="newVenue.description"
+                    v-model="form.description"
                     name="description"
                     cols="30"
                     rows="10"
@@ -83,7 +85,7 @@ const newVenue = ref(props.venue);
                 <span>Notes</span>
                 <textarea
                     id="notes"
-                    v-model="newVenue.notes"
+                    v-model="form.notes"
                     name="notes"
                     cols="30"
                     rows="10"
@@ -96,7 +98,7 @@ const newVenue = ref(props.venue);
                         <span>Region</span>
                         <select
                             id="regions"
-                            v-model="newVenue.region_id"
+                            v-model="form.region_id"
                             name="regions"
                             class="rounded-md w-full"
                         >
@@ -119,7 +121,7 @@ const newVenue = ref(props.venue);
                         <span>City</span>
                         <input
                             id="city"
-                            v-model="newVenue.city"
+                            v-model="form.city"
                             type="text"
                             name="city"
                             class="flex-1"
@@ -130,7 +132,7 @@ const newVenue = ref(props.venue);
                     <span>Street Address</span>
                     <textarea
                         id="street_address"
-                        v-model="newVenue.street_address"
+                        v-model="form.street_address"
                         name="street_address"
                         cols="30"
                         rows="10"
@@ -150,7 +152,7 @@ const newVenue = ref(props.venue);
                         <span>
                             <input
                                 id="maximum_stage_width"
-                                v-model="newVenue.maximum_stage_width"
+                                v-model="form.maximum_stage_width"
                                 type="number"
                                 name="maximum_stage_width"
                             />mm</span
@@ -164,7 +166,7 @@ const newVenue = ref(props.venue);
                         <span>
                             <input
                                 id="maximum_stage_depth"
-                                v-model="newVenue.maximum_stage_depth"
+                                v-model="form.maximum_stage_depth"
                                 type="number"
                                 name="maximum_stage_depth"
                             />mm
@@ -178,7 +180,7 @@ const newVenue = ref(props.venue);
                         <span>
                             <input
                                 id="maximum_stage_height"
-                                v-model="newVenue.maximum_stage_height"
+                                v-model="form.maximum_stage_height"
                                 type="number"
                                 name="maximum_stage_height"
                             />mm</span
@@ -187,13 +189,25 @@ const newVenue = ref(props.venue);
                 </div>
                 <div class="flex flex-col items-stretch space-y-3">
                     <label
+                        for="number_of_dressing_rooms"
+                        class="flex flex-row justify-between items-center space-x-3"
+                    >
+                        <span>Dressing Rooms</span>
+                        <input
+                            id="number_of_dressing_rooms"
+                            v-model="form.number_of_dressing_rooms"
+                            type="number"
+                            name="number_of_dressing_rooms"
+                        />
+                    </label>
+                    <label
                         for="maximum_seats"
                         class="flex flex-row justify-between items-center space-x-3"
                     >
                         <span>Maximum Seats</span>
                         <input
                             id="maximum_seats"
-                            v-model="newVenue.maximum_seats"
+                            v-model="form.maximum_seats"
                             type="number"
                             name="maximum_seats"
                         />
@@ -205,7 +219,7 @@ const newVenue = ref(props.venue);
                         <span>Maximum Wheelchair Seats</span>
                         <input
                             id="maximum_wheelchair_seats"
-                            v-model="newVenue.maximum_wheelchair_seats"
+                            v-model="form.maximum_wheelchair_seats"
                             type="number"
                             name="maximum_wheelchair_seats"
                         />
@@ -217,7 +231,7 @@ const newVenue = ref(props.venue);
                         <span>Backstage Wheelchair Access?</span>
                         <input
                             id="backstage_wheelchair_access"
-                            v-model="newVenue.backstage_wheelchair_access"
+                            v-model="form.backstage_wheelchair_access"
                             :value="true"
                             type="checkbox"
                             name="backstage_wheelchair_access"
@@ -225,6 +239,7 @@ const newVenue = ref(props.venue);
                     </label>
                 </div>
             </div>
-        </div>
+            <button type="submit">Save</button>
+        </form>
     </BaseLayout>
 </template>

@@ -2,6 +2,7 @@
 import { Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
+import { computed } from "vue";
 
 const props = defineProps({
     venue: {
@@ -20,9 +21,22 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    venueTypes: {
+        type: Array,
+        default: () => []
+    }
 });
 
 const newVenue = ref(props.venue);
+
+const venueSearchValue = computed(() => {
+    const { street_address, city } = newVenue.value;
+    const modifiedAddress = street_address?.replace(/\n/g, " ");
+    const searchString = `${city} ${modifiedAddress}`;
+    return `https://www.google.com/maps/search/${encodeURIComponent(
+        searchString
+    )}`;
+});
 </script>
 <template>
     <BaseLayout>
@@ -34,6 +48,8 @@ const newVenue = ref(props.venue);
 
         <Head :title="`Edit ${venue.name}`" />
         <div class="card space-y-3">
+            <div class="grid grid-cols-2">
+
             <label for="name" class="flex flex-row items-center space-x-3">
                 <span>Name</span>
                 <input
@@ -43,6 +59,13 @@ const newVenue = ref(props.venue);
                     name="name"
                 />
             </label>
+            <label for="venue_type">
+                <span>Venue Type</span>
+                <select name="venue_type" id="venue_type" v-model="newVenue.venue_type_id">
+                    <option v-for="venue_type in venueTypes" :key="venue_type.id" :value="venue_type.id" v-text="venue_type.name" />
+                </select>
+            </label>
+            </div>
             <label for="description" class="flex flex-col">
                 <span>Description</span>
                 <textarea
@@ -63,25 +86,56 @@ const newVenue = ref(props.venue);
                     rows="10"
                 />
             </label>
-            <label for="city" class="flex flex-row items-center space-x-3">
-                <span>City</span>
-                <input
-                    id="city"
-                    v-model="newVenue.city"
-                    type="text"
-                    name="city"
-                />
-            </label>
-            <label for="street_address" class="flex flex-col">
-                <span>Street Address</span>
-                <textarea
-                    id="street_address"
-                    v-model="newVenue.street_address"
-                    name="street_address"
-                    cols="30"
-                    rows="10"
-                />
-            </label>
+            <!-- LOCATION INFORMATION -->
+            <div class="grid grid-cols-2 gap-x-4 items-start">
+                <div class="flex flex-col items-stretch space-y-3">
+                    <label for="region">
+                        <span>Region</span>
+                        <select
+                            id="regions"
+                            v-model="newVenue.region_id"
+                            name="regions"
+                            class="rounded-md w-full"
+                        >
+                            <template v-for="area in areas" :key="area.id">
+                                <option disabled v-text="area.name" />
+                                <option
+                                    v-for="region in area.regions"
+                                    :key="region.id"
+                                    :value="region.id"
+                                    class="ps-2"
+                                    v-text="region.name"
+                                />
+                            </template>
+                        </select>
+
+                    </label>
+                    <label
+                        for="city"
+                        class="flex flex-row items-center space-x-3"
+                    >
+                        <span>City</span>
+                        <input
+                            id="city"
+                            v-model="newVenue.city"
+                            type="text"
+                            name="city"
+                        />
+                    </label>
+                </div>
+                <label for="street_address" class="flex flex-col">
+                    <span>Street Address</span>
+                    <textarea
+                        id="street_address"
+                        v-model="newVenue.street_address"
+                        name="street_address"
+                        cols="30"
+                        rows="10"
+                    />
+                </label>
+            </div>
+
+            <!-- STAGE DIMENSIONS AND SEATS-->
             <div class="grid grid-cols-2 gap-x-4 items-end">
                 <div class="flex flex-col items-stretch space-y-2">
                     <span>Stage Dimensions</span>

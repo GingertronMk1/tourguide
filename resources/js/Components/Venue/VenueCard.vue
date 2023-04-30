@@ -19,13 +19,21 @@ const cardTitle = [
 </script>
 <template>
     <div class="card space-y-3">
-        <span class="text-2xl font-bold">
+        <span
+            class="text-2xl font-bold flex flex-row items-center justify-between"
+        >
             <Link v-if="href != ''" :href="href" class="text-2xl font-bold">
                 {{ cardTitle }}
             </Link>
             <template v-else>
                 {{ cardTitle }}
             </template>
+            <Link
+                v-if="$page?.props?.auth?.user"
+                :href="route('venue.edit', venue)"
+            >
+                Edit
+            </Link>
         </span>
         <hr />
         <h6 class="text-l font-bold">Description</h6>

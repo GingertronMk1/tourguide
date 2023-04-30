@@ -1,5 +1,5 @@
 <script setup>
-import VenueCard from "@/Components/VenueCard.vue";
+import VenueCard from "@/Components/Venue/VenueCard.vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
 

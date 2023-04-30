@@ -8,10 +8,21 @@ use App\Models\AccessEquipment;
 use App\Models\Area;
 use App\Models\DealType;
 use App\Models\Venue;
+use App\Models\VenueType;
 use Illuminate\Http\Request;
 
 class VenueController extends Controller
 {
+
+    private function getVenueRelatedItems(?array $merge = []): array
+    {
+        return array_merge([
+            'dealTypes' => DealType::all(),
+            'accessEquipment' => AccessEquipment::all(),
+            'areas' => Area::all()->load('regions'),
+            'venueTypes' => VenueType::all()
+        ], $merge);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -36,19 +47,13 @@ class VenueController extends Controller
         }
 
         $venuePaginator = $venues->paginate(Venue::PER_PAGE);
-        $accessEquipment = AccessEquipment::all();
-        $dealTypes = DealType::all();
-        $areas = Area::all()->load('regions');
 
         return inertia(
             'Venue/Index',
-            compact(
-                'venuePaginator',
-                'query',
-                'dealTypes',
-                'accessEquipment',
-                'areas'
-            )
+            $this->getVenueRelatedItems([
+                'venuePaginator' => $venuePaginator,
+                'query' => $query
+            ])
         );
     }
 
@@ -89,7 +94,10 @@ class VenueController extends Controller
      */
     public function edit(Venue $venue)
     {
-        //
+        return inertia(
+            'Venue/Edit',
+            $this->getVenueRelatedItems(['venue' => $venue])
+        );
     }
 
     /**

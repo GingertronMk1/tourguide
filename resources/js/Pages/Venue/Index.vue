@@ -1,5 +1,5 @@
 <script setup>
-import VenueCard from "@/Components/VenueCard.vue";
+import VenueCard from "@/Components/Venue/VenueCard.vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { Head, router } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
@@ -91,7 +91,10 @@ function incrementPage() {
             <!--
                 Filtering by access and deal types
             -->
-            <div class="flex flex-col overflow-y-scroll max-w-[33%] space-y-3">
+            <div
+                id="filters"
+                class="flex flex-col overflow-y-scroll max-w-[33%] space-y-3"
+            >
                 <div class="card flex flex-row justify-between">
                     <span>
                         <template v-if="venuePaginator.current_page > 1">

@@ -5,10 +5,6 @@ import { Head, Link } from "@inertiajs/vue3";
 import { computed } from "vue";
 
 const props = defineProps({
-    region: {
-        type: [Object, null],
-        default: null,
-    },
     venue: {
         type: Object,
         required: true,
@@ -34,10 +30,7 @@ const addressSearchURL = computed(() => {
             <span class="font-semibold text-xl text-gray-800 leading-tight">
                 <Link :href="route('venue.index', query)">
                     <i class="fa-solid fa-chevron-left" />
-                    <template v-if="region">
-                        Back to {{ region.name }} Venues
-                    </template>
-                    <template v-else> Back to Venue Index </template>
+                     Back to Venue Index
                 </Link>
             </span>
         </template>

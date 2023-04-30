@@ -31,3 +31,11 @@ This information must include, but is not limited to:
 ## Rough DB Diagram
 
 ![Untitled](https://user-images.githubusercontent.com/6438175/234537777-9c4efe03-3d4d-4f12-a944-19423fde9e7d.png)
+
+## Credits
+
+- Idea by Joanne Blunt
+- Name by Jack Ellis
+- Implementation
+    - 90% the combined teams at Laravel and Tailwind
+    - 10% Jack Ellis

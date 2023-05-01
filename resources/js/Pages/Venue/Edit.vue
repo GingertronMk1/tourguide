@@ -253,12 +253,33 @@ const form = useForm(props.venue);
                         <input
                             :id="`has-access-${eq.id}`"
                             v-model="form.access_equipment"
+                            :value="eq.id"
                             type="checkbox"
                             :name="`has-access-${eq.id}`" />
                         <input
                             :id="`notes-access-${eq.id}`"
                             type="text"
                             :name="`notes-access-${eq.id}`"
+                    /></label>
+                </div>
+                <div class="flex flex-col space-y-3">
+                    <label
+                        v-for="dt in dealTypes"
+                        :key="dt.id"
+                        class="flex flex-row items-center space-x-3"
+                        :for="`has-deal-type-${dt.id}`"
+                    >
+                        <span class="mr-auto" v-text="dt.name" />
+                        <input
+                            :id="`has-deal-type-${dt.id}`"
+                            v-model="form.deal_types"
+                            :value="dt.id"
+                            type="checkbox"
+                            :name="`has-deal-type-${dt.id}`" />
+                        <input
+                            :id="`notes-deal-type-${dt.id}`"
+                            type="text"
+                            :name="`notes-deal-type-${dt.id}`"
                     /></label>
                 </div>
             </div>

@@ -13,7 +13,7 @@ class ActivityLogController extends Controller
      */
     public function index()
     {
-        //
+        return "<pre>" . json_encode(ActivityLog::all(), JSON_PRETTY_PRINT) . "</pre>";
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AreaRegionController;
 use App\Http\Controllers\HomeController;
@@ -46,5 +47,7 @@ foreach ($resourceControllers as $resource => $controller) {
     Route::resource($resource, $controller)->only($readOnlyMethods);
     Route::middleware('auth')->resource($resource, $controller)->except($readOnlyMethods);
 }
+
+Route::middleware('auth')->resource('activity-log', ActivityLogController::class)->only('index');
 
 require __DIR__.'/auth.php';

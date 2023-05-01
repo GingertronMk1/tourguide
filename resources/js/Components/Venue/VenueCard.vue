@@ -28,12 +28,12 @@ const cardTitle = [
             <template v-else>
                 {{ cardTitle }}
             </template>
-            <Link
-                v-if="$page?.props?.auth?.user"
-                :href="route('venue.edit', venue)"
-            >
-                Edit
-            </Link>
+            <span v-if="$page?.props?.auth?.user" class="space-x-2">
+                <Link :href="route('venue.edit', venue)" class="btn-primary">
+                    Edit
+                </Link>
+                <span class="btn-caution">Delete</span>
+            </span>
         </span>
         <hr />
         <h6 class="text-l font-bold">Description</h6>
@@ -42,38 +42,34 @@ const cardTitle = [
         <h6 class="text-l font-bold">Notes</h6>
         <p class="font-normal" v-text="venue.notes" />
         <hr />
-        <span class="grid grid-cols-4 divide-x-2 items-center">
-            <p
-                class="text-center"
-                v-text="`Max seats: ${venue.maximum_seats}`"
-            />
-            <p
-                class="text-center"
-                v-text="
-                    `Max wheelchair seats: ${venue.maximum_wheelchair_seats}`
-                "
-            />
-            <p
-                class="text-center"
-                v-text="`Dressing rooms: ${venue.number_of_dressing_rooms}`"
-            />
-            <p
-                class="text-center"
-                v-text="
-                    `Wheelchairs backstage? ${
-                        venue.backstage_wheelchair_access ? 'Yes' : 'No'
-                    }`
-                "
-            />
-        </span>
-        <hr />
-        <span class="flex flex-row items-start space-x-3">
-            <p class="font-normal" v-text="`Stage dimensions:`" />
-            <ul>
-                <li v-text="`W: ${venue.maximum_stage_width}mm`" />
-                <li v-text="`H: ${venue.maximum_stage_height}mm`" />
-                <li v-text="`D: ${venue.maximum_stage_depth}mm`" />
-            </ul>
-        </span>
+
+        <div class="grid grid-cols-2">
+            <span class="flex flex-row items-start space-x-3">
+                <p class="font-normal" v-text="`Stage dimensions:`" />
+                <ul>
+                    <li v-text="`W: ${venue.maximum_stage_width}mm`" />
+                    <li v-text="`H: ${venue.maximum_stage_height}mm`" />
+                    <li v-text="`D: ${venue.maximum_stage_depth}mm`" />
+                </ul>
+            </span>
+            <span class="grid grid-cols-2 divide-2 items-center">
+                <p v-text="`Max seats: ${venue.maximum_seats}`" />
+                <p
+                    v-text="
+                        `Max wheelchair seats: ${venue.maximum_wheelchair_seats}`
+                    "
+                />
+                <p
+                    v-text="`Dressing rooms: ${venue.number_of_dressing_rooms}`"
+                />
+                <p
+                    v-text="
+                        `Wheelchairs backstage? ${
+                            venue.backstage_wheelchair_access ? 'Yes' : 'No'
+                        }`
+                    "
+                />
+            </span>
+        </div>
     </div>
 </template>

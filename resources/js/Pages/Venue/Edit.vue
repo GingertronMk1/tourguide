@@ -239,7 +239,25 @@ const form = useForm(props.venue);
                     </label>
                 </div>
             </div>
-            <button type="submit">Save</button>
+            <button type="submit" class="btn-primary">Save</button>
+            <hr />
+            <div class="grid grid-cols-2">
+                <div class="flex flex-col space-y-3">
+                        <label  class="flex flex-row items-center space-x-3" v-for="eq in accessEquipment" :key="eq.id" :for="`has-access-${eq.id}`">
+                            <span class="mr-auto" v-text="eq.name" />
+                        <input
+                            type="checkbox"
+                            :name="`has-access-${eq.id}`"
+                            :id="`has-access-${eq.id}`"
+                            v-model="form.access_equipment"
+                        />
+                        <input
+                            type="text"
+                            :name="`notes-access-${eq.id}`"
+                            :id="`notes-access-${eq.id}`"
+                        /></label>
+                </div>
+            </div>
         </form>
     </BaseLayout>
 </template>

@@ -1,18 +1,28 @@
 @import "@fortawesome/fontawesome-free/css/all.css";
 
-html,
-body,
-#app {
-    height: 100vh;
-    max-height: 100vh;
-    margin: 0;
-    padding: 0;
-}
-
-.card {
-    @apply shadow border border-gray-100 rounded-lg p-3 bg-white;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    html,
+    body,
+    #app {
+        height: 100vh;
+        max-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .card {
+        @apply shadow border border-gray-100 rounded-lg p-3 bg-white;
+    }
+
+    .btn-primary {
+        @apply bg-blue-700 text-white rounded-md px-4 py-2 hover:bg-blue-900;
+    }
+
+    .btn-caution {
+        @apply btn-primary bg-red-700 hover:bg-red-900;
+    }
+}

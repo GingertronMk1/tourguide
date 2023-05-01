@@ -109,7 +109,19 @@ class VenueController extends Controller
      */
     public function update(UpdateVenueRequest $request, Venue $venue)
     {
+        $postData = $request->post();
+        $syncAccessEquipment = [];
+        $syncDealTypes = [];
+        foreach ($postData['access_equipment'] as $ae) {
+            $syncAccessEquipment[$ae['access_equipment_id']] = ['notes' => $ae['notes']];
+        }
+        foreach ($postData['deal_types'] as $dt) {
+            $syncDealTypes[$dt['deal_type_id']] = ['notes' => $dt['notes']];
+        }
         if ($venue->update($request->post())) {
+            $venue->accessEquipment()->sync($syncAccessEquipment);
+            $venue->dealTypes()->sync($syncDealTypes);
+
             return redirect(route('venue.show', $venue));
         }
 

@@ -1,5 +1,6 @@
 <script setup>
 import { useForm, Head } from "@inertiajs/vue3";
+import { ref } from "vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
 
 const props = defineProps({
@@ -25,7 +26,59 @@ const props = defineProps({
     },
 });
 
+/** The general Venue form */
 const form = useForm(props.venue);
+
+/** Handling Access Equipment */
+const venueAccessPivots = ref(
+    props.venue.access_equipment.map(
+        ({ name, pivot: { venue_id, access_equipment_id, notes } }) => ({
+            venue_id,
+            access_equipment_id,
+            notes,
+            name,
+        })
+    )
+);
+
+const accessPivots = ref({
+    ...props.accessEquipment.map(({ name, id }) => ({
+        name,
+        venue_id: props.venue.id,
+        access_equipment_id: id,
+        notes: "",
+    })),
+    ...venueAccessPivots.value,
+});
+
+/** Handling Deal Types */
+const venueDealTypePivots = ref(
+    props.venue.deal_types.map(
+        ({ name, pivot: { venue_id, deal_type_id, notes } }) => ({
+            venue_id,
+            deal_type_id,
+            notes,
+            name,
+        })
+    )
+);
+
+const dealTypePivots = ref({
+    ...props.dealTypes.map(({ name, id }) => ({
+        name,
+        venue_id: props.venue.id,
+        deal_type_id: id,
+        notes: "",
+    })),
+    ...venueDealTypePivots.value,
+});
+
+/** Saving */
+function saveForm() {
+    form.access_equipment = venueAccessPivots.value;
+    form.deal_types = venueDealTypePivots.value;
+    form.patch(route("venue.update", props.venue));
+}
 </script>
 <template>
     <BaseLayout>
@@ -36,10 +89,7 @@ const form = useForm(props.venue);
         </template>
 
         <Head :title="`Edit ${venue.name}`" />
-        <form
-            class="card space-y-3"
-            @submit.prevent="form.patch(route('venue.update', venue))"
-        >
+        <form class="card space-y-3" @submit.prevent="saveForm">
             <div class="grid grid-cols-2 gap-x-4">
                 <label for="name" class="flex flex-row items-center space-x-3">
                     <span>Name</span>
@@ -241,10 +291,11 @@ const form = useForm(props.venue);
             </div>
             <button type="submit" class="btn-primary">Save</button>
             <hr />
-            <div class="grid grid-cols-2">
+            <div class="grid grid-cols-2 gap-x-4">
                 <div class="flex flex-col space-y-3">
+                    <span class="text-lg">Access Equipment</span>
                     <label
-                        v-for="eq in accessEquipment"
+                        v-for="eq in accessPivots"
                         :key="eq.id"
                         class="flex flex-row items-center space-x-3"
                         :for="`has-access-${eq.id}`"
@@ -252,19 +303,22 @@ const form = useForm(props.venue);
                         <span class="mr-auto" v-text="eq.name" />
                         <input
                             :id="`has-access-${eq.id}`"
-                            v-model="form.access_equipment"
-                            :value="eq.id"
+                            v-model="venueAccessPivots"
+                            :value="eq"
                             type="checkbox"
                             :name="`has-access-${eq.id}`" />
                         <input
                             :id="`notes-access-${eq.id}`"
+                            v-model="eq.notes"
                             type="text"
                             :name="`notes-access-${eq.id}`"
+                            placeholder="Notes"
                     /></label>
                 </div>
                 <div class="flex flex-col space-y-3">
+                    <span class="text-lg">Deal Types</span>
                     <label
-                        v-for="dt in dealTypes"
+                        v-for="dt in dealTypePivots"
                         :key="dt.id"
                         class="flex flex-row items-center space-x-3"
                         :for="`has-deal-type-${dt.id}`"
@@ -272,14 +326,16 @@ const form = useForm(props.venue);
                         <span class="mr-auto" v-text="dt.name" />
                         <input
                             :id="`has-deal-type-${dt.id}`"
-                            v-model="form.deal_types"
-                            :value="dt.id"
+                            v-model="venueDealTypePivots"
+                            :value="dt"
                             type="checkbox"
                             :name="`has-deal-type-${dt.id}`" />
                         <input
                             :id="`notes-deal-type-${dt.id}`"
+                            v-model="dt.notes"
                             type="text"
                             :name="`notes-deal-type-${dt.id}`"
+                            placeholder="Notes"
                     /></label>
                 </div>
             </div>

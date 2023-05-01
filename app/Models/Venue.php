@@ -40,7 +40,7 @@ class Venue extends TourGuideModel
         'venueType',
         'region',
         'accessEquipment',
-        'dealTypes'
+        'dealTypes',
     ];
 
     public function region(): BelongsTo

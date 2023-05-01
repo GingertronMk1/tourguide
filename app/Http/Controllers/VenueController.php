@@ -8,10 +8,21 @@ use App\Models\AccessEquipment;
 use App\Models\Area;
 use App\Models\DealType;
 use App\Models\Venue;
+use App\Models\VenueType;
 use Illuminate\Http\Request;
 
 class VenueController extends Controller
 {
+    private function getVenueRelatedItems(?array $merge = []): array
+    {
+        return array_merge([
+            'dealTypes' => DealType::all(),
+            'accessEquipment' => AccessEquipment::all(),
+            'areas' => Area::all()->load('regions'),
+            'venueTypes' => VenueType::all(),
+        ], $merge);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -23,6 +34,7 @@ class VenueController extends Controller
                 'dealTypes' => [],
                 'page' => 1,
                 'regions' => [],
+                'venueTypes' => [],
             ],
             $request->input()
         );
@@ -34,21 +46,18 @@ class VenueController extends Controller
         if (is_array($query['regions']) && count($query['regions'])) {
             $venues = $venues->whereIn('region_id', $query['regions']);
         }
+        if (is_array($query['venueTypes']) && count($query['venueTypes'])) {
+            $venues = $venues->whereIn('venue_type_id', $query['venueTypes']);
+        }
 
         $venuePaginator = $venues->paginate(Venue::PER_PAGE);
-        $accessEquipment = AccessEquipment::all();
-        $dealTypes = DealType::all();
-        $areas = Area::all()->load('regions');
 
         return inertia(
             'Venue/Index',
-            compact(
-                'venuePaginator',
-                'query',
-                'dealTypes',
-                'accessEquipment',
-                'areas'
-            )
+            $this->getVenueRelatedItems([
+                'venuePaginator' => $venuePaginator,
+                'query' => $query,
+            ])
         );
     }
 
@@ -89,7 +98,10 @@ class VenueController extends Controller
      */
     public function edit(Venue $venue)
     {
-        //
+        return inertia(
+            'Venue/Edit',
+            $this->getVenueRelatedItems(['venue' => $venue])
+        );
     }
 
     /**
@@ -97,7 +109,23 @@ class VenueController extends Controller
      */
     public function update(UpdateVenueRequest $request, Venue $venue)
     {
-        //
+        $postData = $request->post();
+        $syncAccessEquipment = [];
+        $syncDealTypes = [];
+        foreach ($postData['access_equipment'] as $ae) {
+            $syncAccessEquipment[$ae['access_equipment_id']] = ['notes' => $ae['notes']];
+        }
+        foreach ($postData['deal_types'] as $dt) {
+            $syncDealTypes[$dt['deal_type_id']] = ['notes' => $dt['notes']];
+        }
+        if ($venue->update($request->post())) {
+            $venue->accessEquipment()->sync($syncAccessEquipment);
+            $venue->dealTypes()->sync($syncDealTypes);
+
+            return redirect(route('venue.show', $venue));
+        }
+
+        return redirect(route('venue.edit', $venue));
     }
 
     /**

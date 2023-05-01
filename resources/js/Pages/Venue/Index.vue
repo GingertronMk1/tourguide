@@ -1,5 +1,5 @@
 <script setup>
-import VenueCard from "@/Components/VenueCard.vue";
+import VenueCard from "@/Components/Venue/VenueCard.vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { Head, router } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
@@ -14,6 +14,10 @@ const props = defineProps({
         default: () => [],
     },
     dealTypes: {
+        type: Array,
+        default: () => [],
+    },
+    venueTypes: {
         type: Array,
         default: () => [],
     },
@@ -91,7 +95,10 @@ function incrementPage() {
             <!--
                 Filtering by access and deal types
             -->
-            <div class="flex flex-col overflow-y-scroll max-w-[33%] space-y-3">
+            <div
+                id="filters"
+                class="flex flex-col overflow-y-scroll max-w-[33%] space-y-3"
+            >
                 <div class="card flex flex-row justify-between">
                     <span>
                         <template v-if="venuePaginator.current_page > 1">
@@ -171,6 +178,24 @@ function incrementPage() {
                         </template>
                     </select>
                 </div>
+                <div class="card">
+                    <div class="font-bold">Venue Types</div>
+                    <select
+                        id="venueTypes"
+                        v-model="query.venueTypes"
+                        name="venueTypes"
+                        multiple
+                        class="rounded-md w-full"
+                    >
+                        <option
+                            v-for="venueType in venueTypes"
+                            :key="venueType.id"
+                            :value="venueType.id"
+                            v-text="venueType.name"
+                        />
+                    </select>
+                </div>
+
                 <div
                     class="card bg-blue-700 text-white font-bold text-center cursor-pointer border-blue-700"
                     @click="resetFilters"

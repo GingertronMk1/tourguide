@@ -39,6 +39,8 @@ class Venue extends TourGuideModel
     protected $with = [
         'venueType',
         'region',
+        'accessEquipment',
+        'dealTypes',
     ];
 
     public function region(): BelongsTo

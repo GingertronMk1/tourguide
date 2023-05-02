@@ -33,6 +33,8 @@ const props = defineProps({
                 dealTypes: [],
                 page: 1,
                 regions: [],
+                seatsMax: 10000,
+                seatsMin: 0,
             };
         },
     },
@@ -194,6 +196,36 @@ function incrementPage() {
                             v-text="venueType.name"
                         />
                     </select>
+                </div>
+
+                <div class="card">
+                    <div class="font-bold">Seats</div>
+                    <div class="grid grid-cols-2 gap-x-2">
+                        <div class="flex flex-col">
+                            <span>Minimum</span>
+
+                            <input
+                                id="seatsMin"
+                                v-model="query.seatsMin"
+                                type="number"
+                                name="seatsMin"
+                                min="0"
+                                :max="query.seatsMax"
+                            />
+                        </div>
+                        <div class="flex flex-col">
+                            <span>Maximum</span>
+
+                            <input
+                                id="seatsMax"
+                                v-model="query.seatsMax"
+                                type="number"
+                                name="seatsMax"
+                                :min="query.seatsMin"
+                                max="10000"
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 <div

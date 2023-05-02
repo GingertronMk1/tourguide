@@ -33,7 +33,12 @@ const openedMenu = ref(false);
         <header
             class="p-4 bg-white border-b border-gray-100 flex flex-row items-center relative"
         >
-            <i :class="`cursor-pointer p-2 fa-solid ${openedMenu ? 'fa-xmark' : 'fa-bars'}`" @click="openedMenu = !openedMenu"/>
+            <i
+                :class="`cursor-pointer p-2 fa-solid ${
+                    openedMenu ? 'fa-xmark' : 'fa-bars'
+                }`"
+                @click="openedMenu = !openedMenu"
+            />
             <div class="flex-1">
                 <slot name="header" />
             </div>
@@ -44,7 +49,9 @@ const openedMenu = ref(false);
                 <Link :href="route('login')">Log In</Link>
             </div>
             <div
-                :class="`absolute ${openedMenu ? 'flex' : 'hidden'} flex-col w-full top-full left-0 bg-white divide-y-2 shadow-lg`"
+                :class="`absolute ${
+                    openedMenu ? 'flex' : 'hidden'
+                } flex-col w-full top-full left-0 bg-white divide-y-2 shadow-lg`"
             >
                 <Link
                     v-for="(routeObject, index) in routes"

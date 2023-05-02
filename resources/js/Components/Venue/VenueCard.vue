@@ -28,7 +28,10 @@ const cardTitle = [
             <template v-else>
                 {{ cardTitle }}
             </template>
-            <span v-if="$page?.props?.auth?.user" class="flex flex-row justify-end space-x-2">
+            <span
+                v-if="$page?.props?.auth?.user"
+                class="flex flex-row justify-end space-x-2"
+            >
                 <Link :href="route('venue.edit', venue)" class="btn-primary">
                     Edit
                 </Link>

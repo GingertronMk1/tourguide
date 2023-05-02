@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker-compose exec -T app ./vendor/bin/phpstan --memory-limit=4G --error-format=prettyJson "$@" | tee "phpstan-output.json"

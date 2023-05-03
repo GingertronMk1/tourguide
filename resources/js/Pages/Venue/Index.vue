@@ -114,7 +114,7 @@ function incrementPage() {
             -->
             <div
                 id="filters"
-                class="flex flex-col overflow-y-scroll max-w-[33%] space-y-3"
+                class="flex flex-col overflow-y-scroll max-w-[33%] space-y-3 items-stretch"
             >
                 <div class="card flex flex-row justify-between">
                     <span>
@@ -245,13 +245,13 @@ function incrementPage() {
 
                 <div class="flex flex-row space-x-2">
                     <button
-                        class="btn-primary"
+                        class="btn-primary flex-1"
                         @click="applyFilters"
                         v-text="`Apply Filters`"
                     />
 
                     <button
-                        class="btn-caution"
+                        class="btn-caution flex-1"
                         @click="resetFilters"
                         v-text="`Reset Filters`"
                     />

@@ -32,19 +32,21 @@ class VenueSeeder extends Seeder
                 $dealTypeOffset = 0;
                 $dealTypeLimit = 0;
                 $venueTypeOffset = 0;
+                $seats = 0;
                 foreach ($area->regions as $region) {
-                    $accessEquipmentLimit = (++$accessEquipmentLimit) % $accessEquipmentCount;
-                    $dealTypeLimit = (++$dealTypeLimit) % $dealTypeCount;
-                    $venueTypeOffset = (++$venueTypeOffset) % $venueTypeCount;
+                    $accessEquipmentLimit = ($accessEquipmentLimit + 1) % $accessEquipmentCount;
+                    $dealTypeLimit = ($dealTypeLimit + 1) % $dealTypeCount;
+                    $venueTypeOffset = ($venueTypeOffset + 1) % $venueTypeCount;
+
                     if ($accessEquipmentLimit === 0) {
-                        $accessEquipmentOffset = (++$accessEquipmentOffset) % $accessEquipmentCount;
+                        $accessEquipmentOffset = ($accessEquipmentOffset + 1) % $accessEquipmentCount;
                     }
                     if ($dealTypeLimit === 0) {
-                        $dealTypeOffset = (++$dealTypeOffset) % $dealTypeCount;
+                        $dealTypeOffset = ($dealTypeOffset + 1) % $dealTypeCount;
                     }
 
-                    $stageDimension = ($dealTypeLimit + 1) * ($accessEquipmentLimit + 1) * 100;
-                    $seats = 100;
+                    $stageDimension = $dealTypeLimit * $accessEquipmentLimit * 100;
+                    $seats = ($seats % 1000) + 100;
                     echo "Creating venue for {$region->name}\n\n";
                     $venue = $region->venues()->create([
                         'name' => "{$region->name} Theatre",

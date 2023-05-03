@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('notes')->nullable();
-            $table->smallInteger('system')->nullable();
+            $table->integer('system')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         if (in_array(config('app.env'), ['local', 'testing'])) {
+            echo "Local or testing environment detected. Creating venues...\n";
             Area::all()->each(function (Area $area) {
                 $accessEquipment = AccessEquipment::all();
                 $dealTypes = DealType::all();

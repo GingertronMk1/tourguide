@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Area;
 use App\Models\AccessEquipment;
+use App\Models\Area;
 use App\Models\DealType;
 use App\Models\VenueType;
 use Illuminate\Database\Seeder;
@@ -59,7 +59,7 @@ class VenueSeeder extends Seeder
                         'number_of_dressing_rooms' => $stageDimension / 10,
                         'backstage_wheelchair_access' => $venueTypeOffset % 2,
                         'street_address' => "1 Main Street\n{$region->name}\n{$region->area->name}",
-                        'city' => "{$region->name} City"
+                        'city' => "{$region->name} City",
                     ]);
 
                     $venue->accessEquipment()->attach($accessEquipment->slice($accessEquipmentOffset, $accessEquipmentLimit)->pluck('id'));
@@ -67,7 +67,7 @@ class VenueSeeder extends Seeder
                 }
             });
         } else {
-            echo "Not seeding venues because in production";
+            echo 'Not seeding venues because in production';
         }
     }
 }

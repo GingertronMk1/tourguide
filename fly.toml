@@ -12,7 +12,7 @@ kill_timeout = "5s"
   auto_rollback = true
 
 [deploy]
-  release_command = "php /var/www/html/artisan migrate:fresh --seed --force"
+  release_command = "./bin/flyio"
 
 [env]
   APP_ENV = "testing"

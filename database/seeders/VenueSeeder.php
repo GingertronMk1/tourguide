@@ -6,10 +6,19 @@ use App\Models\AccessEquipment;
 use App\Models\Area;
 use App\Models\DealType;
 use App\Models\VenueType;
+use Faker\Generator;
+use Illuminate\Container\Container;
 use Illuminate\Database\Seeder;
 
 class VenueSeeder extends Seeder
 {
+    private Generator $faker;
+
+    public function __invoke(array $parameters = []): void
+    {
+        $this->faker = Container::getInstance()->make(Generator::class);
+        parent::__invoke($parameters);
+    }
     /**
      * Run the database seeds.
      */
@@ -51,6 +60,8 @@ class VenueSeeder extends Seeder
                     $venue = $region->venues()->create([
                         'name' => "{$region->name} Theatre",
                         'venue_type_id' => $venueTypes->values()->get($venueTypeOffset)->id,
+                        'description' => $this->faker->sentences(5, true),
+                        'notes' => $this->faker->sentences(3, true),
                         'maximum_stage_width' => $stageDimension,
                         'maximum_stage_depth' => $stageDimension,
                         'maximum_stage_height' => $stageDimension,
@@ -62,8 +73,22 @@ class VenueSeeder extends Seeder
                         'city' => "{$region->name} City",
                     ]);
 
-                    $venue->accessEquipment()->attach($accessEquipment->slice($accessEquipmentOffset, $accessEquipmentLimit)->pluck('id'));
-                    $venue->dealTypes()->attach($dealTypes->slice($dealTypeOffset, $dealTypeLimit)->pluck('id'));
+                    $accessEquipmentIds = $accessEquipment->slice($accessEquipmentOffset, $accessEquipmentLimit)->pluck('id');
+                    $dealTypeIds = $dealTypes->slice($dealTypeOffset, $dealTypeLimit)->pluck('id');
+
+                    $accessEquipmentToAttach = [];
+                    $dealTypesToAttach = [];
+
+                    foreach ($accessEquipmentIds as $id) {
+                        $accessEquipmentToAttach[$id] = [ 'notes' => $this->faker->sentences(3,true) ];
+                    }
+
+                    foreach($dealTypeIds as $id) {
+                        $dealTypesToAttach[$id] = [ 'notes' => $this->faker->sentences(3, true) ];
+                    }
+
+                    $venue->accessEquipment()->attach($accessEquipmentToAttach);
+                    $venue->dealTypes()->attach($dealTypesToAttach);
                 }
             });
         } else {

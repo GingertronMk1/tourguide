@@ -20,14 +20,13 @@ class DealTypeSeeder extends Seeder
         ];
 
         foreach ($initial_types as $system => $name) {
-            if(is_null(DealType::getSystemType($system))) {
-            $dealType = new DealType;
-            $dealType->system = $system;
-            $dealType->name = $name;
-            $dealType->save();
-}
+            if (is_null(DealType::getSystemType($system))) {
+                $dealType = new DealType;
+                $dealType->system = $system;
+                $dealType->name = $name;
+                $dealType->save();
+            }
         }
-
 
     }
 }

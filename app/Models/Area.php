@@ -14,9 +14,13 @@ class Area extends TourGuideModel
     use HasFactory, LoggableTrait, SoftDeletes, SystemModelTrait;
 
     public const SYSTEM_NORTH = 1;
+
     public const SYSTEM_MIDLANDS = 2;
+
     public const SYSTEM_SOUTH_EAST = 3;
+
     public const SYSTEM_SOUTH_WEST = 4;
+
     public const SYSTEM_LONDON = 5;
 
     protected $fillable = [

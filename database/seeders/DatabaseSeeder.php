@@ -8,10 +8,8 @@ use App\Models\AccessEquipment;
 use App\Models\Area;
 use App\Models\DealType;
 use App\Models\User;
-use App\Models\Venue;
 use App\Models\VenueType;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,7 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!User::where('email', '=', 'admin@tourguide.test')) {
+        if (! User::where('email', '=', 'admin@tourguide.test')) {
             $user = new User();
             $user->name = 'Admin';
             $user->email = 'admin@tourguide.test';
@@ -34,10 +32,10 @@ class DatabaseSeeder extends Seeder
             RegionSeeder::class,
             AccessEquipmentSeeder::class,
             DealTypeSeeder::class,
-            VenueTypeSeeder::class
+            VenueTypeSeeder::class,
         ]);
 
-        if(in_array(config('app.env'), ['local', 'testing'])) {
+        if (in_array(config('app.env'), ['local', 'testing'])) {
             Area::all()->each(function (Area $area) {
                 $accessEquipment = AccessEquipment::all();
                 $dealTypes = DealType::all();
@@ -49,7 +47,7 @@ class DatabaseSeeder extends Seeder
 
                 $accessEquipmentOffset = 0;
                 $accessEquipmentLimit = 0;
-                foreach($area->regions as $region) {
+                foreach ($area->regions as $region) {
 
                 }
             });

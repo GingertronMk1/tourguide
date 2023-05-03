@@ -21,7 +21,7 @@ class AreaSeeder extends Seeder
         ];
 
         foreach ($initial_areas as $system => $name) {
-            if(is_null(Area::getSystemType($system))) {
+            if (is_null(Area::getSystemType($system))) {
                 $area = new Area;
                 $area->name = $name;
                 $area->system = $system;

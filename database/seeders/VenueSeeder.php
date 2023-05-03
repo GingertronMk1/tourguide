@@ -19,6 +19,7 @@ class VenueSeeder extends Seeder
         $this->faker = Container::getInstance()->make(Generator::class);
         parent::__invoke($parameters);
     }
+
     /**
      * Run the database seeds.
      */
@@ -80,11 +81,11 @@ class VenueSeeder extends Seeder
                     $dealTypesToAttach = [];
 
                     foreach ($accessEquipmentIds as $id) {
-                        $accessEquipmentToAttach[$id] = [ 'notes' => $this->faker->sentences(3,true) ];
+                        $accessEquipmentToAttach[$id] = ['notes' => $this->faker->sentences(3, true)];
                     }
 
-                    foreach($dealTypeIds as $id) {
-                        $dealTypesToAttach[$id] = [ 'notes' => $this->faker->sentences(3, true) ];
+                    foreach ($dealTypeIds as $id) {
+                        $dealTypesToAttach[$id] = ['notes' => $this->faker->sentences(3, true)];
                     }
 
                     $venue->accessEquipment()->attach($accessEquipmentToAttach);

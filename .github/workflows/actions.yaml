@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: touch database/database.sqlite
       - run: ./bin/install
-      - run: ./bin/app/phpvendor pint --test
+      - run: ./bin/app/pint --test
       - run: ./bin/node/npm lint
   deploy:
     name: Deploy app

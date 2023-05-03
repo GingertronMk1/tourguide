@@ -12,10 +12,10 @@ kill_timeout = "5s"
   auto_rollback = true
 
 [deploy]
-  release_command = "php /var/www/html/artisan migrate:fresh --seed --force"
+  release_command = "./bin/fly_deploy"
 
 [env]
-  APP_ENV = "production"
+  APP_ENV = "testing"
   LOG_CHANNEL = "stderr"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"

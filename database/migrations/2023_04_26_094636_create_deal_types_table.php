@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\DealType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,20 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('notes')->nullable();
+            $table->integer('system')->nullable()->unique();
             $table->timestamps();
             $table->softDeletes();
         });
-
-        $initial_types = [
-            'Hire',
-            'Split',
-            'Guarantee',
-        ];
-
-        foreach ($initial_types as $type) {
-            DealType::create(['name' => $type]);
-        }
-
     }
 
     /**

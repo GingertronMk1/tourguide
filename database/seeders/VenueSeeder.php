@@ -88,18 +88,34 @@ class VenueSeeder extends Seeder
                     'city' => "{$region->name} City",
                 ]);
 
-                $accessEquipmentIds = $this->accessEquipment->slice($this->accessEquipmentOffset, $this->accessEquipmentLimit)->pluck('id');
-                $dealTypeIds = $this->dealTypes->slice($this->dealTypeOffset, $this->dealTypeLimit)->pluck('id');
+                $accessEquipmentIds = $this
+                    ->accessEquipment
+                    ->slice(
+                        $this->accessEquipmentOffset,
+                        $this->accessEquipmentLimit
+                    )
+                    ->pluck('id');
+                $dealTypeIds = $this
+                    ->dealTypes
+                    ->slice(
+                        $this->dealTypeOffset,
+                        $this->dealTypeLimit
+                    )
+                    ->pluck('id');
 
                 $accessEquipmentToAttach = [];
                 $dealTypesToAttach = [];
 
                 foreach ($accessEquipmentIds as $id) {
-                    $accessEquipmentToAttach[$id] = ['notes' => $this->faker->sentences(3, true)];
+                    $accessEquipmentToAttach[$id] = [
+                        'notes' => $this->faker->sentences(3, true),
+                    ];
                 }
 
                 foreach ($dealTypeIds as $id) {
-                    $dealTypesToAttach[$id] = ['notes' => $this->faker->sentences(3, true)];
+                    $dealTypesToAttach[$id] = [
+                        'notes' => $this->faker->sentences(3, true),
+                    ];
                 }
 
                 $venue->accessEquipment()->attach($accessEquipmentToAttach);

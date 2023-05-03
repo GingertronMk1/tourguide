@@ -4,9 +4,14 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\AccessEquipment;
+use App\Models\Area;
+use App\Models\DealType;
 use App\Models\User;
 use App\Models\Venue;
+use App\Models\VenueType;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
@@ -32,5 +37,22 @@ class DatabaseSeeder extends Seeder
             VenueTypeSeeder::class
         ]);
 
+        if(in_array(config('app.env'), ['local', 'testing'])) {
+            Area::all()->each(function (Area $area) {
+                $accessEquipment = AccessEquipment::all();
+                $dealTypes = DealType::all();
+                $venueTypes = VenueType::all();
+
+                $numberOfAccessEquipments = $accessEquipment->count();
+                $numberOfDealTypes = $dealTypes->count();
+                $numberOfVenueTypes = $venueTypes->count();
+
+                $accessEquipmentOffset = 0;
+                $accessEquipmentLimit = 0;
+                foreach($area->regions as $region) {
+
+                }
+            });
+        }
     }
 }

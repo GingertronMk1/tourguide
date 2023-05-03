@@ -15,7 +15,7 @@ kill_timeout = "5s"
   release_command = "php /var/www/html/artisan migrate:fresh --seed --force"
 
 [env]
-  APP_ENV = "production"
+  APP_ENV = "testing"
   LOG_CHANNEL = "stderr"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"

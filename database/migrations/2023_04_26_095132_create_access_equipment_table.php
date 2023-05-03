@@ -17,19 +17,23 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('notes')->nullable();
+            $table->integer('system')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
 
         $initial_equipments = [
-            'Caption Screen',
-            'Audio Enhancement Equipment',
-            'Quiet Space',
-            'BSL Position',
+            AccessEquipment::SYSTEM_CAPTION_SCREEN => 'Caption Screen',
+            AccessEquipment::SYSTEM_AUDIO_ENHANCEMENT_EQUIPMENT => 'Audio Enhancement Equipment',
+            AccessEquipment::SYSTEM_QUIET_SPACE => 'Quiet Space',
+            AccessEquipment::SYSTEM_BSL_POSITION => 'BSL Position',
         ];
 
-        foreach ($initial_equipments as $equipment) {
-            AccessEquipment::create(['name' => $equipment]);
+        foreach ($initial_equipments as $system => $name) {
+            $accessEquipment = new AccessEquipment;
+            $accessEquipment->name = $name;
+            $accessEquipment->system = $system;
+            $accessEquipment->save();
         }
     }
 

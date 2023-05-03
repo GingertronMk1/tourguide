@@ -17,26 +17,11 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('notes')->nullable();
-            $table->integer('system')->nullable();
+            $table->integer('system')->nullable()->unique();
             $table->timestamps();
             $table->softDeletes();
         });
-
-        $initial_types = [
-            VenueType::SYSTEM_THEATRE => 'Theatre',
-            VenueType::SYSTEM_ARTS_CENTRE => 'Arts Centre',
-            VenueType::SYSTEM_OUTDOOR_THEATRE => 'Outdoor theatre',
-            VenueType::SYSTEM_COMMUNITY_VENUE => 'Community Venue',
-            VenueType::SYSTEM_LIBRARY => 'Library',
-        ];
-
-        foreach ($initial_types as $system => $name) {
-            $newType = new VenueType;
-            $newType->name = $name;
-            $newType->system = $system;
-            $newType->save();
-        }
-    }
+   }
 
     /**
      * Reverse the migrations.

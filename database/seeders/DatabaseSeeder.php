@@ -15,12 +15,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = new User();
-        $user->name = 'Admin';
-        $user->email = 'admin@tourguide.test';
-        $user->password = bcrypt('12345');
-        $user->email_verified_at = date('Y-m-d\TH:i:s');
-        $user->save();
-        Venue::factory(1000)->create();
+        if (!User::where('email', '=', 'admin@tourguide.test')) {
+            $user = new User();
+            $user->name = 'Admin';
+            $user->email = 'admin@tourguide.test';
+            $user->password = bcrypt('12345');
+            $user->email_verified_at = date('Y-m-d\TH:i:s');
+            $user->save();
+        }
+
+        $this->call([
+            AreaSeeder::class,
+            RegionSeeder::class,
+            AccessEquipmentSeeder::class,
+            DealTypeSeeder::class,
+            VenueTypeSeeder::class
+        ]);
+
     }
 }

@@ -17,24 +17,10 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('notes')->nullable();
-            $table->integer('system')->nullable();
+            $table->integer('system')->nullable()->unique();
             $table->timestamps();
             $table->softDeletes();
         });
-
-        $initial_types = [
-            DealType::SYSTEM_HIRE => 'Hire',
-            DealType::SYSTEM_SPLIT => 'Split',
-            DealType::SYSTEM_GUARANTEE => 'Guarantee',
-        ];
-
-        foreach ($initial_types as $system => $name) {
-            $dealType = new DealType;
-            $dealType->system = $system;
-            $dealType->name = $name;
-            $dealType->save();
-        }
-
     }
 
     /**

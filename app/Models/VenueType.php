@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Traits\LoggableTrait;
+use App\Traits\SystemModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class VenueType extends TourGuideModel
 {
-    use HasFactory, LoggableTrait, SoftDeletes;
+    use HasFactory, LoggableTrait, SoftDeletes, SystemModelTrait;
 
     public const SYSTEM_THEATRE = 1;
     public const SYSTEM_ARTS_CENTRE = 2;
@@ -26,8 +27,4 @@ class VenueType extends TourGuideModel
 
     ];
 
-    public static function getSystemType(int $system): static
-    {
-        return static::where('system', '=', $system)->first();
-    }
 }

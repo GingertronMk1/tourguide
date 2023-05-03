@@ -17,26 +17,11 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('notes')->nullable();
-            $table->integer('system')->nullable();
+            $table->integer('system')->nullable()->unique();
             $table->timestamps();
             $table->softDeletes();
         });
-
-        $initial_areas = [
-            Area::SYSTEM_NORTH => 'North',
-            Area::SYSTEM_MIDLANDS => 'Midlands',
-            Area::SYSTEM_SOUTH_EAST => 'South West',
-            Area::SYSTEM_SOUTH_WEST => 'South East',
-            Area::SYSTEM_LONDON => 'London',
-        ];
-
-        foreach ($initial_areas as $system => $name) {
-            $area = new Area;
-            $area->name = $name;
-            $area->system = $system;
-            $area->save();
-        }
-    }
+   }
 
     /**
      * Reverse the migrations.

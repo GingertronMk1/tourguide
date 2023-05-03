@@ -8,7 +8,7 @@ echo "NPM installing..."
 echo "Composer installing"
 ./bin/app/composer install
 
-if [ -ne ".env" ]; then
+if [ ! -f ".env" ]; then
     echo "Copying .env.local"
     cp .env.local .env
 fi

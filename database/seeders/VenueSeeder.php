@@ -48,9 +48,9 @@ class VenueSeeder extends Seeder
     {
         if (in_array(config('app.env'), ['local', 'testing'])) {
             echo "Local or testing environment detected. Creating venues...\n";
-            $this->accessEquipment = AccessEquipment::all();
-            $this->dealTypes = DealType::all();
-            $this->venueTypes = VenueType::all();
+            $this->accessEquipment = AccessEquipment::whereNotNull('system')->get();
+            $this->dealTypes = DealType::whereNotNull('system')->get();
+            $this->venueTypes = VenueType::whereNotNull('system')->get();
 
             $this->accessEquipmentCount = $this->accessEquipment->count();
             $this->dealTypeCount = $this->dealTypes->count();

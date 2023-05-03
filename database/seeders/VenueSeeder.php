@@ -7,17 +7,13 @@ use App\Models\Area;
 use App\Models\DealType;
 use App\Models\VenueType;
 use Faker\Generator;
-use Illuminate\Container\Container;
 use Illuminate\Database\Seeder;
 
 class VenueSeeder extends Seeder
 {
-    private Generator $faker;
-
-    public function __invoke(array $parameters = []): void
-    {
-        $this->faker = Container::getInstance()->make(Generator::class);
-        parent::__invoke($parameters);
+    public function __construct(
+        protected Generator $faker,
+    ) {
     }
 
     /**

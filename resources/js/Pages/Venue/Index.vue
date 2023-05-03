@@ -62,11 +62,13 @@ watch(
     { deep: true }
 );
 
-function applyFilters() {
+function applyFilters(resetPage = true) {
     const newQuery = {
         ...query.value,
-        page: 1,
     };
+    if (resetPage) {
+        newQuery.page = 1;
+    }
     router.get(
         route("venue.index", {
             _query: newQuery,
@@ -85,26 +87,14 @@ function resetFilters() {
 
 function decrementPage() {
     const { page } = query.value;
-    router.get(
-        route("venue.index", {
-            _query: {
-                ...query.value,
-                page: parseInt(page) - 1,
-            },
-        })
-    );
+    query.value.page = parseInt(page) - 1;
+    applyFilters(false);
 }
 
 function incrementPage() {
     const { page } = query.value;
-    router.get(
-        route("venue.index", {
-            _query: {
-                ...query.value,
-                page: parseInt(page) + 1,
-            },
-        })
-    );
+    query.value.page = parseInt(page) + 1;
+    applyFilters(false);
 }
 </script>
 <template>

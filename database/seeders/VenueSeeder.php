@@ -58,10 +58,12 @@ class VenueSeeder extends Seeder
 
             Region::orderBy('name', 'asc')->get()->each(function (Region $region) {
 
+                /** Setting the limits and offsets on each go round to increment by 1 */
                 $this->accessEquipmentLimit = ($this->accessEquipmentLimit + 1) % $this->accessEquipmentCount;
                 $this->dealTypeLimit = ($this->dealTypeLimit + 1) % $this->dealTypeCount;
                 $this->venueTypeOffset = ($this->venueTypeOffset + 1) % $this->venueTypeCount;
 
+                /** If/when the limits are 0 increase the offset to go again */
                 if ($this->accessEquipmentLimit === 0) {
                     $this->accessEquipmentOffset = ($this->accessEquipmentOffset + 1) % $this->accessEquipmentCount;
                 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\LoggableTrait;
+use App\Traits\SystemModelTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Region extends TourGuideModel
 {
-    use HasFactory, LoggableTrait, SoftDeletes;
+    use HasFactory, LoggableTrait, SoftDeletes, SystemModelTrait;
 
     protected $fillable = [
         'name',

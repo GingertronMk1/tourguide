@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\AccessEquipment;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,20 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('notes')->nullable();
+            $table->integer('system')->nullable()->unique();
             $table->timestamps();
             $table->softDeletes();
         });
 
-        $initial_equipments = [
-            'Caption Screen',
-            'Audio Enhancement Equipment',
-            'Quiet Space',
-            'BSL Position',
-        ];
-
-        foreach ($initial_equipments as $equipment) {
-            AccessEquipment::create(['name' => $equipment]);
-        }
     }
 
     /**

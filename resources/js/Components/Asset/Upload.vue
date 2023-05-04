@@ -19,6 +19,7 @@ const props = defineProps({
 const assetTypes = usePage()?.props?.util?.asset_types ?? [];
 
 const form = useForm({
+    title: "",
     file: null,
     type: Object.keys(assetTypes)[0],
     assetable_type: props.assetableClass,
@@ -27,7 +28,9 @@ const form = useForm({
 });
 
 function submit() {
-    form.post(route("asset.store"));
+    form.post(route("asset.store"), {
+        onSuccess: () => form.reset(),
+    });
 }
 </script>
 <template>
@@ -35,19 +38,41 @@ function submit() {
         <div
             v-for="asset in existingAssets"
             :key="asset.id"
-            class="card flex flex-col space-y-2"
+            class="card text-center min-h-20 flex flex-col items-stretch space-y-2"
         >
-            <span v-text="asset.type" />
-            <span v-text="asset.path" />
-            <span v-text="asset.mime_type" />
-            <img :src="asset.file_url" width="100" height="100" />
+            <a
+                class="flex flex-row justify-center items-center flex-1"
+                :href="asset.file_url"
+                target="_blank"
+            >
+                <i
+                    v-if="asset.thumbnail_url.type === 'font-awesome'"
+                    :class="`text-9xl ${asset.thumbnail_url.value}`"
+                />
+                <img
+                    v-else-if="asset.thumbnail_url.type === 'url'"
+                    :src="asset.thumbnail_url.value"
+                    width="200"
+                    height="200"
+                    class="object-contain"
+                />
+            </a>
+            <span v-text="asset.title" />
+            <span v-text="$page.props.util.asset_types[asset.type]" />
         </div>
-        <form class="card" @submit.prevent="submit">
+        <form class="card flex flex-col space-y-2" @submit.prevent="submit">
             <input
                 id="file"
                 type="file"
                 name="file"
                 @input="form.file = $event.target.files[0]"
+            />
+            <input
+                id="title"
+                v-model="form.title"
+                type="text"
+                name="title"
+                placeholder="Asset Title"
             />
             <select id="type" v-model="form.type" name="type">
                 <option

@@ -37,6 +37,7 @@ class Asset extends TourGuideModel
 
     protected $appends = [
         'file_url',
+        'thumbnail_url',
     ];
 
     public function getFileAttribute()
@@ -56,6 +57,29 @@ class Asset extends TourGuideModel
                 return Storage::temporaryUrl($this->path, now()->addMinutes(30));
             default:
                 return Storage::url($this->path);
+        }
+    }
+
+    public function getThumbnailURLAttribute(): array
+    {
+        switch ($this->mime_type) {
+            case 'image/jpeg':
+            case 'image/jpg':
+            case 'image/png':
+                return [
+                    'type' => 'url',
+                    'value' => $this->file_url,
+                ];
+            case 'application/pdf':
+                return [
+                    'type' => 'font-awesome',
+                    'value' => 'fa-solid fa-file-pdf',
+                ];
+            default:
+                return [
+                    'type' => 'font-awesome',
+                    'value' => 'fa-solid fa-file',
+                ];
         }
     }
 }

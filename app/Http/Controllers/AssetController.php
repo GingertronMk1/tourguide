@@ -30,6 +30,7 @@ class AssetController extends Controller
     public function store(StoreAssetRequest $request)
     {
         [
+            'title' => $title,
             'type' => $type,
             'assetable_type' => $assetableType,
             'assetable_id' => $assetableId,
@@ -39,6 +40,7 @@ class AssetController extends Controller
         $path = $file->store('assets');
         if ($path) {
             $asset = new Asset;
+            $asset->title = $title;
             $asset->assetable_type = $assetableType;
             $asset->assetable_id = $assetableId;
             $asset->type = $type;

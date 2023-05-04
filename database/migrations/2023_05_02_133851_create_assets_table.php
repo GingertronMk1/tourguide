@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
             $table->string('type');
+            $table->string('title');
             $table->string('path');
             $table->json('metadata');
             $table->string('mime_type');

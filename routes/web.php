@@ -3,7 +3,7 @@
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AreaRegionController;
-use App\Http\Controllers\FileController;
+use App\Http\Controllers\AssetController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
@@ -51,8 +51,8 @@ foreach ($resourceControllers as $resource => $controller) {
 
 Route::middleware('auth')->group(function () {
     Route::resource('activity-log', ActivityLogController::class)->only('index');
-    Route::resource('file', FileController::class)
-        ->only(['create', 'store']);
+    Route::resource('asset', AssetController::class)
+        ->only(['store', 'show', 'delete']);
 });
 
 require __DIR__.'/auth.php';

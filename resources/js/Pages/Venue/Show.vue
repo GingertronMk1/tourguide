@@ -1,6 +1,7 @@
 <script setup>
 import VenueCard from "@/Components/Venue/VenueCard.vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
+import AssetUpload from "@/Components/Asset/Upload.vue";
 import { Head, Link } from "@inertiajs/vue3";
 import { computed } from "vue";
 
@@ -87,6 +88,11 @@ const addressSearchURL = computed(() => {
                     </li>
                 </ul>
             </div>
+            <AssetUpload
+                :assetable-class="venue.class_name"
+                :assetable-id="venue.id"
+                :existing-assets="venue.assets"
+            />
         </div>
     </BaseLayout>
 </template>

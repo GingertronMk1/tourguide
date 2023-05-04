@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\AssetableTrait;
 use App\Traits\LoggableTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ class Venue extends TourGuideModel
 {
     public const PER_PAGE = 25;
 
-    use HasFactory, LoggableTrait, SoftDeletes;
+    use HasFactory, LoggableTrait, SoftDeletes, AssetableTrait;
 
     protected $fillable = [
         'name',

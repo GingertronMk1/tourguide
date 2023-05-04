@@ -13,6 +13,8 @@ if [ ! -f ".env" ]; then
     cp .env.local .env
 fi
 
+
+
 echo "Generating app key"
 ./bin/app/artisan key:generate
 
@@ -21,5 +23,8 @@ echo "Building assets"
 
 echo "Running migrations and seeding database"
 ./bin/app/artisan migrate:fresh --seed
+
+echo "Linking storage"
+./bin/app/artisan storage:link
 
 echo "Done!"

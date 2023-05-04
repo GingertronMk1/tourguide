@@ -6,23 +6,42 @@ use App\Traits\LoggableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class Asset extends TourGuideModel
 {
     use HasFactory, LoggableTrait, SoftDeletes;
 
-    protected $fillable = [
+    public const TYPE_MAIN_PHOTO = 'photo.main';
 
+    public const TYPE_ADDITIONAL_PHOTO = 'photo.additional';
+
+    public const TYPE_TECHNICAL_DOCUMENT = 'document.technical';
+
+    public const TYPE_OTHER_DOCUMENT = 'document.other';
+
+    public const TYPES = [
+        self::TYPE_MAIN_PHOTO => 'Main Photo',
+        self::TYPE_ADDITIONAL_PHOTO => 'Additional Photo',
+        self::TYPE_TECHNICAL_DOCUMENT => 'Technical Document',
+        self::TYPE_OTHER_DOCUMENT => 'Other Document',
     ];
 
     protected $casts = [
         'metadata' => 'json',
     ];
 
-    public function getFile()
+    protected $attributes = [
+        'metadata' => '[]',
+    ];
+
+    protected $appends = [
+        'file_url',
+    ];
+
+    public function getFileAttribute()
     {
-        return asset($this->path);
+        return Storage::get($this->path);
     }
 
     public function assetable(): BelongsTo
@@ -30,23 +49,13 @@ class Asset extends TourGuideModel
         return $this->belongsTo($this->assetable_type);
     }
 
-    public static function createNew(
-        UploadedFile $file,
-        TourGuideModel $model,
-        string $type,
-        ?array $metadata = []
-    ): self {
-        $storedFile = $file->store('assets');
-        if (! $storedFile) {
-            throw new \Exception('Failed storing file');
+    public function getFileURLAttribute(): string
+    {
+        switch (config('filesystems.default')) {
+            case 's3':
+                return Storage::temporaryUrl($this->path, now()->addMinutes(30));
+            default:
+                return Storage::url($this->path);
         }
-
-        return new self([
-            'type' => $type,
-            'path' => $storedFile,
-            'assetable_id' => $model->id,
-            'assetable_type' => get_class($model),
-            'metadata' => $metadata,
-        ]);
     }
 }

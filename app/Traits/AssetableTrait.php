@@ -3,12 +3,17 @@
 namespace App\Traits;
 
 use App\Models\Asset;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-trait LoggableTrait
+trait AssetableTrait
 {
-    public function getAssets(): HasMany
+    public function initializeAssetableTrait()
     {
-        return $this->hasMany(Asset::class);
+        $this->with[] = 'assets';
+    }
+
+    public function assets(): MorphMany
+    {
+        return $this->morphMany(Asset::class, 'assetable');
     }
 }

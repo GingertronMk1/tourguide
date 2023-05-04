@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('path');
             $table->json('metadata');
+            $table->string('mime_type');
             $table->morphs('assetable');
             $table->timestamps();
             $table->softDeletes();

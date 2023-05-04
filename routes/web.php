@@ -49,11 +49,10 @@ foreach ($resourceControllers as $resource => $controller) {
     Route::middleware('auth')->resource($resource, $controller)->except($readOnlyMethods);
 }
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
     Route::resource('activity-log', ActivityLogController::class)->only('index');
     Route::resource('file', FileController::class)
         ->only(['create', 'store']);
 });
-
 
 require __DIR__.'/auth.php';

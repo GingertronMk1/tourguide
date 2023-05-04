@@ -28,6 +28,7 @@ class FileController extends Controller
     public function store(Request $request)
     {
         $file = $request->file('avatar');
+
         return $file->store('files');
     }
 

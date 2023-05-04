@@ -15,11 +15,16 @@ trait AssetableTrait
 
     public function assets(): MorphMany
     {
-        return $this->morphMany(Asset::class, 'assetable')->orderBy('created_at', 'desc');
+        return $this
+            ->morphMany(Asset::class, 'assetable')
+            ->orderBy('created_at', 'desc');
     }
 
     public function getMainPhotoAttribute(): ?Asset
     {
-        return $this->assets()->where('type', Asset::TYPE_MAIN_PHOTO)->first();
+        return $this
+            ->assets()
+            ->where('type', Asset::TYPE_MAIN_PHOTO)
+            ->first();
     }
 }

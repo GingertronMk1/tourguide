@@ -22,7 +22,7 @@ const form = useForm({
     file: null,
     type: Object.keys(assetTypes)[0],
     assetable_type: props.assetableClass,
-    assetableId: props.assetable_id,
+    assetable_id: props.assetableId,
     redirect: route(route().current(), route().params),
 });
 

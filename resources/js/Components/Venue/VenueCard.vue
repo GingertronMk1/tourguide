@@ -45,11 +45,12 @@ const cardTitle = [
                 <p class="font-normal" v-text="venue.description" />
             </span>
             <a
+                v-if="venue.main_photo?.file_url"
                 class="w-full h-80 row-span-2 bg-no-repeat bg-center bg-contain"
                 :style="{
-                    'background-image': `url(${venue.assets[0].file_url})`,
+                    'background-image': `url(${venue.main_photo.file_url})`,
                 }"
-                :href="venue.assets[0].file_url"
+                :href="venue.main_photo.file_url"
                 target="_blank"
             />
             <span>

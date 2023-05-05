@@ -43,6 +43,8 @@ RUN apk add rsync bash
 
 COPY --from=php_assets /var/www/html /var/www/html
 
+COPY bin bin
+
 # Packages like Laravel Nova may have added assets to the public directory
 # or maybe some custom assets were added manually! Either way, we merge
 # in the assets we generated above rather than overwrite them

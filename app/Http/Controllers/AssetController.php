@@ -37,7 +37,7 @@ class AssetController extends Controller
             'redirect' => $redirect,
         ] = $request->input();
         $file = $request->file('file');
-        $path = $file->store();
+        $path = $file->store('asset');
         if ($path) {
             $asset = new Asset;
             $asset->title = $title;

@@ -54,9 +54,11 @@ RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
     && rm -rf /var/www/html/public-npm \
     && chown -R www-data:www-data /var/www/html/public
 
-COPY ./fly.io/nginx/sites_available_default /etc/nginx/sites_available/default
+COPY ./fly.io/nginx/sites_available_default /etc/nginx/sites-available/default
 COPY ./fly.io/nginx/.htpasswd /etc/nginx/.htpasswd
 
 EXPOSE 8080
+
+RUN alias ls="ls -la"
 
 ENTRYPOINT ["/entrypoint"]

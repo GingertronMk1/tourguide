@@ -3,8 +3,8 @@
 # Default to PHP 8.2, but we attempt to match
 # the PHP version from the user (wherever `flyctl launch` is run)
 # Valid version values are PHP 7.4+
-ARG PHP_VERSION=8.1
-ARG NODE_VERSION=20
+ARG PHP_VERSION=8.2
+ARG NODE_VERSION=16
 FROM fideloper/fly-laravel:${PHP_VERSION} as base
 
 # PHP_VERSION needs to be repeated here
@@ -25,7 +25,8 @@ RUN composer install --optimize-autoloader \
     && cp .fly/entrypoint.sh /entrypoint \
     && chmod +x /entrypoint
 
-RUN ln -s ./fly.io/nginx /etc/nginx
+COPY ./fly.io/nginx/conf.d/app.conf /etc/nginx/nginx.conf
+COPY ./fly.io/nginx/.htpasswd /etc/nginx/.htpasswd
 
 # Multi-stage build: Build static assets
 # This allows us to not include Node within the final container

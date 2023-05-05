@@ -51,8 +51,7 @@ RUN apk add rsync
 # in the assets we generated above rather than overwrite them
 COPY --from=node_assets /app/public /var/www/html/public-npm
 RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
-    && rm -rf /var/www/html/public-npm \
-    && chown -R www-data:www-data /var/www/html/public
+    && rm -rf /var/www/html/public-npm
 
 COPY ./fly.io/nginx/conf.d /etc/nginx/conf.d
 COPY ./fly.io/nginx/.htpasswd /etc/nginx/.htpasswd

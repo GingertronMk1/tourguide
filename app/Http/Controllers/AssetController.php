@@ -54,16 +54,18 @@ class AssetController extends Controller
                         ['id', '<>', $asset->id],
                         ['type', '=', Asset::TYPE_MAIN_PHOTO],
                     ])
-                    ->get()
-                    ->each(function(Asset $asset) {
-                        $asset->type = Asset::TYPE_ADDITIONAL_PHOTO;
-                        $asset->save();
-                    });
+                        ->get()
+                        ->each(function (Asset $asset) {
+                            $asset->type = Asset::TYPE_ADDITIONAL_PHOTO;
+                            $asset->save();
+                        });
                 }
+
                 return redirect($redirect);
             }
         }
-        return "Unable to save file";
+
+        return 'Unable to save file';
     }
 
     /**

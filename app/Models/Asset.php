@@ -54,6 +54,7 @@ class Asset extends TourGuideModel
     {
         switch (config('filesystems.default')) {
             case 's3':
+            case 'r2':
                 return Storage::temporaryUrl($this->path, now()->addMinutes(30));
             default:
                 return Storage::url($this->path);

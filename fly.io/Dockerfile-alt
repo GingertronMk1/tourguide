@@ -36,6 +36,7 @@ RUN npm install && npm run build
 # assets that we generated above
 FROM nginx:1.23.4-alpine
 
+COPY .fly .fly
 COPY ./fly.io/nginx ./local-nginx
 
 RUN apk add rsync

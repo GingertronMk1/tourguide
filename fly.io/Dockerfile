@@ -25,7 +25,7 @@ RUN composer install --optimize-autoloader \
     && cp .fly/entrypoint.sh /entrypoint \
     && chmod +x /entrypoint
 
-COPY ./fly.io/nginx/conf.d/nginx.conf /etc/nginx/nginx.conf
+COPY ./fly.io/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./fly.io/nginx/.htpasswd /etc/nginx/.htpasswd
 
 # Multi-stage build: Build static assets

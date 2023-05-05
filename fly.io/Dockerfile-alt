@@ -55,7 +55,7 @@ RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
     && chown -R www-data:www-data /var/www/html/public
 
 COPY ./fly.io/nginx/conf.d /etc/nginx/conf.d
-COPY ./fly.io/nginx.htpasswd /etc/nginx/.htpasswd
+COPY ./fly.io/nginx/.htpasswd /etc/nginx/.htpasswd
 
 EXPOSE 80
 

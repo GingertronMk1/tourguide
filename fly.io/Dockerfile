@@ -3,8 +3,8 @@
 # Default to PHP 8.2, but we attempt to match
 # the PHP version from the user (wherever `flyctl launch` is run)
 # Valid version values are PHP 7.4+
-ARG PHP_VERSION=8.2
-ARG NODE_VERSION=18
+ARG PHP_VERSION=8.1
+ARG NODE_VERSION=20
 FROM fideloper/fly-laravel:${PHP_VERSION} as base
 
 # PHP_VERSION needs to be repeated here
@@ -25,20 +25,7 @@ RUN composer install --optimize-autoloader \
     && cp .fly/entrypoint.sh /entrypoint \
     && chmod +x /entrypoint
 
-# If we're using Octane...
-RUN if grep -Fq "laravel/octane" /var/www/html/composer.json; then \
-        rm -rf /etc/supervisor/conf.d/fpm.conf; \
-        if grep -Fq "spiral/roadrunner" /var/www/html/composer.json; then \
-            mv /etc/supervisor/octane-rr.conf /etc/supervisor/conf.d/octane-rr.conf; \
-            if [ -f ./vendor/bin/rr ]; then ./vendor/bin/rr get-binary; fi; \
-            rm -f .rr.yaml; \
-        else \
-            mv .fly/octane-swoole /etc/services.d/octane; \
-            mv /etc/supervisor/octane-swoole.conf /etc/supervisor/conf.d/octane-swoole.conf; \
-        fi; \
-        rm /etc/nginx/sites-enabled/default; \
-        ln -sf /etc/nginx/sites-available/default-octane /etc/nginx/sites-enabled/default; \
-    fi
+RUN ln -s ./fly.io/nginx /etc/nginx
 
 # Multi-stage build: Build static assets
 # This allows us to not include Node within the final container

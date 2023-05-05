@@ -1,17 +1,13 @@
-# syntax = docker/dockerfile:experimental
-
 # Default to PHP 8.2, but we attempt to match
 # the PHP version from the user (wherever `flyctl launch` is run)
 # Valid version values are PHP 7.4+
 ARG PHP_VERSION=8.1
 ARG NODE_VERSION=20
-FROM fideloper/fly-laravel:${PHP_VERSION} as base
+FROM php:8.1-fpm-alpine
 
-# PHP_VERSION needs to be repeated here
-# See https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
-ARG PHP_VERSION
+RUN docker-php-ext-install pdo pdo_mysql sockets
 
-LABEL fly_launch_runtime="laravel"
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 # copy application code, skipping files based on .dockerignore
 COPY . /var/www/html
@@ -28,38 +24,13 @@ RUN composer install --optimize-autoloader \
 
 # Multi-stage build: Build static assets
 # This allows us to not include Node within the final container
-FROM node:${NODE_VERSION} as node_modules_go_brrr
+FROM node:20-alpine3.16
 
-RUN mkdir /app
-
-RUN mkdir -p  /app
 WORKDIR /app
 COPY . .
 COPY --from=base /var/www/html/vendor /app/vendor
 
-# Use yarn or npm depending on what type of
-# lock file we might find. Defaults to
-# NPM if no lock file is found.
-# Note: We run "production" for Mix and "build" for Vite
-RUN if [ -f "vite.config.js" ]; then \
-        ASSET_CMD="build"; \
-    else \
-        ASSET_CMD="production"; \
-    fi; \
-    if [ -f "yarn.lock" ]; then \
-        yarn install --frozen-lockfile; \
-        yarn $ASSET_CMD; \
-    elif [ -f "pnpm-lock.yaml" ]; then \
-        corepack enable && corepack prepare pnpm@latest-7 --activate; \
-        pnpm install --frozen-lockfile; \
-        pnpm run $ASSET_CMD; \
-    elif [ -f "package-lock.json" ]; then \
-        npm ci --no-audit; \
-        npm run $ASSET_CMD; \
-    else \
-        npm install; \
-        npm run $ASSET_CMD; \
-    fi;
+RUN npm install && npm run build
 
 # From our base container created above, we
 # create our final image, adding in static

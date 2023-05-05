@@ -47,11 +47,23 @@ class AssetController extends Controller
             $asset->mime_type = $file->getMimeType();
             $asset->path = $path;
             if ($asset->save()) {
+                if ($asset->type === Asset::TYPE_MAIN_PHOTO) {
+                    Asset::where([
+                        ['assetable_type', '=', $assetableType],
+                        ['assetable_id', '=', $assetableId],
+                        ['id', '<>', $asset->id],
+                        ['type', '=', Asset::TYPE_MAIN_PHOTO],
+                    ])
+                    ->get()
+                    ->each(function(Asset $asset) {
+                        $asset->type = Asset::TYPE_ADDITIONAL_PHOTO;
+                        $asset->save();
+                    });
+                }
                 return redirect($redirect);
             }
-        } else {
-            return "Unable to save file";
         }
+        return "Unable to save file";
     }
 
     /**

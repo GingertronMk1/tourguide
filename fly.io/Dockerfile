@@ -22,7 +22,7 @@ RUN composer install --optimize-autoloader \
 
 # Multi-stage build: Build static assets
 # This allows us to not include Node within the final container
-FROM node:20-alpine3.16
+FROM node:20-alpine3.16 AS node
 
 WORKDIR /app
 COPY . .
@@ -38,7 +38,7 @@ FROM base
 # Packages like Laravel Nova may have added assets to the public directory
 # or maybe some custom assets were added manually! Either way, we merge
 # in the assets we generated above rather than overwrite them
-COPY --from=node_modules_go_brrr /app/public /var/www/html/public-npm
+COPY --from=node /app/public /var/www/html/public-npm
 RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
     && rm -rf /var/www/html/public-npm \
     && chown -R www-data:www-data /var/www/html/public

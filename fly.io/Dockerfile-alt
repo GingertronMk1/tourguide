@@ -43,6 +43,8 @@ RUN apk add rsync bash
 
 COPY --from=php_assets /var/www/html /var/www/html
 
+COPY --from=php_assets /usr/local/bin/php /usr/local/bin php
+
 COPY bin bin
 
 # Packages like Laravel Nova may have added assets to the public directory

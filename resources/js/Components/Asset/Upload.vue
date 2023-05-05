@@ -35,10 +35,11 @@ function submit() {
 
 function addFileToForm({
     target: {
-        files: [file, ...rest],
+        files: [file],
     },
 }) {
-    console.log(file);
+    console.table(file);
+    form.title = file.name;
     form.file = file;
 }
 </script>

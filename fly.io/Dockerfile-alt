@@ -1,0 +1,59 @@
+# PHP_VERSION needs to be repeated here
+# See https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
+ARG PHP_VERSION
+FROM php:8.1-fpm-alpine AS php_assets
+
+LABEL fly_launch_runtime="laravel"
+
+RUN docker-php-ext-install pdo pdo_mysql sockets
+
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+WORKDIR /var/www/html
+
+# copy application code, skipping files based on .dockerignore
+COPY . /var/www/html
+
+RUN composer install --optimize-autoloader \
+    && mkdir -p storage/logs \
+    && php artisan optimize:clear \
+    && chown -R www-data:www-data /var/www/html \
+    && echo "MAILTO=\"\"\n* * * * * www-data /usr/bin/php /var/www/html/artisan schedule:run" > /etc/cron.d/laravel \
+    && cp .fly/entrypoint.sh /entrypoint \
+    && chmod +x /entrypoint
+
+# Multi-stage build: Build static assets
+# This allows us to not include Node within the final container
+FROM node:20 as node_assets
+
+RUN mkdir /app
+
+RUN mkdir -p  /app
+WORKDIR /app
+COPY . .
+COPY --from=php_assets /var/www/html/vendor /app/vendor
+
+# Use yarn or npm depending on what type of
+# lock file we might find. Defaults to
+# NPM if no lock file is found.
+# Note: We run "production" for Mix and "build" for Vite
+RUN npm install && npm run build
+
+# From our base container created above, we
+# create our final image, adding in static
+# assets that we generated above
+FROM nginx:1.23.4-alpine
+
+RUN apk add rsync
+
+# Packages like Laravel Nova may have added assets to the public directory
+# or maybe some custom assets were added manually! Either way, we merge
+# in the assets we generated above rather than overwrite them
+COPY --from=node_assets /app/public /var/www/html/public-npm
+RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
+    && rm -rf /var/www/html/public-npm \
+    && chown -R www-data:www-data /var/www/html/public
+
+EXPOSE 80
+
+ENTRYPOINT ["/entrypoint"]

@@ -40,25 +40,7 @@ COPY --from=base /var/www/html/vendor /app/vendor
 # lock file we might find. Defaults to
 # NPM if no lock file is found.
 # Note: We run "production" for Mix and "build" for Vite
-RUN if [ -f "vite.config.js" ]; then \
-        ASSET_CMD="build"; \
-    else \
-        ASSET_CMD="production"; \
-    fi; \
-    if [ -f "yarn.lock" ]; then \
-        yarn install --frozen-lockfile; \
-        yarn $ASSET_CMD; \
-    elif [ -f "pnpm-lock.yaml" ]; then \
-        corepack enable && corepack prepare pnpm@latest-7 --activate; \
-        pnpm install --frozen-lockfile; \
-        pnpm run $ASSET_CMD; \
-    elif [ -f "package-lock.json" ]; then \
-        npm ci --no-audit; \
-        npm run $ASSET_CMD; \
-    else \
-        npm install; \
-        npm run $ASSET_CMD; \
-    fi;
+RUN npm install && npm run build
 
 # From our base container created above, we
 # create our final image, adding in static
@@ -72,6 +54,9 @@ COPY --from=node_modules_go_brrr /app/public /var/www/html/public-npm
 RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
     && rm -rf /var/www/html/public-npm \
     && chown -R www-data:www-data /var/www/html/public
+
+COPY ./fly.io/nginx/sites_available_default /etc/nginx/sites_available/default
+COPY ./fly.io/nginx/.htpasswd /etc/nginx/.htpasswd
 
 EXPOSE 8080
 

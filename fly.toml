@@ -25,7 +25,7 @@ kill_timeout = "5s"
   CLOUDFLARE_R2_BUCKET="tourguide-testing"
 
 [build]
-  dockerfile = "./fly.io/Dockerfile-alt"
+  dockerfile = "./fly.io/Dockerfile"
   [build.args]
     PHP_VERSION="8.1"
     NODE_VERSION="20"

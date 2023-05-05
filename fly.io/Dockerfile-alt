@@ -18,7 +18,7 @@ RUN composer install --optimize-autoloader \
     && mkdir -p storage/logs \
     && php artisan optimize:clear \
     && chown -R www-data:www-data /var/www/html \
-    && echo "MAILTO=\"\"\n* * * * * www-data /usr/bin/php /var/www/html/artisan schedule:run" > /etc/cron.d/laravel \
+    && echo "MAILTO=\"\"\n* * * * * www-data /usr/bin/php /var/www/html/artisan schedule:run" > /etc/crontabs/laravel \
     && cp .fly/entrypoint.sh /entrypoint \
     && chmod +x /entrypoint
 
@@ -53,6 +53,9 @@ COPY --from=node_assets /app/public /var/www/html/public-npm
 RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
     && rm -rf /var/www/html/public-npm \
     && chown -R www-data:www-data /var/www/html/public
+
+COPY ./fly.io/nginx/conf.d /etc/nginx/conf.d
+COPY ./fly.io/nginx.htpasswd /etc/nginx/.htpasswd
 
 EXPOSE 80
 

@@ -32,6 +32,15 @@ function submit() {
         onSuccess: () => form.reset(),
     });
 }
+
+function addFileToForm({
+    target: {
+        files: [file, ...rest],
+    },
+}) {
+    console.log(file);
+    form.file = file;
+}
 </script>
 <template>
     <div class="grid grid-cols-4 gap-2">
@@ -61,12 +70,7 @@ function submit() {
             <span v-text="$page.props.util.asset_types[asset.type]" />
         </div>
         <form class="card flex flex-col space-y-2" @submit.prevent="submit">
-            <input
-                id="file"
-                type="file"
-                name="file"
-                @input="form.file = $event.target.files[0]"
-            />
+            <input id="file" type="file" name="file" @input="addFileToForm" />
             <input
                 id="title"
                 v-model="form.title"

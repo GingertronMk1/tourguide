@@ -21,6 +21,11 @@ kill_timeout = "5s"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
   PRIMARY_REGION = "lhr"
   DB_CONNECTION="pgsql"
+  FILESYSTEM_DISK="s3"
+  AWS_ENDPOINT="https://gateway.storjshare.io"
+  AWS_BUCKET="testing"
+  AWS_DEFAULT_REGION="eu1"
+
 
 [build]
   dockerfile = "./fly.io/Dockerfile"

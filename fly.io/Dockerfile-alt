@@ -39,7 +39,7 @@ FROM nginx:1.23.4-alpine
 COPY .fly .fly
 COPY ./fly.io/nginx ./local-nginx
 
-RUN apk add rsync
+RUN apk add rsync bash
 
 COPY --from=php_assets /var/www/html /var/www/html
 

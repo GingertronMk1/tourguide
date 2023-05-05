@@ -35,7 +35,9 @@ services:
 
     nginx:
         platform: linux/x86_64
-        image: nginx:1.23.4-alpine
+        build:
+            context: .
+            dockerfile: ./docker/nginx.dockerfile
         volumes:
             - "./:/var/www:delegated"
             - "./nginx/conf.d/:/etc/nginx/conf.d/:delegated"

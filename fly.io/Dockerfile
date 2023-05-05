@@ -25,7 +25,6 @@ RUN composer install --optimize-autoloader \
     && cp .fly/entrypoint.sh /entrypoint \
     && chmod +x /entrypoint
 
-RUN ln -s ./fly.io/nginx /etc/nginx
 
 # Multi-stage build: Build static assets
 # This allows us to not include Node within the final container
@@ -74,6 +73,8 @@ COPY --from=node_modules_go_brrr /app/public /var/www/html/public-npm
 RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
     && rm -rf /var/www/html/public-npm \
     && chown -R www-data:www-data /var/www/html/public
+
+COPY ./fly.io/nginx /etc
 
 EXPOSE 8080
 

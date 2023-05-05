@@ -43,19 +43,38 @@ const props = defineProps({
 const query = ref(props.query);
 
 watch(
-    () => query.value,
+    () => ({ ...query.value }),
     (newQuery, oldQuery) => {
-        if (parseInt(oldQuery.page) === parseInt(newQuery.page)) {
-            newQuery.page = 1;
+        const { seatsMax: newSeatsMax, seatsMin: newSeatsMin } = newQuery;
+        const { seatsMax: oldSeatsMax, seatsMin: oldSeatsMin } = oldQuery;
+        const oldSeatsMaxInt = parseInt(oldSeatsMax);
+        const oldSeatsMinInt = parseInt(oldSeatsMin);
+        const newSeatsMaxInt = parseInt(newSeatsMax);
+        const newSeatsMinInt = parseInt(newSeatsMin);
+        if (newSeatsMaxInt < newSeatsMinInt) {
+            if (oldSeatsMaxInt !== newSeatsMaxInt) {
+                query.value.seatsMin = newSeatsMax - 1;
+            } else if (oldSeatsMinInt !== newSeatsMinInt) {
+                query.value.seatsMax = newSeatsMin + 1;
+            }
         }
-        router.get(
-            route("venue.index", {
-                _query: newQuery,
-            })
-        );
     },
     { deep: true }
 );
+
+function applyFilters(resetPage = true) {
+    const newQuery = {
+        ...query.value,
+    };
+    if (resetPage) {
+        newQuery.page = 1;
+    }
+    router.get(
+        route("venue.index", {
+            _query: newQuery,
+        })
+    );
+}
 
 function resetFilters() {
     query.value = {
@@ -68,18 +87,14 @@ function resetFilters() {
 
 function decrementPage() {
     const { page } = query.value;
-    query.value = {
-        ...query.value,
-        page: parseInt(page) - 1,
-    };
+    query.value.page = parseInt(page) - 1;
+    applyFilters(false);
 }
 
 function incrementPage() {
     const { page } = query.value;
-    query.value = {
-        ...query.value,
-        page: parseInt(page) + 1,
-    };
+    query.value.page = parseInt(page) + 1;
+    applyFilters(false);
 }
 </script>
 <template>
@@ -99,7 +114,7 @@ function incrementPage() {
             -->
             <div
                 id="filters"
-                class="flex flex-col overflow-y-scroll max-w-[33%] space-y-3"
+                class="flex flex-col overflow-y-scroll max-w-[33%] space-y-3 items-stretch"
             >
                 <div class="card flex flex-row justify-between">
                     <span>
@@ -228,11 +243,18 @@ function incrementPage() {
                     </div>
                 </div>
 
-                <div
-                    class="card bg-blue-700 text-white font-bold text-center cursor-pointer border-blue-700"
-                    @click="resetFilters"
-                >
-                    Reset Filters
+                <div class="flex flex-row space-x-2">
+                    <button
+                        class="btn-primary flex-1"
+                        @click="applyFilters"
+                        v-text="`Apply Filters`"
+                    />
+
+                    <button
+                        class="btn-caution flex-1"
+                        @click="resetFilters"
+                        v-text="`Reset Filters`"
+                    />
                 </div>
             </div>
 

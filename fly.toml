@@ -21,6 +21,8 @@ kill_timeout = "5s"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
   PRIMARY_REGION = "lhr"
   DB_CONNECTION="pgsql"
+  FILESYSTEM_DISK="r2"
+  CLOUDFLARE_R2_BUCKET="tourguide-testing"
 
 [build]
   dockerfile = "./fly.io/Dockerfile"

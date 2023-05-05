@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Asset;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -39,6 +40,9 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'util' => [
+                'asset_types' => Asset::TYPES,
+            ],
         ]);
     }
 }

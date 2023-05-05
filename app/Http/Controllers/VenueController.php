@@ -90,7 +90,7 @@ class VenueController extends Controller
      */
     public function show(Venue $venue, Request $request)
     {
-        $venue->load(['accessEquipment', 'dealTypes']);
+        $venue->load(['accessEquipment', 'dealTypes', 'assets']);
 
         return inertia(
             'Venue/Show',

@@ -39,11 +39,25 @@ const cardTitle = [
             </span>
         </span>
         <hr />
-        <h6 class="text-l font-bold">Description</h6>
-        <p class="font-normal" v-text="venue.description" />
-        <hr />
-        <h6 class="text-l font-bold">Notes</h6>
-        <p class="font-normal" v-text="venue.notes" />
+        <div class="grid grid-cols-2 gap-y-2">
+            <span>
+                <h6 class="text-l font-bold">Description</h6>
+                <p class="font-normal" v-text="venue.description" />
+            </span>
+            <a
+                v-if="venue.main_photo?.file_url"
+                class="w-full h-80 row-span-2 bg-no-repeat bg-center bg-contain"
+                :style="{
+                    'background-image': `url(${venue.main_photo.file_url})`,
+                }"
+                :href="venue.main_photo.file_url"
+                target="_blank"
+            />
+            <span>
+                <h6 class="text-l font-bold">Notes</h6>
+                <p class="font-normal" v-text="venue.notes" />
+            </span>
+        </div>
         <hr />
 
         <div class="grid grid-cols-2">

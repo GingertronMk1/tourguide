@@ -23,4 +23,11 @@ class TourGuideModel extends Model
     protected $casts = [
 
     ];
+
+    protected $appends = ['class_name'];
+
+    public function getClassNameAttribute(): string
+    {
+        return static::class;
+    }
 }

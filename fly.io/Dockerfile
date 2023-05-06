@@ -24,6 +24,9 @@ RUN composer install --optimize-autoloader \
     && cp .fly/entrypoint.sh /entrypoint \
     && chmod +x /entrypoint
 
+RUN touch .env \
+    && php artisan key:generate
+
 # Multi-stage build: Build static assets
 # This allows us to not include Node within the final container
 FROM node:${NODE_VERSION} as node_modules_go_brrr
@@ -59,7 +62,5 @@ RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
 
 
 EXPOSE 8080
-
-RUN alias ls="ls -la"
 
 ENTRYPOINT ["/entrypoint"]

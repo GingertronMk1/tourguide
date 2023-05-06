@@ -24,7 +24,7 @@ RUN composer install --optimize-autoloader \
     && cp .fly/entrypoint.sh /entrypoint \
     && chmod +x /entrypoint
 
-RUN cp .env.testing .env \
+RUN echo "APP_KEY=" >> .env \
     && php artisan key:generate
 
 # Multi-stage build: Build static assets

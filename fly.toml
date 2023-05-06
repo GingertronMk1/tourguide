@@ -15,7 +15,9 @@ kill_timeout = "5s"
   release_command = "./bin/fly_deploy"
 
 [env]
+  APP_NAME = "TourGuide"
   APP_ENV = "testing"
+  APP_DEBUG = "true"
   LOG_CHANNEL = "stderr"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"

@@ -28,7 +28,6 @@ return new class extends Migration
 
             // General details
             $table->unsignedBigInteger('number_of_dressing_rooms');
-            $table->unsignedBigInteger('maximum_seats');
             $table->unsignedBigInteger('maximum_stage_width');
             $table->unsignedBigInteger('maximum_stage_depth');
             $table->unsignedBigInteger('maximum_stage_height');
@@ -36,7 +35,13 @@ return new class extends Migration
             // Accessibility details
             $table->boolean('backstage_wheelchair_access');
             $table->boolean('rig_wheelchair_access');
+
+            // Seating details
+            $table->unsignedInteger('tiers');
+            $table->string('base_seating_configuration');
+            $table->unsignedBigInteger('maximum_seats');
             $table->unsignedBigInteger('maximum_wheelchair_seats');
+            $table->unsignedBigInteger('maximum_sellable_seats');
 
             // Technical details
             $table->string('tech_notes')->nullable();
@@ -48,10 +53,10 @@ return new class extends Migration
             $table->float('qlab_version')->nullable();
             $table->text('lx_notes')->nullable();
             $table->string('lx_desk');
-            $table->integer('number_of_booms');
+            $table->unsignedInteger('number_of_booms');
             $table->text('laundry_service');
             $table->text('green_room_information');
-            $table->integer('rig_minimum_safe_working_load');
+            $table->unsignedInteger('rig_minimum_safe_working_load');
             $table->text('rig_safe_working_load_notes');
 
             // Nerd shit

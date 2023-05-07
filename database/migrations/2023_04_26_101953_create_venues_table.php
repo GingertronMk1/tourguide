@@ -14,8 +14,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('venues', function (Blueprint $table) {
-            $table->id();
             // Basic venue details
+            $table->id();
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('notes')->nullable();
@@ -54,10 +54,7 @@ return new class extends Migration
             $table->integer('rig_minimum_safe_working_load');
             $table->text('rig_safe_working_load_notes');
 
-
-/**
-Tech
-*/
+            // Nerd shit
             $table->timestamps();
             $table->softDeletes();
         });

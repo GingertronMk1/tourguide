@@ -1,41 +1,30 @@
-# Tourguide
+# TourGuide
 
-## Requirements
+## What is?
 
+An app made in Laravel that acts as a repository for touring theatre venues.
+Designed as a proof-of-concept for an Arts Council grant.
 
-### Client Requirements
+### No but what does it do
 
-A system to store information about touring venues.
-This information must include, but is not limited to:
+Stores details about touring theatre venues, organised into their respective regions and areas.
+Has information about what types of deal are considered for venues, as well as any access equipment the venue has.
 
-- [ ] Name
-- [ ] Street Address
-- [ ] City
-- [ ] Region
-- [ ] Venue type - (Theatre, Arts Centre, Outdoor theatre, Community Venue, Library)
-- [ ] Pictures of venue (probably on a slider)
-- [ ] Link to tech specs
-- [ ] Maximum stage width (and height and depth)
-- [ ] Max. No. Seats
-- [ ] Max. No. Wheelchair seats
-- [ ] No. Dressing Rooms
-- [ ] Backstage wheelchair access: y/n
-- [ ] Access equipment (caption screen, audio enhancement equipment, quiet space, BSL position)
-- [ ] Types of deal considered (Hire, Split, Guarantee)
+## Where could it go from here?
 
-### My Requirements
+As of 2023-05-08 it is a means of storing, displaying, and modifying theatre details.
+Currently doesn't have the ability to:
 
-- [x] Audit logging
+- Create venues
+- Create access equipment
+- Edit access equipment
+- Create deal types
+- Edit deal types
 
+These are the basic CRUD features I would like it to have
 
-## Rough DB Diagram
+### What about the real pie-in-the-sky bollocks
 
-![Untitled](https://user-images.githubusercontent.com/6438175/234537777-9c4efe03-3d4d-4f12-a944-19423fde9e7d.png)
-
-## Credits
-
-- Idea by Joanne Blunt
-- Name by Jack Ellis
-- Implementation
-    - 90% the combined teams at Laravel and Tailwind
-    - 10% Jack Ellis
+Having discussed with a theatre technician friend of mine the idea of having multiple stages for a single venue.
+That'll require a real update to the database schema.
+Additional fields also will want considering - what's there presently is a very nonexhaustive list of things that a techie would find useful.

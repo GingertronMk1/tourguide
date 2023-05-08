@@ -34,27 +34,23 @@ class MakeResourcePages extends Command
             'Components' => ['EditForm'],
             'Pages' => ['Create', 'Edit', 'Index', 'Show'],
         ];
-        $bar = $this
-            ->output
-            ->createProgressBar(
-                count(
-                    array_merge(
-                        ...array_values(
-                            $filesToCreate
-                        )
-                    )
-                ));
         foreach ($filesToCreate as $dir => $fileNames) {
             $dirPath = resource_path("js/{$dir}/{$path}");
             foreach ($fileNames as $fileName) {
                 $filePath = "{$dirPath}/{$fileName}.vue";
-                if (! is_file($filePath)) {
-                    if (! is_dir($dirPath)) {
-                        mkdir($dirPath, recursive: true);
-                    }
-                    file_put_contents(
-                        $filePath,
-                        <<<'JS'
+                if (is_file($filePath)) {
+                    $this->info("{$filePath} already exists, skipping...");
+
+                    continue;
+                }
+
+                $this->info("Creating {$filePath}");
+                if (! is_dir($dirPath)) {
+                    mkdir($dirPath, recursive: true);
+                }
+                file_put_contents(
+                    $filePath,
+                    <<<'JS'
 <script setup>
 
 </script>
@@ -62,11 +58,8 @@ class MakeResourcePages extends Command
 </template>
 
 JS
-                    );
-                }
-                $bar->advance();
+                );
             }
         }
-        $bar->finish();
     }
 }

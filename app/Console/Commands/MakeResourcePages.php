@@ -26,29 +26,35 @@ class MakeResourcePages extends Command
     public function handle()
     {
         $path = $this->argument('resourceFolderName');
-        while (!is_string($path)) {
+        while (! is_string($path)) {
             $path = $this->ask('What is the name of the resource?');
         }
 
         $filesToCreate = [
-            "Components" => ["EditForm"],
-            "Pages" => ['Create', 'Edit', 'Index', 'Show']
+            'Components' => ['EditForm'],
+            'Pages' => ['Create', 'Edit', 'Index', 'Show'],
         ];
-        foreach($filesToCreate as $dir => $fileNames) {
+        $bar = $this
+            ->output
+            ->createProgressBar(
+                count(
+                    array_merge(
+                        ...array_values(
+                            $filesToCreate
+                        )
+                    )
+                ));
+        foreach ($filesToCreate as $dir => $fileNames) {
             $dirPath = resource_path("js/{$dir}/{$path}");
-            foreach($fileNames as $fileName) {
+            foreach ($fileNames as $fileName) {
                 $filePath = "{$dirPath}/{$fileName}.vue";
-                if (is_file($filePath)) {
-                    $this->info("{$filePath} already exists, skipping...");
-                    continue;
-                }
-                if(!is_dir($dirPath)) {
-                    mkdir($dirPath, recursive: true);
-                }
-                $this->info("Creating {$filePath}");
-                file_put_contents(
-                    $filePath,
-<<<JS
+                if (! is_file($filePath)) {
+                    if (! is_dir($dirPath)) {
+                        mkdir($dirPath, recursive: true);
+                    }
+                    file_put_contents(
+                        $filePath,
+                        <<<'JS'
 <script setup>
 
 </script>
@@ -56,8 +62,11 @@ class MakeResourcePages extends Command
 </template>
 
 JS
-                );
+                    );
+                }
+                $bar->advance();
             }
         }
+        $bar->finish();
     }
 }

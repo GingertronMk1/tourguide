@@ -37,11 +37,17 @@ class MakeResourcePages extends Command
         foreach($filesToCreate as $dir => $fileNames) {
             $dirPath = resource_path("js/{$dir}/{$path}");
             foreach($fileNames as $fileName) {
+                $filePath = "{$dirPath}/{$fileName}.vue";
+                if (is_file($filePath)) {
+                    $this->info("{$filePath} already exists, skipping...");
+                    continue;
+                }
                 if(!is_dir($dirPath)) {
                     mkdir($dirPath, recursive: true);
                 }
+                $this->info("Creating {$filePath}");
                 file_put_contents(
-                    "{$dirPath}/{$fileName}.vue",
+                    $filePath,
 <<<JS
 <script setup>
 

@@ -45,9 +45,6 @@ class MakeResourcePages extends Command
                 }
 
                 $this->info("Creating {$filePath}");
-                if (! is_dir($dirPath)) {
-                    mkdir($dirPath, recursive: true);
-                }
                 file_put_contents(
                     $filePath,
                     <<<'JS'

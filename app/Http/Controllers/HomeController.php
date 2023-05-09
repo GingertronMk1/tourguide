@@ -17,6 +17,7 @@ class HomeController extends Controller
         $venueCount = Venue::count();
         $regionCount = Region::count();
         $areaCount = Area::count();
+
         return inertia('Home', compact(
             'venueCount',
             'regionCount',

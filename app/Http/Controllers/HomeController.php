@@ -14,10 +14,14 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return inertia('Home', [
-            'venueCount' => Venue::count(),
-            'regionCount' => Region::count(),
-            'areaCount' => Area::count(),
-        ]);
+        $venueCount = Venue::count();
+        $regionCount = Region::count();
+        $areaCount = Area::count();
+
+        return inertia('Home', compact(
+            'venueCount',
+            'regionCount',
+            'areaCount'
+        ));
     }
 }

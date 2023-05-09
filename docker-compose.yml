@@ -11,8 +11,10 @@ services:
             - "./php/local.ini:/usr/local/etc/php/conf.d/local.ini"
         networks:
             - app-network
-        ports:
-            - "9003:9003"
+        environment:
+            XDEBUG_MODE: develop,coverage,debug,profile
+            XDEBUG_CONFIG: client_host=host.docker.internal client_port=9003
+
 
     node:
         platform: linux/x86_64

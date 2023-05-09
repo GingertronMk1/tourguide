@@ -52,6 +52,7 @@ class MakeResourcePages extends Command
 
 </script>
 <template>
+
 </template>
 
 JS

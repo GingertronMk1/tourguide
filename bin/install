@@ -2,18 +2,13 @@
 
 docker-compose up -d --build
 
-echo "NPM installing..."
-./bin/node/run npm install
-
-echo "Composer installing"
-./bin/app/composer install
+echo "Installing dependencies"
+./bin/install-deps
 
 if [ ! -f ".env" ]; then
     echo "Copying .env.local"
     cp .env.local .env
 fi
-
-
 
 echo "Generating app key"
 ./bin/app/artisan key:generate

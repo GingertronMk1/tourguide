@@ -20,7 +20,7 @@ jobs:
       # - run: ./bin/app/test
   deploy:
     name: Deploy app
-    # needs: lint
+    needs: lint
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
@@ -29,4 +29,24 @@ jobs:
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
+  dependabot:
+    runs-on: ubuntu-latest
+    if: (github.actor == 'dependabot[bot]') && (github.event_name == 'pull_request')
+    needs: lint
+    steps:
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1.1.1
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Leave a comment with the metadata extracted
+        run: gh pr comment "$PR_URL" --body "Type is ${{steps.metadata.outputs.update-type}}"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Enable auto-merge for Dependabot PRs
+        if: ${{steps.metadata.outputs.update-type == 'version-update:semver-patch'}}
+        run: gh pr review --approve "$PR_URL" && gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}

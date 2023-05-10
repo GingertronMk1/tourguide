@@ -56,10 +56,10 @@ COPY --from=node_modules_go_brrr /app/public /var/www/html/public-npm
 RUN rsync -ar /var/www/html/public-npm/ /var/www/html/public/ \
     && rm -rf /var/www/html/public-npm \
     && chown -R www-data:www-data /var/www/html/public \
-    && rsync -ar ./fly.io/nginx/ /etc/nginx/ \
     && touch /etc/nginx/.htpasswd \
     && echo "jack:$(openssl passwd -apr1 12345)" >> /etc/nginx/.htpasswd
 
+COPY ./docker/flyio/sites-available-default /etc/nginx/sites-available/default
 
 EXPOSE 8080
 

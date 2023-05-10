@@ -16,7 +16,7 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Leave a comment with the metadata extracted
-        run: gh pr comment "$PR_URL" --body "${{toJSON(steps.metadata.outputs)}}"
+        run: gh pr comment "$PR_URL" --body "Type is ${{steps.metadata.outputs.update-type}}"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}

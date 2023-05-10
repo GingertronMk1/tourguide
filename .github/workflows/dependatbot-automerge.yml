@@ -17,6 +17,9 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Leave a comment with the metadata extracted
         run: gh pr comment "$PR_URL" --body "${{steps.metadata.outputs}}"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Enable auto-merge for Dependabot PRs
         if: ${{steps.metadata.outputs.update-type == 'version-update:semver-patch'}}
         run: gh pr review --approve "$PR_URL" && gh pr merge --auto --merge "$PR_URL"

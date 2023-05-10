@@ -15,6 +15,8 @@ jobs:
         uses: dependabot/fetch-metadata@v1.1.1
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Leave a comment with the metadata extracted
+        run: gh pr comment "$PR_URL" --body "${{steps.metadata.outputs}}"
       - name: Enable auto-merge for Dependabot PRs
         if: ${{steps.metadata.outputs.update-type == 'version-update:semver-patch'}}
         run: gh pr review --approve "$PR_URL" && gh pr merge --auto --merge "$PR_URL"

@@ -74,7 +74,11 @@ function addFileToForm({
             <span v-text="asset.title" />
             <span v-text="asset.type" />
         </div>
-        <form class="card flex flex-col space-y-2" @submit.prevent="submit" v-if="addAssetOption">
+        <form
+            v-if="addAssetOption"
+            class="card flex flex-col space-y-2"
+            @submit.prevent="submit"
+        >
             <input id="file" type="file" name="file" @input="addFileToForm" />
             <input
                 id="title"

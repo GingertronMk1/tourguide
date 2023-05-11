@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AssetTypeEnum;
 use App\Http\Requests\StoreAssetRequest;
 use App\Http\Requests\UpdateAssetRequest;
 use App\Models\Asset;
-use App\Enums\AssetTypeEnum;
 
 class AssetController extends Controller
 {

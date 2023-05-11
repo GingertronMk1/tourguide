@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use RuntimeException;
 
 class Asset extends TourGuideModel
 {
@@ -52,35 +53,39 @@ class Asset extends TourGuideModel
 
     public function getFileURLAttribute(): string
     {
-        switch (config('filesystems.default')) {
-            case 's3':
-            case 'r2':
-                return Storage::temporaryUrl($this->path, now()->addMinutes(30));
-            default:
-                return Storage::url($this->path);
+        try {
+            return Storage::temporaryUrl($this->path, now()->addMinutes(30));
+        } catch (RuntimeException $e) {
+            return Storage::url($this->path);
         }
     }
 
     public function getThumbnailURLAttribute(): array
     {
-        switch ($this->mime_type) {
-            case 'image/jpeg':
-            case 'image/jpg':
-            case 'image/png':
-                return [
-                    'type' => 'url',
-                    'value' => $this->file_url,
-                ];
-            case 'application/pdf':
-                return [
-                    'type' => 'font-awesome',
-                    'value' => 'fa-solid fa-file-pdf',
-                ];
-            default:
-                return [
-                    'type' => 'font-awesome',
-                    'value' => 'fa-solid fa-file',
-                ];
+        [$base, $specific] = explode('/', $this->mime_type);
+
+        $type = 'font-awesome';
+        $value = 'fa-solid fa-file';
+
+        switch ($base) {
+
+            case 'image': // If it's an image we can probably just show it
+                $type = 'url';
+                $value = $this->file_url;
+                break;
+
+            case 'application': // If it's some other kind of file deal with that
+                switch ($specific) {
+                    case 'pdf': $value = 'fa-solid fa-pdf';
+                        break;
+                }
+                break;
+
+            case 'audio': // If it's an audio file, deal with that
+                $value = 'fa-solid fa-file-audio';
+                break;
         }
+
+        return compact('type', 'value');
     }
 }

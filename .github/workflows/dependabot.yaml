@@ -1,38 +1,14 @@
-name: Testing and Fly Deployment
+name: Testing
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
 
 jobs:
-  lint:
-    name: Lint code
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: touch database/database.sqlite
-      - run: ./bin/install
-      - run: ./bin/app/pint --test
-      - run: ./bin/node/npm lint
-      # - run: ./bin/app/test
-  deploy:
-    name: Deploy app
-    needs: lint
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   dependabot:
+    name: Auto-merge dependabot where appropriate
     runs-on: ubuntu-latest
-    if: (github.actor == 'dependabot[bot]') && (github.event_name == 'pull_request')
-    needs: lint
+    if: github.actor == 'dependabot[bot]'
     steps:
       - name: Dependabot metadata
         id: metadata

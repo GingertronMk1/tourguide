@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\AssetTypeEnum;
 use App\Models\Asset;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -41,7 +42,7 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'util' => [
-                'asset_types' => Asset::TYPES,
+                'asset_types' => AssetTypeEnum::cases(),
             ],
         ]);
     }

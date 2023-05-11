@@ -5,10 +5,10 @@ services:
         platform: linux/x86_64
         build:
             context: .
-            dockerfile: ./docker/app.dockerfile
+            dockerfile: ./docker/local/app.dockerfile
         volumes:
             - "./:/var/www"
-            - "./php/local.ini:/usr/local/etc/php/conf.d/local.ini"
+            - "./docker/local/php/local.ini:/usr/local/etc/php/conf.d/local.ini"
         networks:
             - app-network
         environment:
@@ -41,10 +41,10 @@ services:
         platform: linux/x86_64
         build:
             context: .
-            dockerfile: ./docker/nginx.dockerfile
+            dockerfile: ./docker/local/nginx.dockerfile
         volumes:
             - "./:/var/www:delegated"
-            - "./nginx/conf.d/:/etc/nginx/conf.d/:delegated"
+            - "./docker/local/nginx/conf.d/:/etc/nginx/conf.d/:delegated"
         depends_on:
             - "app"
         ports:

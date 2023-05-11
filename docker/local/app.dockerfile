@@ -13,5 +13,3 @@ RUN apk --update --no-cache add \
 WORKDIR /var/www
 
 COPY . .
-
-RUN composer install

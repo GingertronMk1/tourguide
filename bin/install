@@ -22,4 +22,4 @@ echo "Running migrations and seeding database"
 echo "Linking storage"
 ./bin/app/artisan storage:link
 
-echo "Done!"
+echo "Done! Use command ./bin/set_host_file to update your hosts file and access the site at tourguide.local"

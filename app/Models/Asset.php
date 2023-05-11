@@ -76,7 +76,7 @@ class Asset extends TourGuideModel
 
             case 'application': // If it's some other kind of file deal with that
                 switch ($specific) {
-                    case 'pdf': $value = 'fa-solid fa-pdf';
+                    case 'pdf': $value = 'fa-solid fa-file-pdf';
                         break;
                 }
                 break;

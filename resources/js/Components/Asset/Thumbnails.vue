@@ -25,7 +25,7 @@ const assetTypes = usePage()?.props?.util?.asset_types ?? [];
 const form = useForm({
     title: "",
     file: null,
-    type: Object.keys(assetTypes)[0],
+    type: assetTypes[0],
     assetable_type: props.assetableClass,
     assetable_id: props.assetableId,
     redirect: route(route().current(), route().params),

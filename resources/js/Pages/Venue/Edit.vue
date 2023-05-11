@@ -1,6 +1,7 @@
 <script setup>
 import { useForm, Head } from "@inertiajs/vue3";
 import { ref } from "vue";
+import AssetThumbnails from "@/Components/Asset/Thumbnails.vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
 
 const props = defineProps({
@@ -81,7 +82,7 @@ function saveForm() {
 }
 </script>
 <template>
-    <BaseLayout>
+    <BaseLayout body-classes="space-y-3">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Edit {{ venue.name }}
@@ -340,5 +341,11 @@ function saveForm() {
                 </div>
             </div>
         </form>
+        <AssetThumbnails
+            :assetable-class="venue.class_name"
+            :assetable-id="venue.id"
+            :existing-assets="venue.assets"
+            :add-asset-option="true"
+        />
     </BaseLayout>
 </template>

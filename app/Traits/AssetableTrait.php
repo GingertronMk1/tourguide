@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Enums\AssetTypeEnum;
 use App\Models\Asset;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -24,7 +25,7 @@ trait AssetableTrait
     {
         return $this
             ->assets()
-            ->where('type', Asset::TYPE_MAIN_PHOTO)
+            ->where('type', AssetTypeEnum::MAIN_PHOTO)
             ->first();
     }
 }

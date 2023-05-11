@@ -14,6 +14,10 @@ const props = defineProps({
         type: Array,
         default: () => [],
     },
+    addAssetOption: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const assetTypes = usePage()?.props?.util?.asset_types ?? [];
@@ -68,9 +72,9 @@ function addFileToForm({
                 />
             </a>
             <span v-text="asset.title" />
-            <span v-text="$page.props.util.asset_types[asset.type]" />
+            <span v-text="asset.type" />
         </div>
-        <form class="card flex flex-col space-y-2" @submit.prevent="submit">
+        <form class="card flex flex-col space-y-2" @submit.prevent="submit" v-if="addAssetOption">
             <input id="file" type="file" name="file" @input="addFileToForm" />
             <input
                 id="title"
@@ -83,7 +87,7 @@ function addFileToForm({
                 <option
                     v-for="(type, index) in $page.props.util.asset_types"
                     :key="index"
-                    :value="index"
+                    :value="type"
                     v-text="type"
                 />
             </select>

@@ -9,8 +9,12 @@ const props = defineProps({
     },
 });
 
-let bodyClasses = [
-    "p-4 bg-gray-200 flex flex-col flex-1",
+let bodyClassesProcessed = [
+    "p-4",
+    "bg-gray-200",
+    "flex",
+    "flex-col",
+    "flex-1",
     props.bodyClasses,
 ].join(" ");
 
@@ -63,7 +67,7 @@ const openedMenu = ref(false);
                 </Link>
             </div>
         </header>
-        <div :class="bodyClasses">
+        <div :class="bodyClassesProcessed">
             <slot />
         </div>
     </div>

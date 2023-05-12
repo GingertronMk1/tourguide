@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $maximum_wheelchair_seats
  * @property int $number_of_dressing_rooms
  * @property bool $backstage_wheelchair_access
+ * @property AccessEquipment[] $accessEquipment
+ * @property DealType[] $dealTypes
  */
 class Venue extends TourGuideModel
 {

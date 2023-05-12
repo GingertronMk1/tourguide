@@ -10,7 +10,7 @@
     <p>{{ $venue->notes }}</p>
 
     <h2>Some Statistics</h2>
-    <table>
+    <table border="1" cellspacing="0" cellpadding="10">
         <tr>
             <td>Stage Width</td>
             <td>{{ $venue->maximum_stage_width }}mm</td>
@@ -40,6 +40,39 @@
             <td>{{$venue->backstage_wheelchair_access ? 'Yes' : 'No'}}</td>
         </tr>
     </table>
+
+    <h2>Access Equipment</h2>
+    @if(count($venue->accessEquipment) > 0)
+    <ul>
+        @foreach($venue->accessEquipment as $access)
+        <li>{{ $access->name }}: {{ $access->pivot->notes ?? 'No Notes'}}</li>
+        @endforeach
+    </ul>
+    @else
+    <p>This venue has no Access Equipment</p>
+    @endif
+
+    <h2>Deal Types</h2>
+    @if(count($venue->dealTypes) > 0)
+    <ul>
+        @foreach($venue->dealTypes as $dealType)
+        <li>{{ $dealType->name }}: {{ $dealType->pivot->notes ?? 'No Notes'}}</li>
+        @endforeach
+    </ul>
+    @else
+    <p>This venue has no Deal Types available</p>
+    @endif
 </body>
 
+<style>
+    html {
+        font-family: sans-serif;
+    }
+    table {
+        width: 100%;
+    }
+    td:first-of-type {
+        width: 75%;
+    }
+</style>
 </html>

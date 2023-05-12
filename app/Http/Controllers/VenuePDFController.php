@@ -13,9 +13,12 @@ class VenuePDFController extends Controller
      */
     public function __invoke(Venue $venue)
     {
-        // instantiate and use the dompdf class
+        // Generate view
+        $view = view('pdfs.venue', compact('venue'));
+
+        // Instantiate and use the dompdf class
         $dompdf = new Dompdf();
-        $dompdf->loadHtml(view('pdfs.venue', compact('venue')));
+        $dompdf->loadHtml($view);
 
         // (Optional) Setup the paper size and orientation
         $dompdf->setPaper('A4');
@@ -24,6 +27,6 @@ class VenuePDFController extends Controller
         $dompdf->render();
 
         // Output the generated PDF to Browser
-        return $dompdf->stream("{$venue->name}.pdf");
+        return $dompdf->stream("{$venue->name}.pdf", ['Attachment' => 0]);
     }
 }

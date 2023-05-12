@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-/** @property string $name
+/**
+ * @property int $id
+ * @property string $name
  * @property string $description
  * @property string $notes
  * @property string $street_address

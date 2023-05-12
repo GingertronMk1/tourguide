@@ -8,4 +8,17 @@ enum AssetTypeEnum: string
     case ADDITIONAL_PHOTO = 'Additional Photo';
     case TECHNICAL_DOCUMENT = 'Technical Document';
     case OTHER_DOCUMENT = 'Other Document';
+    case DETAILS_DOCUMENT = 'Details Document';
+
+    private const NON_USER_TYPES = [
+        self::DETAILS_DOCUMENT
+    ];
+
+    public static function getPropAssetTypes(): array
+    {
+
+        return array_filter(static::cases(), function(AssetTypeEnum $assetType) {
+            return !in_array($assetType, static::NON_USER_TYPES);
+        });
+    }
 }

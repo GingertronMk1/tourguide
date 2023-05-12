@@ -42,7 +42,7 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
             'util' => [
-                'asset_types' => AssetTypeEnum::cases(),
+                'asset_types' => AssetTypeEnum::getPropAssetTypes(),
             ],
         ]);
     }

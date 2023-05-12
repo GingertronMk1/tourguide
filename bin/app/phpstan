@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
-docker-compose exec -T app ./vendor/bin/phpstan --configuration=./phpstan.neon --memory-limit=4G --error-format=prettyJson "$@" | tee "phpstan-output.json"
+docker-compose exec -T app \
+    ./vendor/bin/phpstan \
+    --configuration=./phpstan.neon \
+    --memory-limit=4G \
+    --error-format=prettyJson \
+    "$@" \
+    | tee "phpstan-output.json"

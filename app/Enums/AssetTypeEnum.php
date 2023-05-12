@@ -12,18 +12,18 @@ enum AssetTypeEnum: string
 
     public const PHOTO_TYPES = [
         self::MAIN_PHOTO,
-        self::ADDITIONAL_PHOTO
+        self::ADDITIONAL_PHOTO,
     ];
 
     private const NON_USER_TYPES = [
-        self::DETAILS_DOCUMENT
+        self::DETAILS_DOCUMENT,
     ];
 
     public static function getPropAssetTypes(): array
     {
         return array_filter(
             static::cases(),
-            fn (AssetTypeEnum $assetType) => !in_array($assetType, static::NON_USER_TYPES)
+            fn (AssetTypeEnum $assetType) => ! in_array($assetType, static::NON_USER_TYPES)
         );
     }
 }

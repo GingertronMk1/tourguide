@@ -31,8 +31,6 @@ class AssetController extends Controller
     public function store(StoreAssetRequest $request)
     {
         [
-            'title' => $title,
-            'type' => $type,
             'assetable_type' => $assetableType,
             'assetable_id' => $assetableId,
             'redirect' => $redirect,
@@ -40,11 +38,7 @@ class AssetController extends Controller
         $file = $request->file('file');
         $path = $file->store('asset');
         if ($path) {
-            $asset = new Asset;
-            $asset->title = $title;
-            $asset->assetable_type = $assetableType;
-            $asset->assetable_id = $assetableId;
-            $asset->type = $type;
+            $asset = new Asset($request->input());
             $asset->mime_type = $file->getMimeType();
             $asset->path = $path;
             if ($asset->save()) {

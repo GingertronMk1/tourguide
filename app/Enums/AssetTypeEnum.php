@@ -21,8 +21,9 @@ enum AssetTypeEnum: string
 
     public static function getPropAssetTypes(): array
     {
-        return array_filter(static::cases(), function(AssetTypeEnum $assetType) {
-            return !in_array($assetType, static::NON_USER_TYPES);
-        });
+        return array_filter(
+            static::cases(),
+            fn (AssetTypeEnum $assetType) => !in_array($assetType, static::NON_USER_TYPES)
+        );
     }
 }

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 
+<head>
+    <title>{{ $pdfTitle }}</title>
+</head>
+
 <body>
     <h1>{{ $venue->name }}</h1>
 

@@ -50,7 +50,7 @@ foreach ($resourceControllers as $resource => $controller) {
     Route::middleware('auth')->resource($resource, $controller)->except($readOnlyMethods);
 }
 
-Route::get('/venue/{venue}/pdf', VenuePDFController::class)->name('venue-pdf');
+Route::get('/venue/{venue}/pdf', VenuePDFController::class)->name('venue.pdf');
 
 Route::middleware('auth')->group(function () {
     Route::resource('activity-log', ActivityLogController::class)->only('index');

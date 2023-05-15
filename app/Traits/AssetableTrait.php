@@ -21,6 +21,13 @@ trait AssetableTrait
             ->orderBy('created_at', 'desc');
     }
 
+    public function photoAssets(): MorphMany
+    {
+        return $this
+            ->assets()
+            ->whereIn('type', AssetTypeEnum::PHOTO_TYPES);
+    }
+
     public function getMainPhotoAttribute(): ?Asset
     {
         return $this

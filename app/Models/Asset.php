@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
-use RuntimeException;
 
 class Asset extends TourGuideModel
 {
@@ -47,7 +46,7 @@ class Asset extends TourGuideModel
 
     public function getFileURLAttribute(): string
     {
-        switch(config('filesystems.default')) {
+        switch (config('filesystems.default')) {
             case 's3':
             case 'r2':
                 return Storage::temporaryUrl($this->path, now()->addMinutes(30));
@@ -62,6 +61,7 @@ class Asset extends TourGuideModel
         try {
             $image = Storage::get($this->path) ?? '';
             $image = base64_encode($image);
+
             return "{$prefix}{$image}";
         } catch (\Exception) {
             return $prefix;

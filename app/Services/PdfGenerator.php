@@ -37,8 +37,7 @@ class PdfGenerator
         ?array $options = [],
         ?string $fileName = 'PDF.pdf',
         ?array $headers = []
-    ): Response
-    {
+    ): Response {
         $templateVars['fileName'] = $fileName;
         $createdPdf = $this->createPdf(
             $template,
@@ -48,6 +47,7 @@ class PdfGenerator
         );
         $headers['Content-Type'] = 'application/pdf';
         $headers['Content-Disposition'] = "inline; filename=\"{$fileName}\"";
+
         return response()->make($createdPdf, 200, $headers);
     }
 }

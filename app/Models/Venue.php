@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $maximum_wheelchair_seats
  * @property int $number_of_dressing_rooms
  * @property bool $backstage_wheelchair_access
+ * @property Region $region
+ * @property Area $area
  * @property AccessEquipment[] $accessEquipment
  * @property DealType[] $dealTypes
  */
@@ -66,6 +68,11 @@ class Venue extends TourGuideModel
     public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);
+    }
+
+    public function area(): BelongsTo
+    {
+        return $this->region?->area();
     }
 
     public function venueType(): BelongsTo

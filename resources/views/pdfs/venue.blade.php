@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 
 <head>
-    <title>{{ $pdfTitle }}</title>
+    <title>
+        {{ $fileName }}
+    </title>
 </head>
 
 <body>
     <h1>{{ $venue->name }}</h1>
 
     <h2>Some Statistics</h2>
-    <table border="1" cellspacing="0" cellpadding="10" id="details-table">
+    <table
+        border="1"
+        cellspacing="0"
+        cellpadding="10"
+        id="details-table"
+    >
         <tr>
             <td>Area</td>
             <td>{{ $venue->area?->name ?? 'No Area' }}</td>

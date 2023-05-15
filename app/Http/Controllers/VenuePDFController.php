@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Venue;
 use App\Services\PdfGenerator;
+use Illuminate\Http\Response;
 
 class VenuePDFController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Venue $venue, PdfGenerator $pdf)
+    public function __invoke(Venue $venue, PdfGenerator $pdf): void
     {
         // Generate view
-        $generated = $pdf->createPdf(
+        $pdf->createPdf(
             'pdfs.venue',
             compact('venue'),
             false,
@@ -21,7 +22,5 @@ class VenuePDFController extends Controller
             "{$venue->name}.pdf",
             ['isRemoteEnabled' => true]
         );
-
-        return response($generated);
     }
 }

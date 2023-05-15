@@ -22,13 +22,11 @@ class PdfGenerator
         $pdfOptions = $this->pdf->getOptions();
         $pdfOptions->set($options);
         $this->pdf->setOptions($pdfOptions);
-
-        $templateVars['pdfTitle'] = $fileName;
+        $templateVars['fileName'] = $fileName;
         $view = view($template, $templateVars)->render();
         $this->pdf->loadHtml($view);
         $this->pdf->setPaper($paperSize);
         $this->pdf->render();
-        $this->pdf->addInfo('title', $fileName);
 
         return $this->pdf->stream(
             $fileName,

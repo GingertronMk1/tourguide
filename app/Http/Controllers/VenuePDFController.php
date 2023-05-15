@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Venue;
 use App\Services\PdfGenerator;
-use Illuminate\Http\Response;
 
 class VenuePDFController extends Controller
 {

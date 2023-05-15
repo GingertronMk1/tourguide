@@ -10,6 +10,27 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ * @property string $notes
+ * @property string $street_address
+ * @property string $city
+ * @property int $region_id
+ * @property int $venue_type_id
+ * @property int $maximum_stage_width
+ * @property int $maximum_stage_depth
+ * @property int $maximum_stage_height
+ * @property int $maximum_seats
+ * @property int $maximum_wheelchair_seats
+ * @property int $number_of_dressing_rooms
+ * @property bool $backstage_wheelchair_access
+ * @property Region $region
+ * @property Area $area
+ * @property AccessEquipment[] $accessEquipment
+ * @property DealType[] $dealTypes
+ */
 class Venue extends TourGuideModel
 {
     public const PER_PAGE = 25;
@@ -47,6 +68,11 @@ class Venue extends TourGuideModel
     public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);
+    }
+
+    public function area(): BelongsTo
+    {
+        return $this->region?->area();
     }
 
     public function venueType(): BelongsTo

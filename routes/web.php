@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\VenueController;
+use App\Http\Controllers\VenuePDFController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +49,8 @@ foreach ($resourceControllers as $resource => $controller) {
     Route::resource($resource, $controller)->only($readOnlyMethods);
     Route::middleware('auth')->resource($resource, $controller)->except($readOnlyMethods);
 }
+
+Route::get('/venue/{venue}/pdf', VenuePDFController::class)->name('venue.pdf');
 
 Route::middleware('auth')->group(function () {
     Route::resource('activity-log', ActivityLogController::class)->only('index');

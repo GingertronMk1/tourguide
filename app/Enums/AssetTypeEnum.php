@@ -10,15 +10,20 @@ enum AssetTypeEnum: string
     case OTHER_DOCUMENT = 'Other Document';
     case DETAILS_DOCUMENT = 'Details Document';
 
+    public const PHOTO_TYPES = [
+        self::MAIN_PHOTO,
+        self::ADDITIONAL_PHOTO,
+    ];
+
     private const NON_USER_TYPES = [
-        self::DETAILS_DOCUMENT
+        self::DETAILS_DOCUMENT,
     ];
 
     public static function getPropAssetTypes(): array
     {
-
-        return array_filter(static::cases(), function(AssetTypeEnum $assetType) {
-            return !in_array($assetType, static::NON_USER_TYPES);
-        });
+        return array_filter(
+            static::cases(),
+            fn (AssetTypeEnum $assetType) => ! in_array($assetType, static::NON_USER_TYPES)
+        );
     }
 }

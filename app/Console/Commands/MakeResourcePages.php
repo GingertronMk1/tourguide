@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use ErrorException;
 use Illuminate\Console\Command;
 
 class MakeResourcePages extends Command
@@ -42,6 +43,12 @@ class MakeResourcePages extends Command
                     $this->info("{$filePath} already exists, skipping...");
 
                     continue;
+                }
+                $this->info("Ensuring {$dirPath} exists");
+                try {
+                    mkdir($dirPath, recursive: true);
+                } catch (ErrorException $e) {
+                    $this->error("Failed to create {$dirPath}: {$e->getMessage()}");
                 }
 
                 $this->info("Creating {$filePath}");

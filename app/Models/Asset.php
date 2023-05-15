@@ -51,7 +51,7 @@ class Asset extends TourGuideModel
             case 'r2':
                 return Storage::temporaryUrl($this->path, now()->addMinutes(30));
             default:
-                return public_path($this->path);
+                return Storage::url($this->path);
         }
     }
 

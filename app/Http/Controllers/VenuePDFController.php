@@ -18,7 +18,8 @@ class VenuePDFController extends Controller
             compact('venue'),
             false,
             'A4',
-            "{$venue->name}.pdf"
+            "{$venue->name}.pdf",
+            ['isRemoteEnabled' => true]
         );
 
         return response($generated);

@@ -5,25 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Venue;
 use App\Services\PdfGenerator;
 use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class VenuePDFController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Venue $venue, PdfGenerator $pdf): Response
+    public function __invoke(Venue $venue, PdfGenerator $pdf): Response|View
     {
         $fileName = "{$venue->name}.pdf";
-        $createdPdf = $pdf->createPdf(
+        return $pdf->getPdfAsResponse(
             'pdfs.venue',
-            compact('venue'),
+            compact('fileName', 'venue'),
             'A4',
-            ['isRemoteEnabled' => true]
+            ['isRemoteEnabled' => true],
+            $fileName
         );
 
-        return response()->make($createdPdf, 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => "inline; filename=\"{$fileName}\"",
-        ]);
     }
 }

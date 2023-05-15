@@ -47,11 +47,26 @@ class Asset extends TourGuideModel
 
     public function getFileURLAttribute(): string
     {
-        try {
-            return Storage::temporaryUrl($this->path, now()->addMinutes(30));
-        } catch (RuntimeException $e) {
-            return Storage::url($this->path);
+        switch(config('filesystems.default')) {
+            case 's3':
+            case 'r2':
+                return Storage::temporaryUrl($this->path, now()->addMinutes(30));
+            default:
+                return public_path($this->path);
         }
+    }
+
+    public function getFileAsBase64Attribute(): string
+    {
+        $prefix = "data:{$this->mime_type};base64,";
+        try {
+            $image = Storage::get($this->path) ?? '';
+            $image = base64_encode($image);
+            return "{$prefix}{$image}";
+        } catch (\Exception) {
+            return $prefix;
+        }
+
     }
 
     public function getThumbnailURLAttribute(): array

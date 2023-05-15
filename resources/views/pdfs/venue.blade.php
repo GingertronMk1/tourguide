@@ -104,7 +104,12 @@
             <h4 class="photo-header">
                 {{ $photoAsset->title }} | {{ $photoAsset->type }}
             </h4>
-            <img src="{{ $photoAsset->fileURL }}" alt="{{ $photoAsset->title }}" width="600" />
+            <img
+                src="{{ $photoAsset->fileAsBase64 }}"
+                width="600"
+            />
+            <br />
+            <a href="{{ $photoAsset->fileAsBase64 }}" target="_blank">Link</a>
         </div>
     @empty
         <h2>No photos for this venue</h2>

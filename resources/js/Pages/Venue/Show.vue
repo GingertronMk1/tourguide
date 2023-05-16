@@ -1,5 +1,5 @@
 <script setup>
-import VenueCard
+import VenueCard from "@/Components/Venue/VenueCard.vue";
 import AssetThumbnails from "@/Components/Asset/Thumbnails.vue";
 import { Head, Link } from "@inertiajs/vue3";
 import { computed } from "vue";

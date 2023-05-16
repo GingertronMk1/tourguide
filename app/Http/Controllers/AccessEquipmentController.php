@@ -13,7 +13,7 @@ class AccessEquipmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('AccessEquipment/Index', ['accessEquipment' => AccessEquipment::all()]);
     }
 
     /**
@@ -21,7 +21,7 @@ class AccessEquipmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('AccessEquipment/Create');
     }
 
     /**
@@ -37,7 +37,7 @@ class AccessEquipmentController extends Controller
      */
     public function show(AccessEquipment $accessEquipment)
     {
-        //
+        return view('AccessEquipment/Show', compact('accessEquipment'));
     }
 
     /**
@@ -45,7 +45,7 @@ class AccessEquipmentController extends Controller
      */
     public function edit(AccessEquipment $accessEquipment)
     {
-        //
+        return view('AccessEquipment/Edit', compact('accessEquipment'));
     }
 
     /**

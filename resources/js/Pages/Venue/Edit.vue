@@ -1,7 +1,7 @@
 <script setup>
 import { useForm, Head } from "@inertiajs/vue3";
 import { ref } from "vue";
-import AssetThumbnails
+import AssetThumbnails from "@/Components/Asset/Thumbnails.vue";
 
 const props = defineProps({
     venue: {

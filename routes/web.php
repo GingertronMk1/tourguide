@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessEquipmentController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AreaRegionController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\VenueController;
 use App\Http\Controllers\VenuePDFController;
+use App\Http\Controllers\VenueTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +45,8 @@ $resourceControllers = [
     'region' => RegionController::class,
     'area' => AreaController::class,
     'area.region' => AreaRegionController::class,
+    'venue-type' => VenueTypeController::class,
+    'access-equipment' => AccessEquipmentController::class,
 ];
 
 foreach ($resourceControllers as $resource => $controller) {

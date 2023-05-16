@@ -1,5 +1,5 @@
 <script setup>
-import VenueCard
+import VenueCard from "@/Components/Venue/VenueCard.vue";
 import { Head, router } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
 

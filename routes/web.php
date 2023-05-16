@@ -5,6 +5,7 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AreaRegionController;
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\DealTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegionController;
@@ -41,12 +42,13 @@ Route::middleware('auth')->group(function () {
 $readOnlyMethods = ['index', 'show'];
 
 $resourceControllers = [
-    'venue' => VenueController::class,
-    'region' => RegionController::class,
+    'access-equipment' => AccessEquipmentController::class,
     'area' => AreaController::class,
     'area.region' => AreaRegionController::class,
+    'deal-type' => DealTypeController::class,
+    'region' => RegionController::class,
     'venue-type' => VenueTypeController::class,
-    'access-equipment' => AccessEquipmentController::class,
+    'venue' => VenueController::class,
 ];
 
 foreach ($resourceControllers as $resource => $controller) {

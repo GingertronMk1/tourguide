@@ -1,4 +1,4 @@
-name: Testing
+name: Auto-merge Dependabot PRs
 on:
   pull_request:
     branches:
@@ -25,7 +25,9 @@ jobs:
           PR_URL: ${{github.event.pull_request.html_url}}
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Enable auto-merge for Dependabot PRs
-        if: ${{steps.metadata.outputs.update-type == 'version-update:semver-patch'}}
+        if: |
+          endsWith(steps.metadata.outputs.update-type, 'semver-patch') ||
+          endsWith(steps.metadata.outputs.update-type, 'semver-minor')
         run: gh pr review --approve "$PR_URL" && gh pr merge --auto --merge "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}

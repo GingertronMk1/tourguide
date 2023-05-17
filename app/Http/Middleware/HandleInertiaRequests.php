@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
             },
             'util' => [
                 'asset_types' => AssetTypeEnum::getPropAssetTypes(),
-                'env' => config('app.env')
+                'env' => config('app.env'),
             ],
         ]);
     }

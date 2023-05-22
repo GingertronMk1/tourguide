@@ -1,6 +1,4 @@
 <script setup>
-import InputError from "@/Components/InputError.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
 
 defineProps({

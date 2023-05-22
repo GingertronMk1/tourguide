@@ -1,7 +1,5 @@
 <script setup>
 import BaseLayout from "@/Layouts/BaseLayout.vue";
-import InputError from "@/Components/InputError.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({

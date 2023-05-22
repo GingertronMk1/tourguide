@@ -54,15 +54,15 @@ class VenueController extends Controller
         }
 
         $minMaxValues = [
-            'seats' => "maximum_seats",
-            'wheelchairSeats' => "maximum_wheelchair_seats",
-            'maximumStageWidth' => "maximum_stage_width",
-            'maximumStageHeight' => "maximum_stage_height",
-            'maximumStageDepth' => "maximum_stage_depth",
-            'dressingRooms' => "number_of_dressing_rooms",
+            'seats' => 'maximum_seats',
+            'wheelchairSeats' => 'maximum_wheelchair_seats',
+            'maximumStageWidth' => 'maximum_stage_width',
+            'maximumStageHeight' => 'maximum_stage_height',
+            'maximumStageDepth' => 'maximum_stage_depth',
+            'dressingRooms' => 'number_of_dressing_rooms',
         ];
 
-        foreach($minMaxValues as $key => $col) {
+        foreach ($minMaxValues as $key => $col) {
             $keyMin = "{$key}Min";
             $keyMax = "{$key}Max";
             if (isset($query[$keyMin])) {
@@ -73,7 +73,6 @@ class VenueController extends Controller
             }
         }
 
-
         $venuePaginator = $venues->paginate(Venue::PER_PAGE);
 
         return inertia(
@@ -82,12 +81,13 @@ class VenueController extends Controller
                 'venuePaginator' => $venuePaginator,
                 'query' => $query,
                 'minMaxValues' => array_map(
-                    function(string $str) {
+                    function (string $str) {
                         $str = Str::title($str);
+
                         return Str::replace('_', ' ', $str);
                     },
                     $minMaxValues
-                    )
+                ),
             ])
         );
     }

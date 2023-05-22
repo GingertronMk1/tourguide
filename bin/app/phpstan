@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-docker-compose exec -T app \
-    ./vendor/bin/phpstan \
+./bin/app/phpvendor phpstan \
     --configuration=./phpstan.neon \
     --memory-limit=4G \
     --error-format=prettyJson \

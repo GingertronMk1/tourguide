@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if sh -c ": >/dev/tty" >/dev/null 2>/dev/null; then
+    # /dev/tty is available and usable
+    docker-compose exec "$@"
+else
+    # /dev/tty is not available
+    docker-compose exec -T "$@"
+fi

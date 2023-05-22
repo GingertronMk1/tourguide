@@ -19,7 +19,7 @@ echo "Building assets"
 ./bin/node/npm build
 
 echo "Running migrations and seeding database"
-./bin/app/artisan migrate:fresh --seed
+./bin/app/artisan migrate --seed
 
 echo "Linking storage"
 ./bin/app/artisan storage:link

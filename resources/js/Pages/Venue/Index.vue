@@ -102,36 +102,31 @@ function incrementPage() {
         <Head title="Venues" />
 
         <div class="row">
-            <!--
-                Filtering by access and deal types
-            -->
             <div id="filters" class="col-4">
-                <div class="card flex flex-row justify-between">
-                    <span>
-                        <template v-if="venuePaginator.current_page > 1">
-                            <i class="fa-solid fa-chevron-left mr-2" />
-                            <button @click="decrementPage">Previous</button>
-                        </template>
+                <!-- Forward and back buttons -->
+                <div class="grid text-center" style="--bs-columns: 3">
+                    <span
+                        class="btn btn-primary {{ venuePaginator.current_page <= 1 ? 'disabled' : '' }}"
+                        @click="decrementPage"
+                    >
+                        <i class="fa-solid fa-chevron-left mr-2" />
                     </span>
                     <span
                         v-text="
-                            `You are on page ${venuePaginator.current_page} of ${venuePaginator.last_page}`
+                            `${venuePaginator.current_page}/${venuePaginator.last_page}`
                         "
                     />
-                    <span>
-                        <template
-                            v-if="
-                                venuePaginator.current_page <
-                                venuePaginator.last_page
-                            "
-                        >
-                            <button @click="incrementPage">Next</button>
-                            <i class="fa-solid fa-chevron-right ml-2" />
-                        </template>
+                    <span
+                        class="btn btn-primary {{ venuePaginator.current_page >= venuePaginator.last_page ? 'disabled' : '' }}"
+                        @click="incrementPage"
+                    >
+                        <i class="fa-solid fa-chevron-right ml-2" />
                     </span>
                 </div>
-                <div class="form-group">
-                    <div class="form-label">Deal Types</div>
+
+                <!-- Deal Types -->
+                <div class="col mb-3">
+                    <label class="form-label">Deal Types</label>
                     <select
                         id="dealTypes"
                         v-model="query.dealTypes"
@@ -147,8 +142,9 @@ function incrementPage() {
                         />
                     </select>
                 </div>
-                <div class="form-group">
-                    <div class="form-label">Access Equipment</div>
+                <!-- Access Equipment -->
+                <div class="col mb-3">
+                    <label class="form-label">Access Equipment</label>
                     <select
                         id="accessEquipment"
                         v-model="query.accessEquipment"
@@ -164,8 +160,9 @@ function incrementPage() {
                         />
                     </select>
                 </div>
-                <div class="form-group">
-                    <div class="form-label">Regions</div>
+                <!-- Region -->
+                <div class="col mb-3">
+                    <label class="form-label">Regions</label>
                     <select
                         id="regions"
                         v-model="query.regions"
@@ -185,8 +182,10 @@ function incrementPage() {
                         </template>
                     </select>
                 </div>
-                <div class="form-group">
-                    <div class="form-label">Venue Types</div>
+
+                <!-- Venue Type -->
+                <div class="col mb-3">
+                    <label class="form-label">Venue Types</label>
                     <select
                         id="venueTypes"
                         v-model="query.venueTypes"
@@ -202,10 +201,11 @@ function incrementPage() {
                         />
                     </select>
                 </div>
-                <div class="form-group">
-                    <div class="font-bold">Seats</div>
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div class="flex flex-col">
+
+                <!-- Seats min/max -->
+                <div class="col mb-3">
+                    <div class="row">
+                        <div class="col-6">
                             <span>Minimum</span>
 
                             <input
@@ -215,9 +215,10 @@ function incrementPage() {
                                 name="seatsMin"
                                 min="0"
                                 :max="query.seatsMax"
+                                class="form-control"
                             />
                         </div>
-                        <div class="flex flex-col">
+                        <div class="col-6">
                             <span>Maximum</span>
 
                             <input
@@ -227,23 +228,31 @@ function incrementPage() {
                                 name="seatsMax"
                                 :min="query.seatsMin"
                                 max="10000"
+                                class="form-control"
                             />
                         </div>
                     </div>
                 </div>
 
-                <div class="flex flex-row space-x-2">
-                    <button
-                        class="btn-primary flex-1"
-                        @click="applyFilters"
-                        v-text="`Apply Filters`"
-                    />
+                <!-- Buttons -->
+                <div class="col mb-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <button
+                                class="btn btn-primary"
+                                @click="applyFilters"
+                                v-text="`Apply Filters`"
+                            />
+                        </div>
 
-                    <button
-                        class="btn-caution flex-1"
-                        @click="resetFilters"
-                        v-text="`Reset Filters`"
-                    />
+                        <div class="col-6">
+                            <button
+                                class="btn btn-danger"
+                                @click="resetFilters"
+                                v-text="`Reset Filters`"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
 

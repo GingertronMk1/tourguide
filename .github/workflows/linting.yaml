@@ -16,4 +16,5 @@ jobs:
       - run: ./bin/install
       - run: ./bin/app/pint --test
       - run: ./bin/node/npm lint
+      - run: ./bin/app/artisan route:list -vvv
       # - run: ./bin/app/test

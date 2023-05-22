@@ -1,6 +1,5 @@
 <script setup>
 import VenueCard from "@/Components/Venue/VenueCard.vue";
-import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { Head, router } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
 

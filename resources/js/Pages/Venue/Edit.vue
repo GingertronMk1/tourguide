@@ -2,7 +2,6 @@
 import { useForm, Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 import AssetThumbnails from "@/Components/Asset/Thumbnails.vue";
-import BaseLayout from "@/Layouts/BaseLayout.vue";
 
 const props = defineProps({
     venue: {

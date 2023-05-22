@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-echo "NPM installing..."
-./bin/node/run npm install
+echo "NPM installing"
+docker-compose run --rm node npm install
 
 echo "Composer installing"
-./bin/app/composer install
+docker-compose run --rm app composer install

@@ -18,38 +18,40 @@ defineProps({
 });
 
 const cardClasses = [
-    "bg-white",
-    "drop-shadow-sm",
-    "hover:drop-shadow-lg",
-    "border",
-    "border-gray-100",
-    "rounded-lg",
-    "p-3",
-    "flex",
-    "flex-col",
-    "justify-center",
-    "align-center",
-    "text-center",
-    "text-2xl",
-].join(" ");
+    "card",
+    "d-flex",
+    "flex-column",
+    "justify-content-center",
+    "align-items-center",
+];
+const cardHeight = "200px";
 </script>
 <template>
     <BaseLayout>
-        <template #header>
-            <span class="font-semibold text-xl text-gray-800 leading-tight">
-                Welcome to TourGuide!
-            </span>
-        </template>
-
-        <div class="flex-1 grid grid-cols-2 gap-4">
-            <Link :href="route('venue.index')" :class="cardClasses">
-                {{ venueCount }} venues
+        <div
+            class="grid grid-cols-2 gap-4"
+            style="--bs-columns: 2; --bs-gap: 1rem"
+        >
+            <Link
+                :href="route('venue.index')"
+                :class="cardClasses"
+                :style="{ height: cardHeight }"
+            >
+                <h2 v-text="`${venueCount} venues`" />
             </Link>
-            <Link :href="route('region.index')" :class="cardClasses">
-                {{ regionCount }} regions
+            <Link
+                :href="route('region.index')"
+                :class="cardClasses"
+                :style="{ height: cardHeight }"
+            >
+                <h2 v-text="`${regionCount} regions`" />
             </Link>
-            <Link :href="route('area.index')" :class="cardClasses">
-                {{ areaCount }} areas
+            <Link
+                :href="route('area.index')"
+                :class="cardClasses"
+                :style="{ height: cardHeight }"
+            >
+                <h2 v-text="`${areaCount} areas`" />
             </Link>
         </div>
     </BaseLayout>

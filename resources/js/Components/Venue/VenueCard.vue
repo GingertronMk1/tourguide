@@ -18,84 +18,90 @@ const cardTitle = [
 ].join(" | ");
 </script>
 <template>
-    <div class="card space-y-3">
-        <span
-            class="text-2xl font-bold flex flex-row items-center justify-between"
-        >
-            <Link v-if="href != ''" :href="href" class="text-2xl font-bold">
+    <div class="card mb-3">
+        <img
+            v-if="venue.main_photo"
+            :src="venue.main_photo.file_url"
+            class="card-img-top"
+            alt="..."
+        />
+        <div class="card-header d-flex flex-row align-items-center">
+            <Link v-if="href != ''" :href="href" class="fs-3 fw-bold">
                 {{ cardTitle }}
             </Link>
             <template v-else>
                 {{ cardTitle }}
             </template>
-            <span class="flex flex-row justify-end space-x-2">
+            <span class="ms-auto d-flex flex-row nowrap align-items-center">
                 <template v-if="$page?.props?.auth?.user">
                     <Link
                         :href="route('venue.edit', venue)"
-                        class="btn-primary"
+                        class="btn btn-primary ms-1 d-flex align-items-center"
                     >
                         Edit
                     </Link>
-                    <span class="btn-caution">Delete</span>
+                    <span class="btn btn-danger ms-1 d-flex align-items-center"
+                        >Delete</span
+                    >
                 </template>
                 <a
                     :href="route('venue.pdf', venue)"
-                    class="btn-primary"
+                    class="btn btn-primary ms-1 d-flex align-items-center"
                     target="_blank"
                 >
                     <i class="fa-solid fa-file-pdf" /> PDF
                 </a>
             </span>
-        </span>
-        <hr />
-        <div class="grid grid-cols-2 gap-y-2">
-            <span>
-                <h6 class="text-l font-bold">Description</h6>
-                <p class="font-normal" v-text="venue.description" />
-            </span>
-            <a
-                v-if="venue.main_photo?.file_url"
-                class="w-full h-80 row-span-2 bg-no-repeat bg-center bg-contain"
-                :style="{
-                    'background-image': `url(${venue.main_photo.file_url})`,
-                }"
-                :href="venue.main_photo.file_url"
-                target="_blank"
-            />
-            <span>
-                <h6 class="text-l font-bold">Notes</h6>
-                <p class="font-normal" v-text="venue.notes" />
-            </span>
         </div>
-        <hr />
+        <div class="list-group list-group-flush">
+            <div class="list-group-item">
+                <h6 class="text-l font-bold">Description</h6>
+                {{ venue.description }}
+            </div>
+            <div class="list-group-item">
+                <h6 class="text-l font-bold">Notes</h6>
+                {{ venue.notes }}
+            </div>
 
-        <div class="grid grid-cols-2">
-            <span class="flex flex-row items-start space-x-3">
-                <p class="font-normal" v-text="`Stage dimensions:`" />
-                <ul>
-                    <li v-text="`W: ${venue.maximum_stage_width}mm`" />
-                    <li v-text="`H: ${venue.maximum_stage_height}mm`" />
-                    <li v-text="`D: ${venue.maximum_stage_depth}mm`" />
-                </ul>
-            </span>
-            <span class="grid grid-cols-2 divide-2 items-center">
-                <p v-text="`Max seats: ${venue.maximum_seats}`" />
-                <p
+            <div class="list-group-item d-flex">
+                <div class="col-3" v-text="`Stage dimensions:`" />
+                <div
+                    class="col-3"
+                    v-text="`W: ${venue.maximum_stage_width}mm`"
+                />
+                <div
+                    class="col-3"
+                    v-text="`H: ${venue.maximum_stage_height}mm`"
+                />
+                <div
+                    class="col-3"
+                    v-text="`D: ${venue.maximum_stage_depth}mm`"
+                />
+            </div>
+            <div class="list-group-item d-flex">
+                <div
+                    class="col-3"
+                    v-text="`Max seats: ${venue.maximum_seats}`"
+                />
+                <div
+                    class="col-3"
                     v-text="
                         `Max wheelchair seats: ${venue.maximum_wheelchair_seats}`
                     "
                 />
-                <p
+                <div
+                    class="col-3"
                     v-text="`Dressing rooms: ${venue.number_of_dressing_rooms}`"
                 />
-                <p
+                <div
+                    class="col-3"
                     v-text="
                         `Wheelchairs backstage? ${
                             venue.backstage_wheelchair_access ? 'Yes' : 'No'
                         }`
                     "
                 />
-            </span>
+            </div>
         </div>
     </div>
 </template>

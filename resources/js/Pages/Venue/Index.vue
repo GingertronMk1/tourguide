@@ -99,23 +99,13 @@ function incrementPage() {
 </script>
 <template>
     <BaseLayout body-classes="overflow-y-hidden">
-        <template #header>
-            <h2
-                class="font-semibold text-xl text-gray-800 leading-tight"
-                v-text="'Venues'"
-            />
-        </template>
-
         <Head title="Venues" />
 
-        <div class="flex flex-row flex-1 overflow-y-hidden space-x-3">
+        <div class="row">
             <!--
                 Filtering by access and deal types
             -->
-            <div
-                id="filters"
-                class="flex flex-col overflow-y-scroll max-w-[33%] space-y-3 items-stretch"
-            >
+            <div id="filters" class="col-4">
                 <div class="card flex flex-row justify-between">
                     <span>
                         <template v-if="venuePaginator.current_page > 1">
@@ -140,14 +130,14 @@ function incrementPage() {
                         </template>
                     </span>
                 </div>
-                <div class="card">
-                    <div class="font-bold">Deal Types</div>
+                <div class="form-group">
+                    <div class="form-label">Deal Types</div>
                     <select
                         id="dealTypes"
                         v-model="query.dealTypes"
                         name="dealTypes"
                         multiple
-                        class="rounded-md w-full"
+                        class="form-select"
                     >
                         <option
                             v-for="dealType in dealTypes"
@@ -157,14 +147,14 @@ function incrementPage() {
                         />
                     </select>
                 </div>
-                <div class="card">
-                    <div class="font-bold">Access Equipment</div>
+                <div class="form-group">
+                    <div class="form-label">Access Equipment</div>
                     <select
                         id="accessEquipment"
                         v-model="query.accessEquipment"
                         name="accessEquipment"
                         multiple
-                        class="rounded-md w-full"
+                        class="form-select"
                     >
                         <option
                             v-for="access in accessEquipment"
@@ -174,14 +164,14 @@ function incrementPage() {
                         />
                     </select>
                 </div>
-                <div class="card">
-                    <div class="font-bold">Regions</div>
+                <div class="form-group">
+                    <div class="form-label">Regions</div>
                     <select
                         id="regions"
                         v-model="query.regions"
                         name="regions"
                         multiple
-                        class="rounded-md w-full"
+                        class="form-select"
                     >
                         <template v-for="area in areas" :key="area.id">
                             <option disabled v-text="area.name" />
@@ -195,14 +185,14 @@ function incrementPage() {
                         </template>
                     </select>
                 </div>
-                <div class="card">
-                    <div class="font-bold">Venue Types</div>
+                <div class="form-group">
+                    <div class="form-label">Venue Types</div>
                     <select
                         id="venueTypes"
                         v-model="query.venueTypes"
                         name="venueTypes"
                         multiple
-                        class="rounded-md w-full"
+                        class="form-select"
                     >
                         <option
                             v-for="venueType in venueTypes"
@@ -212,8 +202,7 @@ function incrementPage() {
                         />
                     </select>
                 </div>
-
-                <div class="card">
+                <div class="form-group">
                     <div class="font-bold">Seats</div>
                     <div class="grid grid-cols-2 gap-x-2">
                         <div class="flex flex-col">
@@ -261,9 +250,7 @@ function incrementPage() {
             <!--
                 Venues
             -->
-            <div
-                class="overflow-y-scroll space-y-3 flex-1 max-h-full overflow-y-scroll"
-            >
+            <div class="col-8">
                 <VenueCard
                     v-for="venue in venuePaginator.data"
                     :key="venue.id"

@@ -28,7 +28,6 @@ class VenueController extends Controller
      */
     public function index(Request $request)
     {
-        $maximumNumberOfSeats = Venue::orderBy('maximum_seats', 'desc')->value('maximum_seats');
         $query = array_merge(
             [
                 'accessEquipment' => [],
@@ -36,8 +35,8 @@ class VenueController extends Controller
                 'page' => 1,
                 'regions' => [],
                 'venueTypes' => [],
-                'seatsMin' => 0,
-                'seatsMax' => $maximumNumberOfSeats,
+                'seatsMin' => null,
+                'seatsMax' => null,
             ],
             $request->input()
         );
@@ -53,12 +52,14 @@ class VenueController extends Controller
             $venues = $venues->whereIn('venue_type_id', $query['venueTypes']);
         }
 
-        $venuePaginator = $venues
-            ->whereBetween(
-                'maximum_seats',
-                [$query['seatsMin'], $query['seatsMax']]
-            )
-            ->paginate(Venue::PER_PAGE);
+        if (isset($query['seatsMin'])) {
+            $venues = $venues->where('maximum_seats', '>', $query['seatsMin']);
+        }
+        if (isset($query['seatsMax'])) {
+            $venues = $venues->where('maximum_seats', '<', $query['seatsMax']);
+        }
+
+        $venuePaginator = $venues->paginate(Venue::PER_PAGE);
 
         return inertia(
             'Venue/Index',

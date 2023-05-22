@@ -33,8 +33,8 @@ const props = defineProps({
                 dealTypes: [],
                 page: 1,
                 regions: [],
-                seatsMax: 10000,
-                seatsMin: 0,
+                seatsMax: null,
+                seatsMin: null,
             };
         },
     },
@@ -205,30 +205,25 @@ function incrementPage() {
                 <!-- Seats min/max -->
                 <div class="col mb-3">
                     <div class="row">
+                        <div class="col-12 form-label">Maximum Seats</div>
                         <div class="col-6">
-                            <span>Minimum</span>
-
                             <input
                                 id="seatsMin"
                                 v-model="query.seatsMin"
                                 type="number"
                                 name="seatsMin"
-                                min="0"
-                                :max="query.seatsMax"
                                 class="form-control"
+                                placeholder="Minimum"
                             />
                         </div>
                         <div class="col-6">
-                            <span>Maximum</span>
-
                             <input
                                 id="seatsMax"
                                 v-model="query.seatsMax"
                                 type="number"
                                 name="seatsMax"
-                                :min="query.seatsMin"
-                                max="10000"
                                 class="form-control"
+                                placeholder="Maximum"
                             />
                         </div>
                     </div>

@@ -107,9 +107,9 @@ function incrementPage() {
         <Head title="Venues" />
 
         <div class="row">
-            <div id="filters" class="col-4">
+            <div id="filters" class="col-3">
                 <!-- Forward and back buttons -->
-                <div class="grid text-center" style="--bs-columns: 3">
+                <div class="grid text-center mb-3" style="--bs-columns: 3">
                     <span
                         class="btn btn-primary {{ venuePaginator.current_page <= 1 ? 'disabled' : '' }}"
                         @click="decrementPage"
@@ -263,7 +263,7 @@ function incrementPage() {
             <!--
                 Venues
             -->
-            <div class="col-8">
+            <div class="col">
                 <VenueCard
                     v-for="venue in venuePaginator.data"
                     :key="venue.id"

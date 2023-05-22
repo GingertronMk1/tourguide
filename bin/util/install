@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-docker build
+docker-compose up -d
 
 echo "Installing dependencies"
 ./bin/install-deps
@@ -9,8 +9,6 @@ if [ ! -f ".env" ]; then
     echo "Copying .env.local"
     cp .env.local .env
 fi
-
-docker-compose up -d
 
 echo "Generating app key"
 ./bin/app/artisan key:generate

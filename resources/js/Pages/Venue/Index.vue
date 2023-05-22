@@ -100,7 +100,6 @@ function incrementPage() {
     query.value.page = parseInt(page) + 1;
     applyFilters(false);
 }
-
 </script>
 <template>
     <BaseLayout body-classes="overflow-y-hidden">

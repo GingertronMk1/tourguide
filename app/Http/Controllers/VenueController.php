@@ -10,6 +10,7 @@ use App\Models\DealType;
 use App\Models\Venue;
 use App\Models\VenueType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class VenueController extends Controller
 {
@@ -52,12 +53,26 @@ class VenueController extends Controller
             $venues = $venues->whereIn('venue_type_id', $query['venueTypes']);
         }
 
-        if (isset($query['seatsMin'])) {
-            $venues = $venues->where('maximum_seats', '>', $query['seatsMin']);
+        $minMaxValues = [
+            'seats' => "maximum_seats",
+            'wheelchairSeats' => "maximum_wheelchair_seats",
+            'maximumStageWidth' => "maximum_stage_width",
+            'maximumStageHeight' => "maximum_stage_height",
+            'maximumStageDepth' => "maximum_stage_depth",
+            'dressingRooms' => "number_of_dressing_rooms",
+        ];
+
+        foreach($minMaxValues as $key => $col) {
+            $keyMin = "{$key}Min";
+            $keyMax = "{$key}Max";
+            if (isset($query[$keyMin])) {
+                $venues = $venues->where($col, '>=', $query[$keyMin]);
+            }
+            if (isset($query[$keyMax])) {
+                $venues = $venues->where($col, '<=', $query[$keyMax]);
+            }
         }
-        if (isset($query['seatsMax'])) {
-            $venues = $venues->where('maximum_seats', '<', $query['seatsMax']);
-        }
+
 
         $venuePaginator = $venues->paginate(Venue::PER_PAGE);
 
@@ -66,6 +81,13 @@ class VenueController extends Controller
             $this->getVenueRelatedItems([
                 'venuePaginator' => $venuePaginator,
                 'query' => $query,
+                'minMaxValues' => array_map(
+                    function(string $str) {
+                        $str = Str::title($str);
+                        return Str::replace('_', ' ', $str);
+                    },
+                    $minMaxValues
+                    )
             ])
         );
     }

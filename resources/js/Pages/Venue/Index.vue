@@ -38,6 +38,10 @@ const props = defineProps({
             };
         },
     },
+    minMaxValues: {
+        type: Object,
+        default: () => {},
+    },
 });
 
 const query = ref(props.query);
@@ -96,6 +100,7 @@ function incrementPage() {
     query.value.page = parseInt(page) + 1;
     applyFilters(false);
 }
+
 </script>
 <template>
     <BaseLayout body-classes="overflow-y-hidden">
@@ -203,25 +208,29 @@ function incrementPage() {
                 </div>
 
                 <!-- Seats min/max -->
-                <div class="col mb-3">
+                <div
+                    v-for="(label, value) in minMaxValues"
+                    :key="value"
+                    class="col mb-3"
+                >
                     <div class="row">
-                        <div class="col-12 form-label">Maximum Seats</div>
+                        <div class="col-12 form-label" v-text="label" />
                         <div class="col-6">
                             <input
-                                id="seatsMin"
-                                v-model="query.seatsMin"
+                                :id="`${value}Min`"
+                                v-model="query[`${value}Min`]"
                                 type="number"
-                                name="seatsMin"
+                                :name="`${value}Min`"
                                 class="form-control"
                                 placeholder="Minimum"
                             />
                         </div>
                         <div class="col-6">
                             <input
-                                id="seatsMax"
-                                v-model="query.seatsMax"
+                                :id="`${value}Max`"
+                                v-model="query[`${value}Max`]"
                                 type="number"
-                                name="seatsMax"
+                                :name="`${value}Max`"
                                 class="form-control"
                                 placeholder="Maximum"
                             />

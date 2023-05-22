@@ -1,8 +1,6 @@
 <script setup>
 import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
 
 defineProps({
@@ -40,9 +38,9 @@ const form = useForm({
             @submit.prevent="form.patch(route('profile.update'))"
         >
             <div>
-                <InputLabel for="name" value="Name" />
+                <label for="name">Name</label>
 
-                <TextInput
+                <input
                     id="name"
                     v-model="form.name"
                     type="text"
@@ -56,9 +54,9 @@ const form = useForm({
             </div>
 
             <div>
-                <InputLabel for="email" value="Email" />
+                <label for="email">Email</label>
 
-                <TextInput
+                <input
                     id="email"
                     v-model="form.email"
                     type="email"

@@ -1,9 +1,7 @@
 <script setup>
 import BaseLayout from "@/Layouts/BaseLayout.vue";
 import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
 import { Head, Link, useForm } from "@inertiajs/vue3";
 
 const form = useForm({
@@ -26,9 +24,9 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
+                <label for="name">Name</label>
 
-                <TextInput
+                <input
                     id="name"
                     v-model="form.name"
                     type="text"
@@ -42,9 +40,9 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+                <label for="email">Email</label>
 
-                <TextInput
+                <input
                     id="email"
                     v-model="form.email"
                     type="email"
@@ -57,9 +55,9 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <label for="password">Password</label>
 
-                <TextInput
+                <input
                     id="password"
                     v-model="form.password"
                     type="password"
@@ -72,12 +70,9 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
+                <label for="password_confirmation">Confirm Password</label>
 
-                <TextInput
+                <input
                     id="password_confirmation"
                     v-model="form.password_confirmation"
                     type="password"

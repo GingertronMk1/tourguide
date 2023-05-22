@@ -1,5 +1,5 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
+import BaseLayout from "@/Layouts/BaseLayout.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -23,7 +23,7 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <BaseLayout>
         <Head title="Forgot Password" />
 
         <div class="mb-4 text-sm text-gray-600">
@@ -38,29 +38,28 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
-
-                <TextInput
+                <label for="email">Email</label>
+                <input
                     id="email"
                     v-model="form.email"
+                    name="email"
                     type="email"
-                    class="mt-1 block w-full"
                     required
                     autofocus
                     autocomplete="username"
                 />
-
-                <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <PrimaryButton
-                    :class="{ 'opacity-25': form.processing }"
+                <button
+                    :class="`btn-primary ms-3 ${
+                        form.processing ? 'disabled' : ''
+                    }`"
                     :disabled="form.processing"
                 >
-                    Email Password Reset Link
-                </PrimaryButton>
+                    Confirm
+                </button>
             </div>
         </form>
-    </GuestLayout>
+    </BaseLayout>
 </template>

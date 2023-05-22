@@ -12,7 +12,8 @@ const props = defineProps({
 let bodyClassesProcessed = [
     "container",
     "bg-gray",
-    "pt-3",
+    "py-3",
+    "flex-fill",
     props.bodyClasses,
 ].join(" ");
 
@@ -29,55 +30,47 @@ if (usePage()?.props?.auth?.user) {
 </script>
 
 <template>
-    <div class="h-full flex flex-col">
-        <nav class="navbar navbar-expand-lg bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div
-                    id="navbarSupportedContent"
-                    class="collapse navbar-collapse"
-                >
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li
-                            v-for="(routeObject, index) in routes"
-                            :key="index"
-                            class="nav-item"
-                        >
-                            <Link
-                                class="nav-link"
-                                :href="route(routeObject.route)"
-                            >
-                                {{ routeObject.label }}
-                            </Link>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input
-                            class="form-control me-2"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search"
-                        />
-                        <button class="btn btn-outline-success" type="submit">
-                            Search
-                        </button>
-                    </form>
-                </div>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">TourGuide</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li
+                        v-for="(routeObject, index) in routes"
+                        :key="index"
+                        class="nav-item"
+                    >
+                        <Link class="nav-link" :href="route(routeObject.route)">
+                            {{ routeObject.label }}
+                        </Link>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input
+                        class="form-control me-2"
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                    />
+                    <button class="btn btn-outline-success" type="submit">
+                        Search
+                    </button>
+                </form>
             </div>
-        </nav>
-        <div :class="bodyClassesProcessed">
-            <slot />
         </div>
+    </nav>
+    <div :class="bodyClassesProcessed">
+        <slot />
     </div>
 </template>

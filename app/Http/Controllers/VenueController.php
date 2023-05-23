@@ -33,7 +33,6 @@ class VenueController extends Controller
             [
                 'accessEquipment' => [],
                 'dealTypes' => [],
-                'page' => 1,
                 'regions' => [],
                 'venueTypes' => [],
                 'seatsMin' => null,
@@ -73,7 +72,7 @@ class VenueController extends Controller
             }
         }
 
-        $venuePaginator = $venues->paginate(Venue::PER_PAGE);
+        $venuePaginator = $venues->paginate(Venue::PER_PAGE)->appends($query);
 
         return inertia(
             'Venue/Index',

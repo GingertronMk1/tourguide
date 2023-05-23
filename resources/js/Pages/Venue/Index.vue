@@ -1,7 +1,7 @@
 <script setup>
 import VenueCard from "@/Components/Venue/VenueCard.vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
-import { Head, router } from "@inertiajs/vue3";
+import { Head, router, Link } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
 
 const props = defineProps({
@@ -66,13 +66,11 @@ watch(
     { deep: true }
 );
 
-function applyFilters(resetPage = true) {
+function applyFilters() {
     const newQuery = {
         ...query.value,
+        page: 1,
     };
-    if (resetPage) {
-        newQuery.page = 1;
-    }
     router.get(
         route("venue.index", {
             _query: newQuery,
@@ -88,18 +86,6 @@ function resetFilters() {
         regions: [],
     };
 }
-
-function decrementPage() {
-    const { page } = query.value;
-    query.value.page = parseInt(page) - 1;
-    applyFilters(false);
-}
-
-function incrementPage() {
-    const { page } = query.value;
-    query.value.page = parseInt(page) + 1;
-    applyFilters(false);
-}
 </script>
 <template>
     <BaseLayout body-classes="overflow-y-hidden">
@@ -109,23 +95,30 @@ function incrementPage() {
             <div id="filters" class="col-3">
                 <!-- Forward and back buttons -->
                 <div class="grid text-center mb-3" style="--bs-columns: 3">
-                    <span
-                        class="btn btn-primary {{ venuePaginator.current_page <= 1 ? 'disabled' : '' }}"
-                        @click="decrementPage"
+                    <Link
+                        :class="{
+                            'btn btn-primary': true,
+                            disabled: !venuePaginator.prev_page_url,
+                        }"
+                        :href="venuePaginator.prev_page_url"
                     >
                         <i class="fa-solid fa-chevron-left mr-2" />
-                    </span>
+                    </Link>
                     <span
+                        class="d-flex flex-column justify-content-center"
                         v-text="
                             `${venuePaginator.current_page}/${venuePaginator.last_page}`
                         "
                     />
-                    <span
-                        class="btn btn-primary {{ venuePaginator.current_page >= venuePaginator.last_page ? 'disabled' : '' }}"
-                        @click="incrementPage"
+                    <Link
+                        :class="{
+                            'btn btn-primary': true,
+                            disabled: !venuePaginator.next_page_url,
+                        }"
+                        :href="venuePaginator.next_page_url"
                     >
                         <i class="fa-solid fa-chevron-right ml-2" />
-                    </span>
+                    </Link>
                 </div>
 
                 <!-- Deal Types -->

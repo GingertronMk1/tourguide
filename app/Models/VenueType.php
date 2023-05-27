@@ -22,7 +22,8 @@ class VenueType extends TourGuideModel
 
     public const SYSTEM_LIBRARY = 5;
 
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
         static::addGlobalScope('order', function (Builder $builder) {
             $builder->orderBy('name');

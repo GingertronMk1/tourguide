@@ -18,7 +18,8 @@ class DealType extends TourGuideModel
 
     public const SYSTEM_GUARANTEE = 3;
 
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
         static::addGlobalScope('order', function (Builder $builder) {
             $builder->orderBy('name');

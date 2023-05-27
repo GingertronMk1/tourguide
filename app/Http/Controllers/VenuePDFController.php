@@ -25,6 +25,5 @@ class VenuePDFController extends Controller
             ['isRemoteEnabled' => true],
             $fileName
         );
-
     }
 }

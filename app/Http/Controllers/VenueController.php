@@ -16,16 +16,6 @@ use Illuminate\Support\Str;
 
 class VenueController extends Controller
 {
-    private function getVenueRelatedItems(?array $merge = []): array
-    {
-        return array_merge([
-            'dealTypes' => DealType::all(),
-            'accessEquipment' => AccessEquipment::all(),
-            'areas' => Area::all()->load('regions'),
-            'venueTypes' => VenueType::all(),
-        ], $merge);
-    }
-
     /**
      * Display a listing of the resource.
      */
@@ -45,7 +35,8 @@ class VenueController extends Controller
 
         $venues = Venue::query()
             ->withAccessEquipment($query['accessEquipment'])
-            ->withDealTypes($query['dealTypes']);
+            ->withDealTypes($query['dealTypes'])
+        ;
 
         if (is_array($query['regions']) && count($query['regions'])) {
             $venues = $venues->whereIn('region_id', $query['regions']);
@@ -98,7 +89,6 @@ class VenueController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -106,7 +96,6 @@ class VenueController extends Controller
      */
     public function store(StoreVenueRequest $request)
     {
-        //
     }
 
     /**
@@ -165,6 +154,15 @@ class VenueController extends Controller
      */
     public function destroy(Venue $venue)
     {
-        //
+    }
+
+    private function getVenueRelatedItems(?array $merge = []): array
+    {
+        return array_merge([
+            'dealTypes' => DealType::all(),
+            'accessEquipment' => AccessEquipment::all(),
+            'areas' => Area::all()->load('regions'),
+            'venueTypes' => VenueType::all(),
+        ], $merge);
     }
 }

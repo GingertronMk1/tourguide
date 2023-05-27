@@ -12,7 +12,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class VenueType extends TourGuideModel
 {
-    use HasFactory, LoggableTrait, SoftDeletes, SystemModelTrait;
+    use HasFactory;
+    use LoggableTrait;
+    use SoftDeletes;
+    use SystemModelTrait;
 
     public const SYSTEM_THEATRE = 1;
 
@@ -24,14 +27,6 @@ class VenueType extends TourGuideModel
 
     public const SYSTEM_LIBRARY = 5;
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope('order', function (Builder $builder) {
-            $builder->orderBy('name');
-        });
-    }
-
     protected $fillable = [
         'name',
         'description',
@@ -39,6 +34,13 @@ class VenueType extends TourGuideModel
     ];
 
     protected $casts = [
-
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('name');
+        });
+    }
 }

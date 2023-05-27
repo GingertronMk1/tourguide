@@ -15,7 +15,6 @@ class DealTypeController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -23,7 +22,6 @@ class DealTypeController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -31,7 +29,6 @@ class DealTypeController extends Controller
      */
     public function store(StoreDealTypeRequest $request)
     {
-        //
     }
 
     /**
@@ -39,7 +36,6 @@ class DealTypeController extends Controller
      */
     public function show(DealType $dealType)
     {
-        //
     }
 
     /**
@@ -47,7 +43,6 @@ class DealTypeController extends Controller
      */
     public function edit(DealType $dealType)
     {
-        //
     }
 
     /**
@@ -55,7 +50,6 @@ class DealTypeController extends Controller
      */
     public function update(UpdateDealTypeRequest $request, DealType $dealType)
     {
-        //
     }
 
     /**
@@ -63,6 +57,5 @@ class DealTypeController extends Controller
      */
     public function destroy(DealType $dealType)
     {
-        //
     }
 }

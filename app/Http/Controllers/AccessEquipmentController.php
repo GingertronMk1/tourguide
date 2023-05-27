@@ -15,7 +15,6 @@ class AccessEquipmentController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -23,7 +22,6 @@ class AccessEquipmentController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -31,7 +29,6 @@ class AccessEquipmentController extends Controller
      */
     public function store(StoreAccessEquipmentRequest $request)
     {
-        //
     }
 
     /**
@@ -39,7 +36,6 @@ class AccessEquipmentController extends Controller
      */
     public function show(AccessEquipment $accessEquipment)
     {
-        //
     }
 
     /**
@@ -47,7 +43,6 @@ class AccessEquipmentController extends Controller
      */
     public function edit(AccessEquipment $accessEquipment)
     {
-        //
     }
 
     /**
@@ -55,7 +50,6 @@ class AccessEquipmentController extends Controller
      */
     public function update(UpdateAccessEquipmentRequest $request, AccessEquipment $accessEquipment)
     {
-        //
     }
 
     /**
@@ -63,6 +57,5 @@ class AccessEquipmentController extends Controller
      */
     public function destroy(AccessEquipment $accessEquipment)
     {
-        //
     }
 }

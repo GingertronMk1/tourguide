@@ -20,14 +20,16 @@ trait AssetableTrait
     {
         return $this
             ->morphMany(Asset::class, 'assetable')
-            ->orderBy('created_at', 'desc');
+            ->orderBy('created_at', 'desc')
+        ;
     }
 
     public function photoAssets(): MorphMany
     {
         return $this
             ->assets()
-            ->whereIn('type', AssetTypeEnum::PHOTO_TYPES);
+            ->whereIn('type', AssetTypeEnum::PHOTO_TYPES)
+        ;
     }
 
     public function getMainPhotoAttribute(): ?Asset
@@ -35,6 +37,7 @@ trait AssetableTrait
         return $this
             ->assets()
             ->where('type', AssetTypeEnum::MAIN_PHOTO)
-            ->first();
+            ->first()
+        ;
     }
 }

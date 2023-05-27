@@ -13,7 +13,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Region extends TourGuideModel
 {
-    use HasFactory, LoggableTrait, SoftDeletes, SystemModelTrait;
+    use HasFactory;
+    use LoggableTrait;
+    use SoftDeletes;
+    use SystemModelTrait;
 
     protected $fillable = [
         'name',
@@ -22,7 +25,6 @@ class Region extends TourGuideModel
     ];
 
     protected $casts = [
-
     ];
 
     public function area(): BelongsTo

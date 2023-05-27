@@ -23,7 +23,6 @@ class ActivityLogController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -31,7 +30,6 @@ class ActivityLogController extends Controller
      */
     public function store(StoreActivityLogRequest $request)
     {
-        //
     }
 
     /**
@@ -39,7 +37,6 @@ class ActivityLogController extends Controller
      */
     public function show(ActivityLog $activityLog)
     {
-        //
     }
 
     /**
@@ -47,7 +44,6 @@ class ActivityLogController extends Controller
      */
     public function edit(ActivityLog $activityLog)
     {
-        //
     }
 
     /**
@@ -55,7 +51,6 @@ class ActivityLogController extends Controller
      */
     public function update(UpdateActivityLogRequest $request, ActivityLog $activityLog)
     {
-        //
     }
 
     /**
@@ -63,6 +58,5 @@ class ActivityLogController extends Controller
      */
     public function destroy(ActivityLog $activityLog)
     {
-        //
     }
 }

@@ -25,7 +25,6 @@ class AreaController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -33,7 +32,6 @@ class AreaController extends Controller
      */
     public function store(StoreAreaRequest $request)
     {
-        //
     }
 
     /**
@@ -51,7 +49,6 @@ class AreaController extends Controller
      */
     public function edit(Area $area)
     {
-        //
     }
 
     /**
@@ -59,7 +56,6 @@ class AreaController extends Controller
      */
     public function update(UpdateAreaRequest $request, Area $area)
     {
-        //
     }
 
     /**
@@ -67,6 +63,5 @@ class AreaController extends Controller
      */
     public function destroy(Area $area)
     {
-        //
     }
 }

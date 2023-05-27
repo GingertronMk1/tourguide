@@ -19,7 +19,6 @@ class AreaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
         ];
     }
 }

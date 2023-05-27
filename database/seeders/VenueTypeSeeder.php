@@ -24,12 +24,11 @@ class VenueTypeSeeder extends Seeder
 
         foreach ($initial_types as $system => $name) {
             if (is_null(VenueType::getSystemType($system))) {
-                $newType = new VenueType;
+                $newType = new VenueType();
                 $newType->name = $name;
                 $newType->system = $system;
                 $newType->save();
             }
         }
-
     }
 }

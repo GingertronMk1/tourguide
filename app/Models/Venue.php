@@ -13,39 +13,33 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @property int $id
- * @property string $name
- * @property string $description
- * @property string $notes
- * @property string $street_address
- * @property string $city
- * @property int $region_id
- * @property int $venue_type_id
- * @property int $maximum_stage_width
- * @property int $maximum_stage_depth
- * @property int $maximum_stage_height
- * @property int $maximum_seats
- * @property int $maximum_wheelchair_seats
- * @property int $number_of_dressing_rooms
- * @property bool $backstage_wheelchair_access
- * @property Region $region
- * @property Area $area
+ * @property int               $id
+ * @property string            $name
+ * @property string            $description
+ * @property string            $notes
+ * @property string            $street_address
+ * @property string            $city
+ * @property int               $region_id
+ * @property int               $venue_type_id
+ * @property int               $maximum_stage_width
+ * @property int               $maximum_stage_depth
+ * @property int               $maximum_stage_height
+ * @property int               $maximum_seats
+ * @property int               $maximum_wheelchair_seats
+ * @property int               $number_of_dressing_rooms
+ * @property bool              $backstage_wheelchair_access
+ * @property Region            $region
+ * @property Area              $area
  * @property AccessEquipment[] $accessEquipment
- * @property DealType[] $dealTypes
+ * @property DealType[]        $dealTypes
  */
 class Venue extends TourGuideModel
 {
+    use HasFactory;
+    use LoggableTrait;
+    use SoftDeletes;
+    use AssetableTrait;
     public const PER_PAGE = 25;
-
-    use HasFactory, LoggableTrait, SoftDeletes, AssetableTrait;
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope('order', function (Builder $builder) {
-            $builder->orderBy('name');
-        });
-    }
 
     protected $fillable = [
         'name',
@@ -128,5 +122,13 @@ class Venue extends TourGuideModel
                 $dealTypeCount
             );
         }
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('name');
+        });
     }
 }

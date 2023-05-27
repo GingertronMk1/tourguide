@@ -24,9 +24,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/**
- * Base Laravel routes
- */
+// Base Laravel routes
 Route::get('/', HomeController::class)->name('home');
 
 Route::middleware('auth')->group(function () {
@@ -36,7 +34,7 @@ Route::middleware('auth')->group(function () {
 });
 
 /**
- * My routes
+ * My routes.
  */
 $readOnlyMethods = ['index', 'show'];
 
@@ -57,7 +55,8 @@ Route::get('/venue/{venue}/pdf', VenuePDFController::class)->name('venue.pdf');
 Route::middleware('auth')->group(function () {
     Route::resource('activity-log', ActivityLogController::class)->only('index');
     Route::resource('asset', AssetController::class)
-        ->only(['store', 'show', 'delete']);
+        ->only(['store', 'show', 'delete'])
+    ;
 });
 
 require __DIR__.'/auth.php';

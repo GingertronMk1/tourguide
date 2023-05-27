@@ -16,7 +16,6 @@ class AssetController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -24,7 +23,6 @@ class AssetController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -44,7 +42,7 @@ class AssetController extends Controller
             $asset->mime_type = $file->getMimeType();
             $asset->path = $path;
             if ($asset->save()) {
-                if ($asset->type === AssetTypeEnum::MAIN_PHOTO) {
+                if (AssetTypeEnum::MAIN_PHOTO === $asset->type) {
                     Asset::where([
                         ['assetable_type', '=', $assetableType],
                         ['assetable_id', '=', $assetableId],
@@ -55,7 +53,8 @@ class AssetController extends Controller
                         ->each(function (Asset $asset) {
                             $asset->type = AssetTypeEnum::ADDITIONAL_PHOTO;
                             $asset->save();
-                        });
+                        })
+                    ;
                 }
 
                 return redirect($redirect);
@@ -70,7 +69,6 @@ class AssetController extends Controller
      */
     public function show(Asset $asset)
     {
-        //
     }
 
     /**
@@ -78,7 +76,6 @@ class AssetController extends Controller
      */
     public function edit(Asset $asset)
     {
-        //
     }
 
     /**
@@ -86,7 +83,6 @@ class AssetController extends Controller
      */
     public function update(UpdateAssetRequest $request, Asset $asset)
     {
-        //
     }
 
     /**
@@ -94,6 +90,5 @@ class AssetController extends Controller
      */
     public function destroy(Asset $asset)
     {
-        //
     }
 }

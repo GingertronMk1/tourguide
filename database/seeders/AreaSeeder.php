@@ -24,7 +24,7 @@ class AreaSeeder extends Seeder
 
         foreach ($initial_areas as $system => $name) {
             if (is_null(Area::getSystemType($system))) {
-                $area = new Area;
+                $area = new Area();
                 $area->name = $name;
                 $area->system = $system;
                 $area->save();
@@ -32,6 +32,5 @@ class AreaSeeder extends Seeder
                 echo "Area with system value {$system} found\n";
             }
         }
-
     }
 }

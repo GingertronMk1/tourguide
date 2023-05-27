@@ -17,3 +17,4 @@ yarn-error.log
 /.fleet
 /.idea
 phpstan-output.json
+.php-cs-fixer.cache

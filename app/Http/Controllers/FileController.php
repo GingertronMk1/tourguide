@@ -13,7 +13,6 @@ class FileController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -39,7 +38,6 @@ class FileController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -47,7 +45,6 @@ class FileController extends Controller
      */
     public function edit(string $id)
     {
-        //
     }
 
     /**
@@ -55,7 +52,6 @@ class FileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
     }
 
     /**
@@ -63,6 +59,5 @@ class FileController extends Controller
      */
     public function destroy(string $id)
     {
-        //
     }
 }

@@ -14,7 +14,6 @@ class RegionPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
     }
 
     /**
@@ -22,7 +21,6 @@ class RegionPolicy
      */
     public function view(User $user, Region $region): bool
     {
-        //
     }
 
     /**
@@ -30,7 +28,6 @@ class RegionPolicy
      */
     public function create(User $user): bool
     {
-        //
     }
 
     /**
@@ -38,7 +35,6 @@ class RegionPolicy
      */
     public function update(User $user, Region $region): bool
     {
-        //
     }
 
     /**
@@ -46,7 +42,6 @@ class RegionPolicy
      */
     public function delete(User $user, Region $region): bool
     {
-        //
     }
 
     /**
@@ -54,7 +49,6 @@ class RegionPolicy
      */
     public function restore(User $user, Region $region): bool
     {
-        //
     }
 
     /**
@@ -62,6 +56,5 @@ class RegionPolicy
      */
     public function forceDelete(User $user, Region $region): bool
     {
-        //
     }
 }

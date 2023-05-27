@@ -13,6 +13,5 @@ class AssetSeeder extends Seeder
      */
     public function run(): void
     {
-        //
     }
 }

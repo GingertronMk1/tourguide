@@ -14,7 +14,6 @@ class ActivityLogPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
     }
 
     /**
@@ -22,7 +21,6 @@ class ActivityLogPolicy
      */
     public function view(User $user, ActivityLog $activityLog): bool
     {
-        //
     }
 
     /**
@@ -30,7 +28,6 @@ class ActivityLogPolicy
      */
     public function create(User $user): bool
     {
-        //
     }
 
     /**
@@ -38,7 +35,6 @@ class ActivityLogPolicy
      */
     public function update(User $user, ActivityLog $activityLog): bool
     {
-        //
     }
 
     /**
@@ -46,7 +42,6 @@ class ActivityLogPolicy
      */
     public function delete(User $user, ActivityLog $activityLog): bool
     {
-        //
     }
 
     /**
@@ -54,7 +49,6 @@ class ActivityLogPolicy
      */
     public function restore(User $user, ActivityLog $activityLog): bool
     {
-        //
     }
 
     /**
@@ -62,6 +56,5 @@ class ActivityLogPolicy
      */
     public function forceDelete(User $user, ActivityLog $activityLog): bool
     {
-        //
     }
 }

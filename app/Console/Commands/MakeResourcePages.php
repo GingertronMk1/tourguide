@@ -28,7 +28,7 @@ class MakeResourcePages extends Command
     public function handle()
     {
         $path = $this->argument('resourceFolderName');
-        while (! is_string($path)) {
+        while (!is_string($path)) {
             $path = $this->ask('What is the name of the resource?');
         }
 

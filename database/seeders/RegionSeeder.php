@@ -154,6 +154,5 @@ class RegionSeeder extends Seeder
                 echo "No area found for {$area}\n";
             }
         }
-
     }
 }

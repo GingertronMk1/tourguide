@@ -12,21 +12,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DealType extends TourGuideModel
 {
-    use HasFactory, LoggableTrait, SoftDeletes, SystemModelTrait;
+    use HasFactory;
+    use LoggableTrait;
+    use SoftDeletes;
+    use SystemModelTrait;
 
     public const SYSTEM_HIRE = 1;
 
     public const SYSTEM_SPLIT = 2;
 
     public const SYSTEM_GUARANTEE = 3;
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope('order', function (Builder $builder) {
-            $builder->orderBy('name');
-        });
-    }
 
     protected $fillable = [
         'name',
@@ -35,6 +30,13 @@ class DealType extends TourGuideModel
     ];
 
     protected $casts = [
-
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('name');
+        });
+    }
 }

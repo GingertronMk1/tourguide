@@ -14,7 +14,6 @@ class AreaPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
     }
 
     /**
@@ -22,7 +21,6 @@ class AreaPolicy
      */
     public function view(User $user, Area $area): bool
     {
-        //
     }
 
     /**
@@ -30,7 +28,6 @@ class AreaPolicy
      */
     public function create(User $user): bool
     {
-        //
     }
 
     /**
@@ -38,7 +35,6 @@ class AreaPolicy
      */
     public function update(User $user, Area $area): bool
     {
-        //
     }
 
     /**
@@ -46,7 +42,6 @@ class AreaPolicy
      */
     public function delete(User $user, Area $area): bool
     {
-        //
     }
 
     /**
@@ -54,7 +49,6 @@ class AreaPolicy
      */
     public function restore(User $user, Area $area): bool
     {
-        //
     }
 
     /**
@@ -62,6 +56,5 @@ class AreaPolicy
      */
     public function forceDelete(User $user, Area $area): bool
     {
-        //
     }
 }

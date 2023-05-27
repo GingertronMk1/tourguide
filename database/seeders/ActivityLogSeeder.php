@@ -13,6 +13,5 @@ class ActivityLogSeeder extends Seeder
      */
     public function run(): void
     {
-        //
     }
 }

@@ -23,12 +23,11 @@ class AccessEquipmentSeeder extends Seeder
 
         foreach ($initial_equipments as $system => $name) {
             if (is_null(AccessEquipment::getSystemType($system))) {
-                $accessEquipment = new AccessEquipment;
+                $accessEquipment = new AccessEquipment();
                 $accessEquipment->name = $name;
                 $accessEquipment->system = $system;
                 $accessEquipment->save();
             }
         }
-
     }
 }

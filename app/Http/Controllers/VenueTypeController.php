@@ -15,7 +15,6 @@ class VenueTypeController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -23,7 +22,6 @@ class VenueTypeController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -31,7 +29,6 @@ class VenueTypeController extends Controller
      */
     public function store(StoreVenueTypeRequest $request)
     {
-        //
     }
 
     /**
@@ -39,7 +36,6 @@ class VenueTypeController extends Controller
      */
     public function show(VenueType $venueType)
     {
-        //
     }
 
     /**
@@ -47,7 +43,6 @@ class VenueTypeController extends Controller
      */
     public function edit(VenueType $venueType)
     {
-        //
     }
 
     /**
@@ -55,7 +50,6 @@ class VenueTypeController extends Controller
      */
     public function update(UpdateVenueTypeRequest $request, VenueType $venueType)
     {
-        //
     }
 
     /**
@@ -63,6 +57,5 @@ class VenueTypeController extends Controller
      */
     public function destroy(VenueType $venueType)
     {
-        //
     }
 }

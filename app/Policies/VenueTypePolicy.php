@@ -14,7 +14,6 @@ class VenueTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
     }
 
     /**
@@ -22,7 +21,6 @@ class VenueTypePolicy
      */
     public function view(User $user, VenueType $venueType): bool
     {
-        //
     }
 
     /**
@@ -30,7 +28,6 @@ class VenueTypePolicy
      */
     public function create(User $user): bool
     {
-        //
     }
 
     /**
@@ -38,7 +35,6 @@ class VenueTypePolicy
      */
     public function update(User $user, VenueType $venueType): bool
     {
-        //
     }
 
     /**
@@ -46,7 +42,6 @@ class VenueTypePolicy
      */
     public function delete(User $user, VenueType $venueType): bool
     {
-        //
     }
 
     /**
@@ -54,7 +49,6 @@ class VenueTypePolicy
      */
     public function restore(User $user, VenueType $venueType): bool
     {
-        //
     }
 
     /**
@@ -62,6 +56,5 @@ class VenueTypePolicy
      */
     public function forceDelete(User $user, VenueType $venueType): bool
     {
-        //
     }
 }

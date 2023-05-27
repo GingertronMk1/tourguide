@@ -22,7 +22,8 @@ class RegionController extends Controller
             ->get()
             ->sortBy('name')
             ->values()
-            ->all();
+            ->all()
+        ;
 
         return inertia('Region/Index', [
             'regions' => $regions,
@@ -34,7 +35,6 @@ class RegionController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -42,7 +42,6 @@ class RegionController extends Controller
      */
     public function store(StoreRegionRequest $request)
     {
-        //
     }
 
     /**
@@ -60,7 +59,6 @@ class RegionController extends Controller
      */
     public function edit(Region $region)
     {
-        //
     }
 
     /**
@@ -68,7 +66,6 @@ class RegionController extends Controller
      */
     public function update(UpdateRegionRequest $request, Region $region)
     {
-        //
     }
 
     /**
@@ -76,6 +73,5 @@ class RegionController extends Controller
      */
     public function destroy(Region $region)
     {
-        //
     }
 }

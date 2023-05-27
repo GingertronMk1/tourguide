@@ -13,7 +13,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Area extends TourGuideModel
 {
-    use HasFactory, LoggableTrait, SoftDeletes, SystemModelTrait;
+    use HasFactory;
+    use LoggableTrait;
+    use SoftDeletes;
+    use SystemModelTrait;
 
     public const SYSTEM_NORTH = 1;
 
@@ -32,7 +35,6 @@ class Area extends TourGuideModel
     ];
 
     protected $casts = [
-
     ];
 
     public function regions(): HasMany

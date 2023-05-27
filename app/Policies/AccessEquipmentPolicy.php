@@ -14,7 +14,6 @@ class AccessEquipmentPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
     }
 
     /**
@@ -22,7 +21,6 @@ class AccessEquipmentPolicy
      */
     public function view(User $user, AccessEquipment $accessEquipment): bool
     {
-        //
     }
 
     /**
@@ -30,7 +28,6 @@ class AccessEquipmentPolicy
      */
     public function create(User $user): bool
     {
-        //
     }
 
     /**
@@ -38,7 +35,6 @@ class AccessEquipmentPolicy
      */
     public function update(User $user, AccessEquipment $accessEquipment): bool
     {
-        //
     }
 
     /**
@@ -46,7 +42,6 @@ class AccessEquipmentPolicy
      */
     public function delete(User $user, AccessEquipment $accessEquipment): bool
     {
-        //
     }
 
     /**
@@ -54,7 +49,6 @@ class AccessEquipmentPolicy
      */
     public function restore(User $user, AccessEquipment $accessEquipment): bool
     {
-        //
     }
 
     /**
@@ -62,6 +56,5 @@ class AccessEquipmentPolicy
      */
     public function forceDelete(User $user, AccessEquipment $accessEquipment): bool
     {
-        //
     }
 }

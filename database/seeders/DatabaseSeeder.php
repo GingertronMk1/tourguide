@@ -20,8 +20,6 @@ class DatabaseSeeder extends Seeder
 
     /**
      * Create a new seeder instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -35,8 +33,8 @@ class DatabaseSeeder extends Seeder
     {
         $adminEmail = 'admin@tourguide.test';
         if (
-            (! User::where('email', '=', $adminEmail)->first()) &&
-            in_array(config('app.env'), ['local', 'testing'])
+            (!User::where('email', '=', $adminEmail)->first())
+            && in_array(config('app.env'), ['local', 'testing'])
         ) {
             echo "No user found for email {$adminEmail}";
             $user = new User();

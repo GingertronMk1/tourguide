@@ -14,7 +14,6 @@ class AssetPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
     }
 
     /**
@@ -22,7 +21,6 @@ class AssetPolicy
      */
     public function view(User $user, Asset $asset): bool
     {
-        //
     }
 
     /**
@@ -30,7 +28,6 @@ class AssetPolicy
      */
     public function create(User $user): bool
     {
-        //
     }
 
     /**
@@ -38,7 +35,6 @@ class AssetPolicy
      */
     public function update(User $user, Asset $asset): bool
     {
-        //
     }
 
     /**
@@ -46,7 +42,6 @@ class AssetPolicy
      */
     public function delete(User $user, Asset $asset): bool
     {
-        //
     }
 
     /**
@@ -54,7 +49,6 @@ class AssetPolicy
      */
     public function restore(User $user, Asset $asset): bool
     {
-        //
     }
 
     /**
@@ -62,6 +56,5 @@ class AssetPolicy
      */
     public function forceDelete(User $user, Asset $asset): bool
     {
-        //
     }
 }

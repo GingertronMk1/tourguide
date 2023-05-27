@@ -26,14 +26,6 @@ class ActivityLog extends TourGuideModel
         'new_data' => 'json',
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-        static::addGlobalScope('order', function (Builder $builder) {
-            $builder->orderBy('created_at', 'desc');
-        });
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -42,5 +34,13 @@ class ActivityLog extends TourGuideModel
     public function loggable(): BelongsTo
     {
         return $this->belongsTo($this->loggable_type);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('created_at', 'desc');
+        });
     }
 }

@@ -8,7 +8,6 @@ use Monolog\Handler\SyslogUdpHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Log Channel
@@ -129,5 +128,4 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
     ],
-
 ];

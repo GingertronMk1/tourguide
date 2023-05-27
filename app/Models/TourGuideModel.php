@@ -8,25 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class TourGuideModel extends Model
 {
+    protected $fillable = [
+    ];
+
+    protected $casts = [
+    ];
+
+    protected $appends = ['class_name'];
+
     public static function getTableName(): string
     {
-        return (new static)->getTable();
+        return (new static())->getTable();
     }
 
     public static function getTableColumn(string $column): string
     {
         return static::getTableName().'.'.$column;
     }
-
-    protected $fillable = [
-
-    ];
-
-    protected $casts = [
-
-    ];
-
-    protected $appends = ['class_name'];
 
     public function getClassNameAttribute(): string
     {

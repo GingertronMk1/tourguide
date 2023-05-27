@@ -14,7 +14,6 @@ class DealTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
     }
 
     /**
@@ -22,7 +21,6 @@ class DealTypePolicy
      */
     public function view(User $user, DealType $dealType): bool
     {
-        //
     }
 
     /**
@@ -30,7 +28,6 @@ class DealTypePolicy
      */
     public function create(User $user): bool
     {
-        //
     }
 
     /**
@@ -38,7 +35,6 @@ class DealTypePolicy
      */
     public function update(User $user, DealType $dealType): bool
     {
-        //
     }
 
     /**
@@ -46,7 +42,6 @@ class DealTypePolicy
      */
     public function delete(User $user, DealType $dealType): bool
     {
-        //
     }
 
     /**
@@ -54,7 +49,6 @@ class DealTypePolicy
      */
     public function restore(User $user, DealType $dealType): bool
     {
-        //
     }
 
     /**
@@ -62,6 +56,5 @@ class DealTypePolicy
      */
     public function forceDelete(User $user, DealType $dealType): bool
     {
-        //
     }
 }

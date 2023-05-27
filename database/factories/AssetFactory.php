@@ -19,7 +19,6 @@ class AssetFactory extends Factory
     public function definition(): array
     {
         return [
-            //
         ];
     }
 }

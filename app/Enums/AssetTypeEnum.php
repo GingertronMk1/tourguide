@@ -7,9 +7,13 @@ namespace App\Enums;
 enum AssetTypeEnum: string
 {
     case MAIN_PHOTO = 'Main Photo';
+
     case ADDITIONAL_PHOTO = 'Additional Photo';
+
     case TECHNICAL_DOCUMENT = 'Technical Document';
+
     case OTHER_DOCUMENT = 'Other Document';
+
     case DETAILS_DOCUMENT = 'Details Document';
 
     public const PHOTO_TYPES = [
@@ -25,7 +29,7 @@ enum AssetTypeEnum: string
     {
         return array_filter(
             static::cases(),
-            fn (AssetTypeEnum $assetType) => ! in_array($assetType, static::NON_USER_TYPES)
+            fn (AssetTypeEnum $assetType) => !in_array($assetType, static::NON_USER_TYPES)
         );
     }
 }

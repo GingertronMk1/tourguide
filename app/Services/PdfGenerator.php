@@ -27,9 +27,8 @@ class PdfGenerator
         $this->pdf->loadHtml($view);
         $this->pdf->setPaper($paperSize);
         $this->pdf->render();
-        $output = $this->pdf->output();
 
-        return $output;
+        return $this->pdf->output();
     }
 
     public function getPdfAsResponse(

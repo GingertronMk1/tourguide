@@ -59,17 +59,16 @@ class VenueSeeder extends Seeder
             $this->venueTypeCount = $this->venueTypes->count();
 
             Region::orderBy('name', 'asc')->get()->each(function (Region $region) {
-
-                /** Setting the limits and offsets on each go round to increment by 1 */
+                // Setting the limits and offsets on each go round to increment by 1
                 $this->accessEquipmentLimit = ($this->accessEquipmentLimit + 1) % $this->accessEquipmentCount;
                 $this->dealTypeLimit = ($this->dealTypeLimit + 1) % $this->dealTypeCount;
                 $this->venueTypeOffset = ($this->venueTypeOffset + 1) % $this->venueTypeCount;
 
-                /** If/when the limits are 0 increase the offset to go again */
-                if ($this->accessEquipmentLimit === 0) {
+                // If/when the limits are 0 increase the offset to go again
+                if (0 === $this->accessEquipmentLimit) {
                     $this->accessEquipmentOffset = ($this->accessEquipmentOffset + 1) % $this->accessEquipmentCount;
                 }
-                if ($this->dealTypeLimit === 0) {
+                if (0 === $this->dealTypeLimit) {
                     $this->dealTypeOffset = ($this->dealTypeOffset + 1) % $this->dealTypeCount;
                 }
 
@@ -98,14 +97,16 @@ class VenueSeeder extends Seeder
                         $this->accessEquipmentOffset,
                         $this->accessEquipmentLimit
                     )
-                    ->pluck('id');
+                    ->pluck('id')
+                ;
                 $dealTypeIds = $this
                     ->dealTypes
                     ->slice(
                         $this->dealTypeOffset,
                         $this->dealTypeLimit
                     )
-                    ->pluck('id');
+                    ->pluck('id')
+                ;
 
                 $accessEquipmentToAttach = [];
                 $dealTypesToAttach = [];

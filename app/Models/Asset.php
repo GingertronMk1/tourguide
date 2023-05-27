@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Storage;
 
 class Asset extends TourGuideModel
 {
-    use HasFactory, LoggableTrait, SoftDeletes;
+    use HasFactory;
+    use LoggableTrait;
+    use SoftDeletes;
 
     protected $fillable = [
         'title',
@@ -52,6 +54,7 @@ class Asset extends TourGuideModel
             case 's3':
             case 'r2':
                 return Storage::temporaryUrl($this->path, now()->addMinutes(30));
+
             default:
                 return Storage::url($this->path);
         }
@@ -60,6 +63,7 @@ class Asset extends TourGuideModel
     public function getFileAsBase64Attribute(): string
     {
         $prefix = "data:{$this->mime_type};base64,";
+
         try {
             $image = Storage::get($this->path) ?? '';
             $image = base64_encode($image);
@@ -68,7 +72,6 @@ class Asset extends TourGuideModel
         } catch (\Exception) {
             return $prefix;
         }
-
     }
 
     public function getThumbnailURLAttribute(): array
@@ -79,21 +82,24 @@ class Asset extends TourGuideModel
         $value = 'fa-solid fa-file';
 
         switch ($base) {
-
             case 'image': // If it's an image we can probably just show it
                 $type = 'url';
                 $value = $this->file_url;
+
                 break;
 
             case 'application': // If it's some other kind of file deal with that
                 switch ($specific) {
                     case 'pdf': $value = 'fa-solid fa-file-pdf';
+
                         break;
                 }
+
                 break;
 
             case 'audio': // If it's an audio file, deal with that
                 $value = 'fa-solid fa-file-audio';
+
                 break;
         }
 

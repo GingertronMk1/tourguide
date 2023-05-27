@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\AccessEquipment;
 use App\Models\Venue;
 use Illuminate\Database\Migrations\Migration;

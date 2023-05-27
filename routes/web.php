@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AreaRegionController;

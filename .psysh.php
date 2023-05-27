@@ -1,8 +1,11 @@
 <?php
+
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
-function generate_color_console() {
+function generate_color_console()
+{
     /** Reference: https://symfony.com/doc/current/console/coloring.html */
     $output       = new ConsoleOutput();
 
@@ -34,7 +37,8 @@ function generate_color_console() {
  * @return string[] Example: `['id', 'name', 'date']`
  *
  */
-function get_binding_names_from_insert($sql) {
+function get_binding_names_from_insert($sql)
+{
     // Get column names. Ex.: "'id, `name`, created_at'".
     $matches = [];
     $success = preg_match('/INSERT *INTO *[^(]*\(([^)]+)\)/i', $sql, $matches);
@@ -59,7 +63,8 @@ function get_binding_names_from_insert($sql) {
  * @return string[] Example: `['id', 'created_at', 'LIMIT']`
  *
  */
-function get_binding_names_from_expressions($sql) {
+function get_binding_names_from_expressions($sql)
+{
     // For each `?`, get the two previous words.
     $matches = [];
     preg_match_all('/([\S]*) *([\S]*) *\?/', $sql, $matches);
@@ -87,7 +92,7 @@ function get_binding_names_from_expressions($sql) {
 
 $output = generate_color_console();
 DB::listen(function ($query) use ($output) {
-   // Change reserved words to uppercase (not the full list, just some main ones).
+    // Change reserved words to uppercase (not the full list, just some main ones).
     $reserved = [
         'SELECT ', 'UPDATE ', 'INSERT ', 'DELETE ',
         'BEGIN', 'COMMIT', 'ROLLBACK', ' FROM ',

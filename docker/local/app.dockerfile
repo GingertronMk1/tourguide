@@ -6,6 +6,7 @@ RUN docker-php-ext-install sockets pdo pdo_mysql
 RUN apk --update --no-cache add \
     $PHPIZE_DEPS \
     linux-headers \
+    bash \
     && \
     pecl install -f xdebug-3.2.1 && \
     docker-php-ext-enable xdebug

@@ -10,11 +10,10 @@ const props = defineProps({
 });
 
 let bodyClassesProcessed = [
-    "p-4",
-    "bg-gray-200",
-    "flex",
-    "flex-col",
-    "flex-1",
+    "container",
+    "bg-gray",
+    "py-3",
+    "flex-fill",
     props.bodyClasses,
 ].join(" ");
 
@@ -28,47 +27,50 @@ const routes = ref([
 if (usePage()?.props?.auth?.user) {
     routes.value.push({ label: "Activity Log", route: "activity-log.index" });
 }
-
-const openedMenu = ref(false);
 </script>
 
 <template>
-    <div class="h-full flex flex-col">
-        <header
-            class="p-4 bg-white border-b border-gray-100 flex flex-row items-center relative"
-        >
-            <i
-                :class="`cursor-pointer p-2 fa-solid ${
-                    openedMenu ? 'fa-xmark' : 'fa-bars'
-                }`"
-                @click="openedMenu = !openedMenu"
-            />
-            <div class="flex-1">
-                <slot name="header" />
-            </div>
-            <div v-if="$page?.props?.auth?.user">
-                <span v-text="$page?.props?.auth?.user.name" />
-            </div>
-            <div v-else>
-                <Link :href="route('login')">Log In</Link>
-            </div>
-            <div
-                :class="`absolute ${
-                    openedMenu ? 'flex' : 'hidden'
-                } flex-col w-full top-full left-0 bg-white divide-y-2 shadow-lg`"
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">TourGuide</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
             >
-                <Link
-                    v-for="(routeObject, index) in routes"
-                    :key="index"
-                    class="p-4 hover:bg-gray-200"
-                    :href="route(routeObject.route)"
-                >
-                    {{ routeObject.label }}
-                </Link>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li
+                        v-for="(routeObject, index) in routes"
+                        :key="index"
+                        class="nav-item"
+                    >
+                        <Link class="nav-link" :href="route(routeObject.route)">
+                            {{ routeObject.label }}
+                        </Link>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input
+                        class="form-control me-2"
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                    />
+                    <button class="btn btn-outline-success" type="submit">
+                        Search
+                    </button>
+                </form>
             </div>
-        </header>
-        <div :class="bodyClassesProcessed">
-            <slot />
         </div>
+    </nav>
+    <div :class="bodyClassesProcessed">
+        <slot />
     </div>
 </template>

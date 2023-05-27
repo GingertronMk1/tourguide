@@ -1,9 +1,5 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
+import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 
 const form = useForm({
@@ -18,7 +14,7 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <BaseLayout>
         <Head title="Confirm Password" />
 
         <div class="mb-4 text-sm text-gray-600">
@@ -28,28 +24,29 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="password" value="Password" />
-                <TextInput
+                <label for="password">Password</label>
+                <input
                     id="password"
                     v-model="form.password"
                     type="password"
-                    class="mt-1 block w-full"
+                    name="password"
+                    class="form-control"
                     required
                     autocomplete="current-password"
                     autofocus
                 />
-                <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="flex justify-end mt-4">
-                <PrimaryButton
-                    class="ml-4"
-                    :class="{ 'opacity-25': form.processing }"
+                <button
+                    :class="`btn-primary ms-3 ${
+                        form.processing ? 'disabled' : ''
+                    }`"
                     :disabled="form.processing"
                 >
                     Confirm
-                </PrimaryButton>
+                </button>
             </div>
         </form>
-    </GuestLayout>
+    </BaseLayout>
 </template>

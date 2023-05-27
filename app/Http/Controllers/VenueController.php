@@ -10,6 +10,7 @@ use App\Models\DealType;
 use App\Models\Venue;
 use App\Models\VenueType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class VenueController extends Controller
 {
@@ -28,16 +29,14 @@ class VenueController extends Controller
      */
     public function index(Request $request)
     {
-        $maximumNumberOfSeats = Venue::orderBy('maximum_seats', 'desc')->value('maximum_seats');
         $query = array_merge(
             [
                 'accessEquipment' => [],
                 'dealTypes' => [],
-                'page' => 1,
                 'regions' => [],
                 'venueTypes' => [],
-                'seatsMin' => 0,
-                'seatsMax' => $maximumNumberOfSeats,
+                'seatsMin' => null,
+                'seatsMax' => null,
             ],
             $request->input()
         );
@@ -53,18 +52,41 @@ class VenueController extends Controller
             $venues = $venues->whereIn('venue_type_id', $query['venueTypes']);
         }
 
-        $venuePaginator = $venues
-            ->whereBetween(
-                'maximum_seats',
-                [$query['seatsMin'], $query['seatsMax']]
-            )
-            ->paginate(Venue::PER_PAGE);
+        $minMaxValues = [
+            'seats' => 'maximum_seats',
+            'wheelchairSeats' => 'maximum_wheelchair_seats',
+            'maximumStageWidth' => 'maximum_stage_width',
+            'maximumStageHeight' => 'maximum_stage_height',
+            'maximumStageDepth' => 'maximum_stage_depth',
+            'dressingRooms' => 'number_of_dressing_rooms',
+        ];
+
+        foreach ($minMaxValues as $key => $col) {
+            $keyMin = "{$key}Min";
+            $keyMax = "{$key}Max";
+            if (isset($query[$keyMin])) {
+                $venues = $venues->where($col, '>=', $query[$keyMin]);
+            }
+            if (isset($query[$keyMax])) {
+                $venues = $venues->where($col, '<=', $query[$keyMax]);
+            }
+        }
+
+        $venuePaginator = $venues->paginate(Venue::PER_PAGE)->appends($query);
 
         return inertia(
             'Venue/Index',
             $this->getVenueRelatedItems([
                 'venuePaginator' => $venuePaginator,
                 'query' => $query,
+                'minMaxValues' => array_map(
+                    function (string $str) {
+                        $str = Str::title($str);
+
+                        return Str::replace('_', ' ', $str);
+                    },
+                    $minMaxValues
+                ),
             ])
         );
     }

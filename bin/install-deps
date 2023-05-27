@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-echo "NPM installing..."
-./bin/node/run npm install
-
-echo "Composer installing"
-./bin/app/composer install

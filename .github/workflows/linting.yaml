@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: ./bin/install
-      - run: ./bin/app/pint --test
+      - run: ./bin/util/install
+      - run: ./bin/app/pint -- --test
       - run: ./bin/node/npm lint
       # - run: ./bin/app/test

@@ -1,7 +1,7 @@
 <script setup>
 import VenueCard from "@/Components/Venue/VenueCard.vue";
 import BaseLayout from "@/Layouts/BaseLayout.vue";
-import { Head, router } from "@inertiajs/vue3";
+import { Head, router, Link } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
 
 const props = defineProps({
@@ -33,10 +33,14 @@ const props = defineProps({
                 dealTypes: [],
                 page: 1,
                 regions: [],
-                seatsMax: 10000,
-                seatsMin: 0,
+                seatsMax: null,
+                seatsMin: null,
             };
         },
+    },
+    minMaxValues: {
+        type: Object,
+        default: () => {},
     },
 });
 
@@ -62,13 +66,11 @@ watch(
     { deep: true }
 );
 
-function applyFilters(resetPage = true) {
+function applyFilters() {
     const newQuery = {
         ...query.value,
+        page: 1,
     };
-    if (resetPage) {
-        newQuery.page = 1;
-    }
     router.get(
         route("venue.index", {
             _query: newQuery,
@@ -84,70 +86,50 @@ function resetFilters() {
         regions: [],
     };
 }
-
-function decrementPage() {
-    const { page } = query.value;
-    query.value.page = parseInt(page) - 1;
-    applyFilters(false);
-}
-
-function incrementPage() {
-    const { page } = query.value;
-    query.value.page = parseInt(page) + 1;
-    applyFilters(false);
-}
 </script>
 <template>
     <BaseLayout body-classes="overflow-y-hidden">
-        <template #header>
-            <h2
-                class="font-semibold text-xl text-gray-800 leading-tight"
-                v-text="'Venues'"
-            />
-        </template>
-
         <Head title="Venues" />
 
-        <div class="flex flex-row flex-1 overflow-y-hidden space-x-3">
-            <!--
-                Filtering by access and deal types
-            -->
-            <div
-                id="filters"
-                class="flex flex-col overflow-y-scroll max-w-[33%] space-y-3 items-stretch"
-            >
-                <div class="card flex flex-row justify-between">
-                    <span>
-                        <template v-if="venuePaginator.current_page > 1">
-                            <i class="fa-solid fa-chevron-left mr-2" />
-                            <button @click="decrementPage">Previous</button>
-                        </template>
-                    </span>
+        <div class="row">
+            <div id="filters" class="col-3">
+                <!-- Forward and back buttons -->
+                <div class="grid text-center mb-3" style="--bs-columns: 3">
+                    <Link
+                        :class="{
+                            'btn btn-primary': true,
+                            disabled: !venuePaginator.prev_page_url,
+                        }"
+                        :href="venuePaginator.prev_page_url"
+                    >
+                        <i class="fa-solid fa-chevron-left mr-2" />
+                    </Link>
                     <span
+                        class="d-flex flex-column justify-content-center"
                         v-text="
-                            `You are on page ${venuePaginator.current_page} of ${venuePaginator.last_page}`
+                            `${venuePaginator.current_page}/${venuePaginator.last_page}`
                         "
                     />
-                    <span>
-                        <template
-                            v-if="
-                                venuePaginator.current_page <
-                                venuePaginator.last_page
-                            "
-                        >
-                            <button @click="incrementPage">Next</button>
-                            <i class="fa-solid fa-chevron-right ml-2" />
-                        </template>
-                    </span>
+                    <Link
+                        :class="{
+                            'btn btn-primary': true,
+                            disabled: !venuePaginator.next_page_url,
+                        }"
+                        :href="venuePaginator.next_page_url"
+                    >
+                        <i class="fa-solid fa-chevron-right ml-2" />
+                    </Link>
                 </div>
-                <div class="card">
-                    <div class="font-bold">Deal Types</div>
+
+                <!-- Deal Types -->
+                <div class="col mb-3">
+                    <label class="form-label">Deal Types</label>
                     <select
                         id="dealTypes"
                         v-model="query.dealTypes"
                         name="dealTypes"
                         multiple
-                        class="rounded-md w-full"
+                        class="form-select"
                     >
                         <option
                             v-for="dealType in dealTypes"
@@ -157,14 +139,15 @@ function incrementPage() {
                         />
                     </select>
                 </div>
-                <div class="card">
-                    <div class="font-bold">Access Equipment</div>
+                <!-- Access Equipment -->
+                <div class="col mb-3">
+                    <label class="form-label">Access Equipment</label>
                     <select
                         id="accessEquipment"
                         v-model="query.accessEquipment"
                         name="accessEquipment"
                         multiple
-                        class="rounded-md w-full"
+                        class="form-select"
                     >
                         <option
                             v-for="access in accessEquipment"
@@ -174,14 +157,15 @@ function incrementPage() {
                         />
                     </select>
                 </div>
-                <div class="card">
-                    <div class="font-bold">Regions</div>
+                <!-- Region -->
+                <div class="col mb-3">
+                    <label class="form-label">Regions</label>
                     <select
                         id="regions"
                         v-model="query.regions"
                         name="regions"
                         multiple
-                        class="rounded-md w-full"
+                        class="form-select"
                     >
                         <template v-for="area in areas" :key="area.id">
                             <option disabled v-text="area.name" />
@@ -195,14 +179,16 @@ function incrementPage() {
                         </template>
                     </select>
                 </div>
-                <div class="card">
-                    <div class="font-bold">Venue Types</div>
+
+                <!-- Venue Type -->
+                <div class="col mb-3">
+                    <label class="form-label">Venue Types</label>
                     <select
                         id="venueTypes"
                         v-model="query.venueTypes"
                         name="venueTypes"
                         multiple
-                        class="rounded-md w-full"
+                        class="form-select"
                     >
                         <option
                             v-for="venueType in venueTypes"
@@ -213,57 +199,63 @@ function incrementPage() {
                     </select>
                 </div>
 
-                <div class="card">
-                    <div class="font-bold">Seats</div>
-                    <div class="grid grid-cols-2 gap-x-2">
-                        <div class="flex flex-col">
-                            <span>Minimum</span>
-
+                <!-- Seats min/max -->
+                <div
+                    v-for="(label, value) in minMaxValues"
+                    :key="value"
+                    class="col mb-3"
+                >
+                    <div class="row">
+                        <div class="col-12 form-label" v-text="label" />
+                        <div class="col-6">
                             <input
-                                id="seatsMin"
-                                v-model="query.seatsMin"
+                                :id="`${value}Min`"
+                                v-model="query[`${value}Min`]"
                                 type="number"
-                                name="seatsMin"
-                                min="0"
-                                :max="query.seatsMax"
+                                :name="`${value}Min`"
+                                class="form-control"
+                                placeholder="Minimum"
                             />
                         </div>
-                        <div class="flex flex-col">
-                            <span>Maximum</span>
-
+                        <div class="col-6">
                             <input
-                                id="seatsMax"
-                                v-model="query.seatsMax"
+                                :id="`${value}Max`"
+                                v-model="query[`${value}Max`]"
                                 type="number"
-                                name="seatsMax"
-                                :min="query.seatsMin"
-                                max="10000"
+                                :name="`${value}Max`"
+                                class="form-control"
+                                placeholder="Maximum"
                             />
                         </div>
                     </div>
                 </div>
 
-                <div class="flex flex-row space-x-2">
-                    <button
-                        class="btn-primary flex-1"
-                        @click="applyFilters"
-                        v-text="`Apply Filters`"
-                    />
+                <!-- Buttons -->
+                <div class="col mb-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <button
+                                class="btn btn-primary"
+                                @click="applyFilters"
+                                v-text="`Apply Filters`"
+                            />
+                        </div>
 
-                    <button
-                        class="btn-caution flex-1"
-                        @click="resetFilters"
-                        v-text="`Reset Filters`"
-                    />
+                        <div class="col-6">
+                            <button
+                                class="btn btn-danger"
+                                @click="resetFilters"
+                                v-text="`Reset Filters`"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!--
                 Venues
             -->
-            <div
-                class="overflow-y-scroll space-y-3 flex-1 max-h-full overflow-y-scroll"
-            >
+            <div class="col">
                 <VenueCard
                     v-for="venue in venuePaginator.data"
                     :key="venue.id"

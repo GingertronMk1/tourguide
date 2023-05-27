@@ -1,9 +1,5 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import TextInput from "@/Components/TextInput.vue";
+import BaseLayout from "@/Layouts/BaseLayout.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
@@ -32,14 +28,14 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <BaseLayout>
         <Head title="Reset Password" />
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <label for="email">Email</label>
 
-                <TextInput
+                <input
                     id="email"
                     v-model="form.email"
                     type="email"
@@ -53,9 +49,9 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <label for="password">Password</label>
 
-                <TextInput
+                <input
                     id="password"
                     v-model="form.password"
                     type="password"
@@ -68,12 +64,9 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
+                <label for="password_confirmation">Confirm Password</label>
 
-                <TextInput
+                <input
                     id="password_confirmation"
                     v-model="form.password_confirmation"
                     type="password"
@@ -97,5 +90,5 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
-    </GuestLayout>
+    </BaseLayout>
 </template>

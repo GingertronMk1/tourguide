@@ -1,0 +1,14 @@
+@import "./variable.scss";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/brands";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import "bootstrap/scss/bootstrap";
+
+html, body, #app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: rgb(230,230,230);
+}

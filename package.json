@@ -8,7 +8,7 @@
         "lint:fix": "npm run lint -- --fix"
     },
     "devDependencies": {
-        "@inertiajs/vue3": "^1.0.0",
+        "@inertiajs/vue3": "^1.0.7",
         "@vitejs/plugin-vue": "^4.2.3",
         "autoprefixer": "^10.4.12",
         "axios": "^1.4.0",

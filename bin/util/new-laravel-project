@@ -12,17 +12,18 @@ done
 echo "Creating ${PROJECTNAME}"
 
 if [ ! -f ./artisan ]; then
-  docker-compose run --rm app \
+  docker-compose run --build --rm app \
     bash -c "\
     shopt -s dotglob && \
     composer create-project laravel/laravel "${PROJECTNAME}" "$@" && \
     mv "${PROJECTNAME}"/* . && \
     rm -rf "${PROJECTNAME}" && \
     composer require filament/filament:"^2.0" livewire/livewire && \
+    sed -i 's/DATABASE_.*/# \0/g' .env && \
     echo "" >> .env
     cat .env.local >> .env \
     "
-  ./bin/install
+  ./bin/util/install
 else
   echo "A Laravel project already exists in here"
 fi

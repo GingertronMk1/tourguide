@@ -6626,16 +6626,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.17.0",
+            "version": "v3.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "3f0ed862f22386c55a767461ef5083bddceeed79"
+                "reference": "b123395c9fa3a70801f816f13606c0f3a7ada8df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/3f0ed862f22386c55a767461ef5083bddceeed79",
-                "reference": "3f0ed862f22386c55a767461ef5083bddceeed79",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/b123395c9fa3a70801f816f13606c0f3a7ada8df",
+                "reference": "b123395c9fa3a70801f816f13606c0f3a7ada8df",
                 "shasum": ""
             },
             "require": {
@@ -6710,7 +6710,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.17.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.18.0"
             },
             "funding": [
                 {
@@ -6718,7 +6718,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-22T19:59:32+00:00"
+            "time": "2023-06-18T22:25:45+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -8992,16 +8992,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v6.2.10",
+            "version": "v6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "fd588debf7d1bc16a2c84b4b3b71145d9946b894"
+                "reference": "97b698e1d77d356304def77a8d0cd73090b359ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/fd588debf7d1bc16a2c84b4b3b71145d9946b894",
-                "reference": "fd588debf7d1bc16a2c84b4b3b71145d9946b894",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/97b698e1d77d356304def77a8d0cd73090b359ea",
+                "reference": "97b698e1d77d356304def77a8d0cd73090b359ea",
                 "shasum": ""
             },
             "require": {
@@ -9035,7 +9035,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v6.2.10"
+                "source": "https://github.com/symfony/filesystem/tree/v6.3.0"
             },
             "funding": [
                 {
@@ -9051,25 +9051,25 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-18T13:46:08+00:00"
+            "time": "2023-05-30T17:12:32+00:00"
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v6.2.7",
+            "version": "v6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "aa0e85b53bbb2b4951960efd61d295907eacd629"
+                "reference": "a10f19f5198d589d5c33333cffe98dc9820332dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/aa0e85b53bbb2b4951960efd61d295907eacd629",
-                "reference": "aa0e85b53bbb2b4951960efd61d295907eacd629",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/a10f19f5198d589d5c33333cffe98dc9820332dd",
+                "reference": "a10f19f5198d589d5c33333cffe98dc9820332dd",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
-                "symfony/deprecation-contracts": "^2.1|^3"
+                "symfony/deprecation-contracts": "^2.5|^3"
             },
             "type": "library",
             "autoload": {
@@ -9102,7 +9102,7 @@
                 "options"
             ],
             "support": {
-                "source": "https://github.com/symfony/options-resolver/tree/v6.2.7"
+                "source": "https://github.com/symfony/options-resolver/tree/v6.3.0"
             },
             "funding": [
                 {
@@ -9118,7 +9118,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-14T08:44:56+00:00"
+            "time": "2023-05-12T14:21:09+00:00"
         },
         {
             "name": "symfony/polyfill-php81",
@@ -9201,21 +9201,21 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v6.2.7",
+            "version": "v6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
-                "reference": "f3adc98c1061875dd2edcd45e5b04e63d0e29f8f"
+                "reference": "fc47f1015ec80927ff64ba9094dfe8b9d48fe9f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/f3adc98c1061875dd2edcd45e5b04e63d0e29f8f",
-                "reference": "f3adc98c1061875dd2edcd45e5b04e63d0e29f8f",
+                "url": "https://api.github.com/repos/symfony/stopwatch/zipball/fc47f1015ec80927ff64ba9094dfe8b9d48fe9f2",
+                "reference": "fc47f1015ec80927ff64ba9094dfe8b9d48fe9f2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
-                "symfony/service-contracts": "^1|^2|^3"
+                "symfony/service-contracts": "^2.5|^3"
             },
             "type": "library",
             "autoload": {
@@ -9243,7 +9243,7 @@
             "description": "Provides a way to profile code",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/stopwatch/tree/v6.2.7"
+                "source": "https://github.com/symfony/stopwatch/tree/v6.3.0"
             },
             "funding": [
                 {
@@ -9259,7 +9259,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-14T08:44:56+00:00"
+            "time": "2023-02-16T10:14:28+00:00"
         },
         {
             "name": "symfony/yaml",
